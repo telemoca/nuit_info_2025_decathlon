@@ -267,3 +267,9 @@ h2 {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Quand l'input est coché, on applique un filtre sur l'image dans la tuile */
+.option-input:checked + .option-tile .tile-icon {
+    /* Rend l'image complètement blanche */
+    filter: brightness(0) invert(1); 
+}
