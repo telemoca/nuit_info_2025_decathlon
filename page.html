@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilage Sportif - Decathlon Coach</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --decathlon-blue: #0082C3;
+            --decathlon-yellow: #FFEA28;
+            --text-black: #1a1a1a;
+            --text-grey: #707070;
+            --bg-light: #F7F8F9;
+            --white: #FFFFFF;
+            --border-radius: 4px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-black);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 100;
+            position: relative;
+        }
+
+        .brand-logo {
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: -1px;
+            color: var(--decathlon-blue);
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--decathlon-blue);
+            width: 0%;
+            transition: width 0.4s ease-in-out;
+        }
+
+        /* --- CONTENEUR PRINCIPAL --- */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+            position: relative;
+        }
+
+        /* --- NAVIGATION (RETOUR) --- */
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--text-grey);
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0;
+            visibility: hidden; /* Caché au début */
+        }
+        .btn-back:hover { color: var(--decathlon-blue); }
+        .btn-back svg { width: 18px; margin-right: 5px; fill: currentColor; }
+
+        /* --- ÉTAPES (STEPS) --- */
+        .step {
+            display: none; /* Caché par défaut */
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--text-grey);
+            margin-bottom: 30px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* --- GRILLE & TUILES --- */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .option-input { display: none; }
+
+        .option-tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 15px;
+            background: var(--white);
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            height: 100%;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .option-tile:hover {
+            border-color: var(--decathlon-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 130, 195, 0.15);
+        }
+
+        .tile-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+            fill: var(--text-black);
+            transition: var(--transition);
+        }
+
+        .tile-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-black);
+        }
+
+        /* ETAT SÉLECTIONNÉ */
+        .option-input:checked + .option-tile {
+            background-color: #F0F9FF;
+            border: 2px solid var(--decathlon-blue);
+            padding: 24px 14px; /* Compensate border */
+        }
+        .option-input:checked + .option-tile .tile-icon { fill: var(--decathlon-blue); }
+        .option-input:checked + .option-tile .tile-label { color: var(--decathlon-blue); font-weight: 700; }
+
+        /* --- STEP FINAL (RÉSUMÉ) --- */
+        .final-step-content {
+            text-align: center;
+            background: var(--white);
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .loader-icon {
+            width: 60px;
+            height: 60px;
+            fill: var(--decathlon-blue);
+            margin-bottom: 20px;
+            animation: spin 2s linear infinite;
+            display: none; /* Affiché uniquement pendant le "calcul" */
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- BOUTON FINAL --- */
+        .btn-decathlon {
+            background-color: var(--decathlon-yellow);
+            color: var(--text-black);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            border: none;
+            padding: 18px 40px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.1s;
+            margin-top: 20px;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+        }
+        
+        .btn-decathlon:active { transform: translateY(2px); box-shadow: none; }
+
+        /* Debug console */
+        #debug { display: none; margin-top:20px; font-family: monospace; font-size: 0.8rem; color: #333; text-align: left; background: #eee; padding: 10px; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="brand-logo">DECATHLON</div>
+    <div style="font-weight:bold; font-size:12px;">COACH</div>
+</header>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="container">
+    
+    <button class="btn-back" id="btnBack" onclick="prevStep()">
+        <svg viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"/></svg>
+        Précédent
+    </button>
+
+    <form id="quizForm">
+
+        <div class="step active" data-step="1">
+            <h2>Votre niveau ?</h2>
+            <p class="subtitle">Pour adapter l'intensité des exercices.</p>
+            <div class="options-grid">
+                <label>
+                    <input type="radio" name="experience" value="Debutant" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"/></svg>
+                        <span class="tile-label">Je débute / Reprise</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="experience" value="Intermediaire" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M16.2,16.2L12,14.1L7.8,16.2L8.9,11.7L5.4,8.6L10,8.2L12,4L14,8.2L18.6,8.6L15.1,11.7L16.2,16.2Z"/></svg>
+                        <span class="tile-label">Intermédiaire</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="experience" value="Expert" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M12,2L1,21H23M12,6L19.53,19H4.47"/></svg>
+                        <span class="tile-label">Expert</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="step" data-step="2">
+            <h2>Votre Objectif ?</h2>
+            <p class="subtitle">Quel est votre but principal aujourd'hui ?</p>
+            <div class="options-grid">
+                <label>
+                    <input type="radio" name="objectif" value="Perte de poids" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
+                        <span class="tile-label">Perte de poids</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="objectif" value="Renforcement" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43L20.57 12L17 15.57L8.43 7L12 3.43L10.57 2L9.14 3.43L7.71 2L5.57 4.14L4.14 2.71L2.71 4.14L4.14 5.57L2 7.71L3.43 9.14L2 10.57L3.43 12L7 8.43L15.57 17L12 20.57L13.43 22L14.86 20.57L16.29 22L18.43 19.86L19.86 21.29L21.29 19.86L19.86 18.43L22 16.29L20.57 14.86Z"/></svg>
+                        <span class="tile-label">Renforcement</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="objectif" value="Souplesse" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M20.5,11H19V7C19,5.89 18.1,5 17,5H15V3.5A2.5,2.5 0 0,0 12.5,1A2.5,2.5 0 0,0 10,3.5V5H8C6.9,5 6,5.89 6,7V11H4.5C3.67,11 3,11.67 3,12.5V14H21V12.5C21,11.67 20.33,11 20.5,11M6,7H17V9H6V7M11,3.5C11,2.67 11.67,2 12.5,2C13.33,2 14,2.67 14,3.5V5H11V3.5M4,15H5V18A2,2 0 0,0 7,20H10V22H11V20H13V22H14V20H17A2,2 0 0,0 19,18V15H20V16H4V15Z"/></svg>
+                        <span class="tile-label">Souplesse / Yoga</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="step" data-step="3">
+            <h2>Où êtes-vous ?</h2>
+            <p class="subtitle">On adapte l'espace nécessaire.</p>
+            <div class="options-grid">
+                <label>
+                    <input type="radio" name="lieu" value="Maison" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg>
+                        <span class="tile-label">À la maison</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="lieu" value="Exterieur" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M14,6L10.25,11L13.1,14.8L11.5,16C9.81,13.75 7,10 7,10L1,18H23L14,6Z"/></svg>
+                        <span class="tile-label">Extérieur / Parc</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="lieu" value="Salle" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L6.04,7.5L12,10.85L17.96,7.5L12,4.15M5,15.91L11,19.29V12.58L5,9.21V15.91M19,15.91V9.21L13,12.58V19.29L19,15.91Z"/></svg>
+                        <span class="tile-label">En salle</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="step" data-step="4">
+            <h2>Équipement ?</h2>
+            <p class="subtitle">Ce dont vous disposez maintenant.</p>
+            <div class="options-grid">
+                <label>
+                    <input type="radio" name="materiel" value="Aucun" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/></svg>
+                        <span class="tile-label">Aucun (Poids du corps)</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="materiel" value="Basique" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M21 16H3V4H21V16M21 2H3C1.89 2 1 2.89 1 4V16C1 17.11 1.89 18 3 18H10V20H8V22H16V20H14V18H21C22.11 18 23 17.11 23 16V4C23 2.89 22.11 2 21 2Z"/></svg>
+                        <span class="tile-label">Petit matériel</span>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="materiel" value="Complet" class="option-input" onchange="nextStep()">
+                    <div class="option-tile">
+                        <svg class="tile-icon" viewBox="0 0 24 24"><path d="M8,6H16V14H8V6M6,4C4.89,4 4,4.89 4,6V14C4,15.11 4.89,16 6,16H8V20H16V16H18C19.11,16 20,15.11 20,14V6C20,4.89 19.11,4 18,4H6Z"/></svg>
+                        <span class="tile-label">Équipement complet</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="step" data-step="5">
+            <div class="final-step-content">
+                <svg class="loader-icon" id="loader" viewBox="0 0 24 24"><path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"/></svg>
+                
+                <h2>Profil Terminé !</h2>
+                <p class="subtitle">Nous avons toutes les infos pour créer votre séance sur mesure.</p>
+                
+                <button type="button" class="btn-decathlon" onclick="submitForm()">VOIR MON PROGRAMME</button>
+                
+                <div id="debug"></div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    // Variables de gestion d'état
+    let currentStep = 1;
+    const totalSteps = 5;
+    const steps = document.querySelectorAll('.step');
+    const progressBar = document.getElementById('progressBar');
+    const btnBack = document.getElementById('btnBack');
+
+    // Initialisation
+    updateProgress();
+
+    // Fonction pour passer à l'étape suivante
+    function nextStep() {
+        if (currentStep < totalSteps) {
+            // Petit délai pour laisser l'animation du "clic" se faire (UX)
+            setTimeout(() => {
+                // Masquer l'étape actuelle
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+                
+                // Incrémenter
+                currentStep++;
+                
+                // Afficher la suivante
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+                
+                updateUI();
+            }, 300); // 300ms de délai
+        }
+    }
+
+    // Fonction pour revenir en arrière
+    function prevStep() {
+        if (currentStep > 1) {
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            currentStep--;
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+            updateUI();
+        }
+    }
+
+    // Mise à jour de l'interface (Barre de progression + Bouton retour)
+    function updateUI() {
+        // Barre de progression
+        const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        progressBar.style.width = percentage + '%';
+
+        // Bouton retour (Caché si étape 1, sinon visible)
+        if (currentStep === 1) {
+            btnBack.style.visibility = 'hidden';
+        } else {
+            btnBack.style.visibility = 'visible';
+        }
+    }
+
+    // Fonction de mise à jour initiale
+    function updateProgress() {
+        progressBar.style.width = '0%';
+    }
+
+    // Fonction finale de soumission
+    function submitForm() {
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+        const profilData = {};
+        
+        formData.forEach((value, key) => {
+            profilData[key] = value;
+        });
+
+        // Simulation effet de chargement
+        const btn = document.querySelector('.btn-decathlon');
+        const loader = document.getElementById('loader');
+        
+        btn.innerText = "GÉNÉRATION EN COURS...";
+        btn.style.opacity = "0.7";
+        loader.style.display = "inline-block"; // Affiche l'icone qui tourne
+
+        setTimeout(() => {
+            // C'est ici que tu envoies les données au Niveau 2
+            console.log("DONNÉES FINALISÉES : ", profilData);
+            
+            // Affichage debug dans la page pour confirmation
+            const debug = document.getElementById('debug');
+            debug.style.display = 'block';
+            debug.innerText = "Données prêtes pour le niveau 2 :\n" + JSON.stringify(profilData, null, 2);
+            
+            btn.innerText = "C'EST PARTI !";
+            btn.style.backgroundColor = "#5cb85c";
+            btn.style.color = "white";
+            loader.style.display = "none";
+            
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
