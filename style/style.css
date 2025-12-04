@@ -27,9 +27,8 @@ header {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Légère ombre sous le menu */
 }
 
-/* Classe à mettre sur ton image <img> dans le HTML */
 .logo-img {
-    height: 50px; /* Taille ajustable selon ton image */
+    height: 40px; /* Taille ajustable selon ton image */
     width: auto;
     display: block;
 }
@@ -211,9 +210,6 @@ h2 {
     fill: #ffffff; /* Icône blanche */
 }
 
-/* --- LE CORRECTIF : Survol d'une case DÉJÀ SÉLECTIONNÉE --- */
-/* Cette règle doit être placée APRÈS les deux autres pour être prioritaire.
-   Si c'est sélectionné ET que je survole, on applique un style spécifique. */
 .options-grid label:hover .option-input:checked + .option-tile {
     background-color: #2a3494; /* Un bleu un peu plus foncé pour le contraste */
     border-color: #2a3494;
