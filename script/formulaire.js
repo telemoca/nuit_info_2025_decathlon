@@ -70,7 +70,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const profilData = {};
         
         formData.forEach((value, key) => {
-            profilData[key] = value;
+            // Si la donnée existe déjà (cas des checkbox multiples comme 'sports')
+            if (profilData.hasOwnProperty(key)) {
+                // Si ce n'est pas encore un tableau, on le transforme en tableau avec l'ancienne valeur
+                if (!Array.isArray(profilData[key])) {
+                    profilData[key] = [profilData[key]];
+                }
+                // On ajoute la nouvelle valeur
+                profilData[key].push(value);
+            } else {
+                // Sinon, on ajoute la donnée normalement
+                profilData[key] = value;
+            }
         });
 
         // Simulation effet de chargement
