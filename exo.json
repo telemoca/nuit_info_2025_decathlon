@@ -1,1256 +1,659 @@
 [
-    {
-        "id": 0,
-        "title": "Air Squat",
-        "sport_category": [
-            "crossfit",
-            "running",
-            "randonnee",
-            "sport_collectif",
-            "musculation"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "quadriceps",
-            "fessiers",
-            "ischios"
-        ],
-        "equipment": [
-            "poids_du_corps"
-        ],
-        "description": "Le mouvement fondamental pour renforcer le bas du corps.",
-        "instructions": [
-            "Pieds largeur d'épaules, orteils légèrement ouverts.",
-            "Envoyez les hanches vers l'arrière et le bas, dos droit.",
-            "Gardez les talons ancrés au sol.",
-            "Descendez jusqu'à ce que les hanches soient sous les genoux.",
-            "Remontez en extension complète."
-        ],
-        "media": {
-            "icon": "squat.png",
-            "gif": "squat.gif"
-        }
-    },
-    {
-        "id": 1,
-        "title": "Burpee",
-        "sport_category": [
-            "crossfit",
-            "sport_collectif",
-            "musculation"
-        ],
-        "type": "cardio_renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "pectoraus",
-            "triceps",
-            "cardio",
-            "cuisses"
-        ],
-        "equipment": [
-            "poids_du_corps"
-        ],
-        "description": "L'exercice ultime pour l'endurance et l'explosivité.",
-        "instructions": [
-            "Debout, jetez-vous au sol poitrine contre terre.",
-            "Relevez-vous en faisant une pompe rapide.",
-            "Ramenez les pieds sous les hanches.",
-            "Sautez verticalement en touchant vos mains derrière la tête."
-        ],
-        "media": {
-            "icon": "burpee.png",
-            "gif": "burpee.gif"
-        }
-    },
-    {
-        "id": 2,
-        "title": "Pompes Classiques",
-        "sport_category": [
-            "musculation",
-            "crossfit",
-            "sports_aquatique",
-            "sport_collectif"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "pectoraux",
-            "triceps",
-            "epaules"
-        ],
-        "equipment": [
-            "poids_du_corps"
-        ],
-        "description": "Renforcement du haut du corps et gainage.",
-        "instructions": [
-            "Mains au sol plus larges que les épaules, corps gainé.",
-            "Fléchissez les bras pour amener la poitrine au sol.",
-            "Gardez les coudes à 45 degrés par rapport au corps.",
-            "Poussez pour revenir bras tendus."
-        ],
-        "media": {
-            "icon": "pushup.png",
-            "gif": "pushup.gif"
-        }
-    },
-    {
-        "id": 3,
-        "title": "Fentes Alternées",
-        "sport_category": [
-            "running",
-            "randonnee",
-            "cyclisme",
-            "sport_collectif"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "quadriceps",
-            "fessiers"
-        ],
-        "equipment": [
-            "poids_du_corps"
-        ],
-        "description": "Renforce les jambes unilatéralement, idéal pour la foulée.",
-        "instructions": [
-            "Faites un grand pas en avant.",
-            "Descendez le genou arrière vers le sol (angle 90°).",
-            "Gardez le buste vertical.",
-            "Poussez sur le talon avant pour revenir.",
-            "Changez de jambe."
-        ],
-        "media": {
-            "icon": "lunge.png",
-            "gif": "lunge.gif"
-        }
-    },
-    {
-        "id": 4,
-        "title": "La Planche (Gainage)",
-        "sport_category": [
-            "tous",
-            "sports_aquatique",
-            "running",
-            "cyclisme"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "abdominaux",
-            "transverse",
-            "lombaires"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "La base pour un tronc solide et une meilleure posture.",
-        "instructions": [
-            "En appui sur les avant-bras et les orteils.",
-            "Corps aligné (épaules, bassin, chevilles).",
-            "Contractez fessiers et abdominaux.",
-            "Ne laissez pas le bas du dos se creuser.",
-            "Maintenez la position."
-        ],
-        "media": {
-            "icon": "plank.png",
-            "gif": "plank.gif"
-        }
-    },
-    {
-        "id": 5,
-        "title": "Chien Tête en Bas",
-        "sport_category": [
-            "sport_relaxation",
-            "crossfit",
-            "randonnee"
-        ],
-        "type": "etirement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "chaine_posterieure",
-            "epaules",
-            "mollets"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Excellent pour étirer tout le dos et l'arrière des jambes.",
-        "instructions": [
-            "Démarrez à quatre pattes.",
-            "Levez les fesses vers le ciel pour former un 'V' inversé.",
-            "Poussez fort dans les mains pour éloigner les épaules des oreilles.",
-            "Tentez de poser les talons au sol (jambes fléchies si besoin).",
-            "Respirez calmement."
-        ],
-        "media": {
-            "icon": "downward_dog.png",
-            "gif": "downward_dog.gif"
-        }
-    },
-    {
-        "id": 6,
-        "title": "Soulevé de Terre (Deadlift)",
-        "sport_category": [
-            "musculation",
-            "crossfit",
-            "sport_collectif"
-        ],
-        "type": "renforcement",
-        "difficulty": "avance",
-        "target_muscles": [
-            "chaine_posterieure",
-            "dos",
-            "fessiers"
-        ],
-        "equipment": [
-            "barre",
-            "disques"
-        ],
-        "description": "L'exercice roi pour la force globale.",
-        "instructions": [
-            "Pieds sous la barre, tibias collés.",
-            "Saisissez la barre bras tendus, dos plat.",
-            "Levez la charge en poussant avec les jambes et en redressant le buste.",
-            "La barre doit longer les cuisses.",
-            "Verrouillez hanches et genoux en haut."
-        ],
-        "media": {
-            "icon": "deadlift.png",
-            "gif": "deadlift.gif"
-        }
-    },
-    {
-        "id": 7,
-        "title": "Step Up (Montée sur banc)",
-        "sport_category": [
-            "cyclisme",
-            "randonnee",
-            "running"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "quadriceps",
-            "fessiers"
-        ],
-        "equipment": [
-            "banc"
-        ],
-        "description": "Simule l'effort de pédalage ou de grimpe.",
-        "instructions": [
-            "Posez un pied entier sur le banc.",
-            "Poussez sur cette jambe pour monter l'autre pied.",
-            "Contrôlez la descente.",
-            "Gardez le buste droit, ne vous penchez pas en avant."
-        ],
-        "media": {
-            "icon": "stepup.png",
-            "gif": "stepup.gif"
-        }
-    },
-    {
-        "id": 8,
-        "title": "Le Superman (Arch)",
-        "sport_category": [
-            "sports_aquatique",
-            "musculation",
-            "sport_relaxation"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "lombaires",
-            "dorsaux"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Renforce les lombaires pour une meilleure position dans l'eau.",
-        "instructions": [
-            "Allongé sur le ventre, bras tendus devant.",
-            "Décollez simultanément les bras et les jambes du sol.",
-            "Regardez le sol pour ne pas casser la nuque.",
-            "Tenez 2 secondes et relâchez.",
-            "Répétez."
-        ],
-        "media": {
-            "icon": "superman.png",
-            "gif": "superman.gif"
-        }
-    },
-    {
-        "id": 9,
-        "title": "Rotation de Buste (Woodchop)",
-        "sport_category": [
-            "sports_raquete",
-            "golf",
-            "sport_collectif"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "obliques",
-            "abdominaux"
-        ],
-        "equipment": [
-            "elastique"
-        ],
-        "description": "Développe la puissance de rotation pour les coups droits/revers.",
-        "instructions": [
-            "Attachez l'élastique à hauteur de coude.",
-            "Tenez-le à deux mains, de profil à l'attache.",
-            "Pivotez le buste vers l'opposé en gardant les bras tendus.",
-            "Contrôlez le retour (négative) pour résister à la tension."
-        ],
-        "media": {
-            "icon": "woodchop.png",
-            "gif": "woodchop.gif"
-        }
-    },
-    {
-        "id": 10,
-        "title": "Kettlebell Swing (Russe)",
-        "sport_category": [
-            "crossfit",
-            "musculation",
-            "combat"
-        ],
-        "type": "cardio_renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "chaine_posterieure",
-            "fessiers",
-            "cardio"
-        ],
-        "equipment": [
-            "kettlebell"
-        ],
-        "description": "Explosivité des hanches, essentiel pour beaucoup de sports.",
-        "instructions": [
-            "Pieds plus larges que le bassin, KB entre les jambes.",
-            "Poussez les fesses en arrière (hinge), dos plat.",
-            "Contractez violemment les fessiers pour projeter le KB devant vous.",
-            "Les bras ne sont que des cordes, l'impulsion vient des hanches.",
-            "Hauteur des yeux max."
-        ],
-        "media": {
-            "icon": "kb_swing.png",
-            "gif": "kb_swing.gif"
-        }
-    },
-    {
-        "id": 11,
-        "title": "Étirement du Psoas",
-        "sport_category": [
-            "running",
-            "cyclisme",
-            "randonnee",
-            "sport_de_bureau"
-        ],
-        "type": "etirement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "psoas",
-            "hanches"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Indispensable pour combattre la position assise et libérer la foulée.",
-        "instructions": [
-            "En position de fente, genou arrière au sol.",
-            "Avancez le bassin vers l'avant en gardant le dos droit.",
-            "Contractez la fesse de la jambe arrière.",
-            "Levez le bras du même côté vers le ciel pour accentuer."
-        ],
-        "media": {
-            "icon": "psoas_stretch.png",
-            "gif": "psoas_stretch.gif"
-        }
-    },
-    {
-        "id": 12,
-        "title": "Rowing Barre (Bent Over Row)",
-        "sport_category": [
-            "musculation",
-            "sports_aquatique",
-            "crossfit"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "grand_dorsal",
-            "biceps",
-            "trapezes"
-        ],
-        "equipment": [
-            "barre"
-        ],
-        "description": "Pour un dos épais et puissant.",
-        "instructions": [
-            "Buste penché à 45°, dos plat, genoux fléchis.",
-            "Tirez la barre vers le bas-ventre.",
-            "Serrez les omoplates en haut du mouvement.",
-            "Relâchez doucement bras tendus sans arrondir le dos."
-        ],
-        "media": {
-            "icon": "rowing.png",
-            "gif": "rowing.gif"
-        }
-    },
-    {
-        "id": 13,
-        "title": "Mountain Climber",
-        "sport_category": [
-            "crossfit",
-            "sport_collectif",
-            "running"
-        ],
-        "type": "cardio",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "abdominaux",
-            "cardio",
-            "epaules"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Exercice cardio intense qui sollicite les abdos.",
-        "instructions": [
-            "Position de planche haute (sur les mains).",
-            "Ramenez rapidement un genou vers la poitrine.",
-            "Alternez les jambes rapidement comme si vous couriez.",
-            "Gardez le bassin bas et stable."
-        ],
-        "media": {
-            "icon": "mountain_climber.png",
-            "gif": "mountain_climber.gif"
-        }
-    },
-    {
-        "id": 14,
-        "title": "Posture de l'Enfant (Balasana)",
-        "sport_category": [
-            "sport_relaxation",
-            "randonnee",
-            "musculation"
-        ],
-        "type": "etirement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "lombaires",
-            "dos"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Repos total et décompression vertébrale.",
-        "instructions": [
-            "À genoux, asseyez-vous sur vos talons.",
-            "Penchez le front au sol loin devant.",
-            "Étirez les bras devant ou relâchez-les le long du corps.",
-            "Respirez profondément avec le ventre."
-        ],
-        "media": {
-            "icon": "child_pose.png",
-            "gif": "child_pose.gif"
-        }
-    },
-    {
-        "id": 15,
-        "title": "Fente Latérale",
-        "sport_category": [
-            "sports_raquete",
-            "sport_collectif",
-            "musculation"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "adducteurs",
-            "fessiers",
-            "quadriceps"
-        ],
-        "equipment": [
-            "poids_du_corps"
-        ],
-        "description": "Renforce les déplacements latéraux et prévient les blessures aux adducteurs.",
-        "instructions": [
-            "Pieds très écartés.",
-            "Fléchissez une jambe en envoyant les fesses en arrière.",
-            "L'autre jambe reste parfaitement tendue.",
-            "Gardez le dos plat.",
-            "Revenez au centre et changez de côté."
-        ],
-        "media": {
-            "icon": "side_lunge.png",
-            "gif": "side_lunge.gif"
-        }
-    },
-    {
-        "id": 16,
-        "title": "Thruster",
-        "sport_category": [
-            "crossfit",
-            "musculation",
-            "sport_collectif"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "cuisses",
-            "epaules",
-            "cardio"
-        ],
-        "equipment": [
-            "barre",
-            "halteres"
-        ],
-        "description": "Combinaison squat avant et développé militaire. Très énergivore.",
-        "instructions": [
-            "Barre sur les épaules avant, coudes hauts.",
-            "Squat complet.",
-            "Remontez explosivement.",
-            "Utilisez l'élan pour pousser la barre au-dessus de la tête.",
-            "Enchaînez."
-        ],
-        "media": {
-            "icon": "thruster.png",
-            "gif": "thruster.gif"
-        }
-    },
-    {
-        "id": 17,
-        "title": "Extension Mollets (Calf Raise)",
-        "sport_category": [
-            "running",
-            "randonnee",
-            "cyclisme"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "mollets"
-        ],
-        "equipment": [
-            "marche_escalier"
-        ],
-        "description": "Renforce la propulsion et protège le tendon d'Achille.",
-        "instructions": [
-            "Avant-pied sur une marche, talons dans le vide.",
-            "Descendez le talon le plus bas possible (étirement).",
-            "Remontez le plus haut possible sur la pointe.",
-            "Contrôlez le mouvement."
-        ],
-        "media": {
-            "icon": "calf_raise.png",
-            "gif": "calf_raise.gif"
-        }
-    },
-    {
-        "id": 18,
-        "title": "Dips",
-        "sport_category": [
-            "musculation",
-            "crossfit",
-            "sports_aquatique"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "triceps",
-            "pectoraux",
-            "epaules"
-        ],
-        "equipment": [
-            "barres_paralleles",
-            "chaise"
-        ],
-        "description": "Excellent pour la poussée vers le bas.",
-        "instructions": [
-            "En appui bras tendus sur les barres.",
-            "Descendez en fléchissant les coudes.",
-            "Penchez légèrement le buste en avant.",
-            "Remontez jusqu'à l'extension complète.",
-            "Épaules basses, loin des oreilles."
-        ],
-        "media": {
-            "icon": "dips.png",
-            "gif": "dips.gif"
-        }
-    },
-    {
-        "id": 19,
-        "title": "Tirage Bras Tendus (Skiier)",
-        "sport_category": [
-            "sports_aquatique",
-            "ski",
-            "musculation"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "grand_dorsal",
-            "triceps"
-        ],
-        "equipment": [
-            "elastique"
-        ],
-        "description": "Imite la phase de traction du crawl.",
-        "instructions": [
-            "Élastique attaché en hauteur.",
-            "Penchez le buste, bras tendus devant vous.",
-            "Abaissez les bras tendus jusqu'aux hanches en gardant une tension constante.",
-            "Contrôlez le retour."
-        ],
-        "media": {
-            "icon": "skiier_pull.png",
-            "gif": "skiier_pull.gif"
-        }
-    },
-    {
-        "id": 20,
-        "title": "Le Cobra (Bhujangasana)",
-        "sport_category": [
-            "sport_relaxation",
-            "musculation"
-        ],
-        "type": "etirement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "abdominaux",
-            "colonne_vertebrale"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Ouvre la cage thoracique et étire les abdos.",
-        "instructions": [
-            "Allongé sur le ventre, mains sous les épaules.",
-            "Poussez sur les mains pour lever le buste.",
-            "Gardez le bassin au sol et les coudes près du corps.",
-            "Regardez devant ou légèrement vers le haut."
-        ],
-        "media": {
-            "icon": "cobra.png",
-            "gif": "cobra.gif"
-        }
-    },
-    {
-        "id": 21,
-        "title": "Box Jump",
-        "sport_category": [
-            "crossfit",
-            "sport_collectif",
-            "running"
-        ],
-        "type": "cardio_renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "explosivite",
-            "jambes",
-            "cardio"
-        ],
-        "equipment": [
-            "box",
-            "banc_solide"
-        ],
-        "description": "Développe la puissance explosive des jambes.",
-        "instructions": [
-            "Face à la boîte, pieds largeur bassin.",
-            "Fléchissez légèrement et lancez les bras.",
-            "Sautez pour atterrir les deux pieds à plat sur la boîte.",
-            "Finissez l'extension des hanches (debout sur la boîte).",
-            "Redescendez un pied après l'autre ou sautez."
-        ],
-        "media": {
-            "icon": "box_jump.png",
-            "gif": "box_jump.gif"
-        }
-    },
-    {
-        "id": 22,
-        "title": "Curl Biceps",
-        "sport_category": [
-            "musculation",
-            "sports_raquete",
-            "escalade"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "biceps"
-        ],
-        "equipment": [
-            "halteres",
-            "elastique"
-        ],
-        "description": "Renforcement des bras.",
-        "instructions": [
-            "Debout, coudes collés aux côtes.",
-            "Montez les haltères vers les épaules par flexion du coude.",
-            "Ne balancez pas le buste.",
-            "Contrôlez la descente."
-        ],
-        "media": {
-            "icon": "curl.png",
-            "gif": "curl.gif"
-        }
-    },
-    {
-        "id": 23,
-        "title": "Drill Échelle de Rythme",
-        "sport_category": [
-            "sport_collectif",
-            "sports_raquete",
-            "running"
-        ],
-        "type": "cardio",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "coordination",
-            "mollets"
-        ],
-        "equipment": [
-            "echelle_agilite"
-        ],
-        "description": "Améliore la fréquence gestuelle et la coordination.",
-        "instructions": [
-            "Posez l'échelle au sol.",
-            "Courez en posant deux appuis (pied droit, pied gauche) dans chaque carreau.",
-            "Restez sur la pointe des pieds.",
-            "Regardez loin devant, pas vos pieds.",
-            "Accélérez progressivement."
-        ],
-        "media": {
-            "icon": "ladder_drill.png",
-            "gif": "ladder_drill.gif"
-        }
-    },
-    {
-        "id": 24,
-        "title": "Respiration Carrée",
-        "sport_category": [
-            "sport_relaxation",
-            "tous"
-        ],
-        "type": "relaxation",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "mental",
-            "diaphragme"
-        ],
-        "equipment": [
-            "aucun"
-        ],
-        "description": "Technique pour faire baisser le stress et le rythme cardiaque.",
-        "instructions": [
-            "Inspirez par le nez sur 4 secondes.",
-            "Bloquez la respiration (poumons pleins) 4 secondes.",
-            "Expirez par la bouche sur 4 secondes.",
-            "Bloquez la respiration (poumons vides) 4 secondes.",
-            "Répétez le cycle 5 minutes."
-        ],
-        "media": {
-            "icon": "breathing.png",
-            "gif": "breathing.gif"
-        }
-    },
-    {
-        "id": 25,
-        "title": "Développé Militaire (Overhead Press)",
-        "sport_category": [
-            "musculation",
-            "crossfit",
-            "sports_raquete"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "epaules",
-            "triceps"
-        ],
-        "equipment": [
-            "barre",
-            "halteres"
-        ],
-        "description": "Force pure des épaules et stabilité du tronc.",
-        "instructions": [
-            "Barre posée sur le haut de la poitrine.",
-            "Poussez la barre verticalement jusqu'à extension des bras.",
-            "Passez la tête légèrement en avant une fois la barre passée.",
-            "Gardez les abdos et fessiers serrés pour ne pas cambrer."
-        ],
-        "media": {
-            "icon": "ohp.png",
-            "gif": "ohp.gif"
-        }
-    },
-    {
-        "id": 26,
-        "title": "La Chaise (Wall Sit)",
-        "sport_category": [
-            "randonnee",
-            "ski",
-            "running"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "quadriceps",
-            "isometrie"
-        ],
-        "equipment": [
-            "mur"
-        ],
-        "description": "Renforce la résistance des cuisses sans impact.",
-        "instructions": [
-            "Dos plaqué contre un mur.",
-            "Descendez jusqu'à avoir les cuisses parallèles au sol (90°).",
-            "Mains le long du corps (pas sur les genoux !).",
-            "Tenez la position le plus longtemps possible."
-        ],
-        "media": {
-            "icon": "wallsit.png",
-            "gif": "wallsit.gif"
-        }
-    },
-    {
-        "id": 27,
-        "title": "Posture du Pigeon",
-        "sport_category": [
-            "sport_relaxation",
-            "running",
-            "crossfit"
-        ],
-        "type": "etirement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "fessiers",
-            "piriforme"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Soulage les fessiers et le bas du dos.",
-        "instructions": [
-            "Au sol, amenez le genou droit derrière le poignet droit.",
-            "Le pied droit va vers le poignet gauche.",
-            "Allongez la jambe gauche loin derrière.",
-            "Si possible, penchez le buste vers l'avant sur les coudes.",
-            "Changez de côté."
-        ],
-        "media": {
-            "icon": "pigeon.png",
-            "gif": "pigeon.gif"
-        }
-    },
-    {
-        "id": 28,
-        "title": "Jumping Jacks",
-        "sport_category": [
-            "tous",
-            "cardio"
-        ],
-        "type": "cardio",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "cardio",
-            "coordination"
-        ],
-        "equipment": [
-            "poids_du_corps"
-        ],
-        "description": "L'échauffement universel.",
-        "instructions": [
-            "Départ pieds joints, bras le long du corps.",
-            "Sautez en écartant les pieds et en levant les mains au-dessus de la tête.",
-            "Sautez pour revenir en position initiale.",
-            "Gardez un rythme régulier."
-        ],
-        "media": {
-            "icon": "jumping_jack.png",
-            "gif": "jumping_jack.gif"
-        }
-    },
-    {
-        "id": 29,
-        "title": "Relevé de Bassin (Glute Bridge)",
-        "sport_category": [
-            "musculation",
-            "running",
-            "randonnee",
-            "yoga"
-        ],
-        "type": "renforcement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "fessiers",
-            "ischios"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Active les fessiers souvent endormis par la position assise.",
-        "instructions": [
-            "Allongé sur le dos, genoux pliés, pieds à plat au sol.",
-            "Levez le bassin vers le plafond en contractant fort les fessiers.",
-            "Alignez genoux, hanches et épaules.",
-            "Redescendez doucement sans toucher le sol complètement."
-        ],
-        "media": {
-            "icon": "glute_bridge.png",
-            "gif": "glute_bridge.gif"
-        }
-    },
-    {
-        "id": 30,
-        "title": "Battements de Jambes (Flutter Kicks)",
-        "sport_category": [
-            "sports_aquatique",
-            "crossfit"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "abdominaux",
-            "flechisseurs_hanche"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Renforce les abdos inférieurs et simule le battement du crawl.",
-        "instructions": [
-            "Allongé sur le dos, mains sous les fesses pour protéger le dos.",
-            "Levez les deux jambes de 15 cm.",
-            "Effectuez de petits battements verticaux rapides.",
-            "Gardez le bas du dos collé au sol."
-        ],
-        "media": {
-            "icon": "flutter_kicks.png",
-            "gif": "flutter_kicks.gif"
-        }
-    },
-    {
-        "id": 31,
-        "title": "Gainage Latéral",
-        "sport_category": [
-            "cyclisme",
-            "running",
-            "sport_collectif"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "obliques"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Stabilisation latérale du tronc.",
-        "instructions": [
-            "Allongé sur le côté, en appui sur un avant-bras.",
-            "Décollez le bassin pour aligner jambes et buste.",
-            "Le bras libre peut être levé vers le ciel.",
-            "Tenez sans laisser les hanches tomber."
-        ],
-        "media": {
-            "icon": "side_plank.png",
-            "gif": "side_plank.gif"
-        }
-    },
-    {
-        "id": 32,
-        "title": "Étirement Pectoraux (Cadre de porte)",
-        "sport_category": [
-            "musculation",
-            "sports_raquete",
-            "sport_de_bureau"
-        ],
-        "type": "etirement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "pectoraux",
-            "epaules"
-        ],
-        "equipment": [
-            "mur"
-        ],
-        "description": "Contre la posture des épaules voûtées.",
-        "instructions": [
-            "Placez votre avant-bras contre le montant d'une porte (coude à 90°).",
-            "Avancez le buste doucement.",
-            "Tournez légèrement la tête à l'opposé.",
-            "Sentez l'ouverture de l'épaule et de la poitrine."
-        ],
-        "media": {
-            "icon": "pec_stretch.png",
-            "gif": "pec_stretch.gif"
-        }
-    },
-    {
-        "id": 33,
-        "title": "Face Pull",
-        "sport_category": [
-            "musculation",
-            "sports_raquete",
-            "natation"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "arriere_epaule",
-            "coiffe_rotateurs"
-        ],
-        "equipment": [
-            "elastique",
-            "poulie"
-        ],
-        "description": "Essentiel pour la santé des épaules et la posture.",
-        "instructions": [
-            "Élastique fixé à hauteur des yeux.",
-            "Tirez les extrémités vers votre visage.",
-            "Écartez les mains en fin de mouvement (position double biceps).",
-            "Resserrez fort les omoplates."
-        ],
-        "media": {
-            "icon": "face_pull.png",
-            "gif": "face_pull.gif"
-        }
-    },
-    {
-        "id": 34,
-        "title": "Handstand Push-Up (Pompes Poirier)",
-        "sport_category": [
-            "crossfit",
-            "gymnastique"
-        ],
-        "type": "renforcement",
-        "difficulty": "expert",
-        "target_muscles": [
-            "epaules",
-            "triceps",
-            "equilibre"
-        ],
-        "equipment": [
-            "mur",
-            "tapis"
-        ],
-        "description": "Mouvement avancé de poussée verticale inversée.",
-        "instructions": [
-            "Lancez-vous en équilibre contre un mur (talons au mur).",
-            "Descendez la tête vers le sol en freinant.",
-            "Les mains forment un triangle avec la tête.",
-            "Poussez fort pour revenir bras tendus."
-        ],
-        "media": {
-            "icon": "hspu.png",
-            "gif": "hspu.gif"
-        }
-    },
-    {
-        "id": 35,
-        "title": "Talons-Fesses (Drill)",
-        "sport_category": [
-            "running",
-            "sport_collectif",
-            "echauffement"
-        ],
-        "type": "cardio",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "ischios",
-            "dynamique"
-        ],
-        "equipment": [
-            "aucun"
-        ],
-        "description": "Éducatif de course pour améliorer la foulée.",
-        "instructions": [
-            "Courez sur place ou en avançant légèrement.",
-            "Ramenez le talon rapidement vers la fesse.",
-            "Gardez le genou pointé vers le sol (ne le levez pas devant).",
-            "Restez bien droit et dynamique."
-        ],
-        "media": {
-            "icon": "butt_kicks.png",
-            "gif": "butt_kicks.gif"
-        }
-    },
-    {
-        "id": 36,
-        "title": "Good Morning",
-        "sport_category": [
-            "randonnee",
-            "musculation"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "lombaires",
-            "ischios"
-        ],
-        "equipment": [
-            "barre",
-            "baton",
-            "elastique"
-        ],
-        "description": "Renforce la chaîne postérieure, utile pour porter un sac à dos.",
-        "instructions": [
-            "Barre ou bâton sur les trapèzes.",
-            "Penchez le buste en avant en poussant les fesses en arrière.",
-            "Gardez les jambes quasi tendues et le dos plat.",
-            "Descendez jusqu'à sentir l'étirement des ischios, puis remontez."
-        ],
-        "media": {
-            "icon": "good_morning.png",
-            "gif": "good_morning.gif"
-        }
-    },
-    {
-        "id": 37,
-        "title": "Rotation Externe Épaule",
-        "sport_category": [
-            "sports_aquatique",
-            "sports_raquete",
-            "musculation"
-        ],
-        "type": "prevention",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "coiffe_rotateurs"
-        ],
-        "equipment": [
-            "elastique"
-        ],
-        "description": "Prévention des blessures d'épaule (nageur, tennisman).",
-        "instructions": [
-            "Coude collé au corps, plié à 90°.",
-            "Tenez l'élastique qui vient de l'intérieur.",
-            "Ouvrez le bras vers l'extérieur sans décoller le coude des côtes.",
-            "Revenez doucement."
-        ],
-        "media": {
-            "icon": "ext_rotation.png",
-            "gif": "ext_rotation.gif"
-        }
-    },
-    {
-        "id": 38,
-        "title": "Sprint Départ Arrêté",
-        "sport_category": [
-            "sport_collectif",
-            "running",
-            "crossfit"
-        ],
-        "type": "cardio",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "explosivite",
-            "cardio"
-        ],
-        "equipment": [
-            "espace_libre"
-        ],
-        "description": "Travail de l'accélération pure.",
-        "instructions": [
-            "Position de départ décalée, corps penché en avant.",
-            "Poussez explosivement sur les premiers appuis.",
-            "Montez les genoux et engagez les bras.",
-            "Accélérez à fond sur 10 à 20 mètres."
-        ],
-        "media": {
-            "icon": "sprint.png",
-            "gif": "sprint.gif"
-        }
-    },
-    {
-        "id": 39,
-        "title": "Chat-Vache (Cat-Cow)",
-        "sport_category": [
-            "sport_relaxation",
-            "tous"
-        ],
-        "type": "etirement",
-        "difficulty": "debutant",
-        "target_muscles": [
-            "colonne_vertebrale"
-        ],
-        "equipment": [
-            "tapis"
-        ],
-        "description": "Mobilisation douce de la colonne vertébrale.",
-        "instructions": [
-            "À quatre pattes.",
-            "Inspirez : creusez le dos, regardez vers le haut (Vache).",
-            "Expirez : arrondissez le dos, rentrez le menton (Chat).",
-            "Alternez fluidement."
-        ],
-        "media": {
-            "icon": "cat_cow.png",
-            "gif": "cat_cow.gif"
-        }
-    },
-    {
-        "id": 40,
-        "title": "Relevés de Jambes (Leg Raise)",
-        "sport_category": [
-            "musculation",
-            "gymnastique",
-            "crossfit"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "abdominaux_inferieurs"
-        ],
-        "equipment": [
-            "barre_traction",
-            "tapis"
-        ],
-        "description": "Ciblage du bas des abdominaux.",
-        "instructions": [
-            "Suspendu à une barre (ou allongé au sol).",
-            "Gardez les jambes tendues ou genoux fléchis (plus facile).",
-            "Remontez les jambes jusqu'à l'horizontale.",
-            "Ne balancez pas (contrôlez le mouvement)."
-        ],
-        "media": {
-            "icon": "leg_raise.png",
-            "gif": "leg_raise.gif"
-        }
-    },
-    {
-        "id": 41,
-        "title": "Soulevé de Terre Unilatéral",
-        "sport_category": [
-            "cyclisme",
-            "running",
-            "randonnee"
-        ],
-        "type": "renforcement",
-        "difficulty": "intermediaire",
-        "target_muscles": [
-            "ischios",
-            "equilibre",
-            "cheville"
-        ],
-        "equipment": [
-            "kettlebell",
-            "poids_du_corps"
-        ],
-        "description": "Renforce la chaîne postérieure et la proprioception.",
-        "instructions": [
-            "En appui sur une jambe.",
-            "Penchez le buste en avant en levant la jambe libre derrière (effet balancier).",
-            "Gardez le dos plat et la jambe d'appui légèrement fléchie.",
-            "Revenez en position droite par contraction du fessier."
-        ],
-        "media": {
-            "icon": "single_dl.png",
-            "gif": "single_dl.gif"
-        }
-    }
+  {
+    "id": 0,
+    "title": "Étirement Cobra (Cobra Stretch)",
+    "sport_category": ["yoga", "relaxation", "recuperation"],
+    "type": "etirement",
+    "difficulty": "debutant",
+    "target_muscles": ["abdominaux", "lombaires"],
+    "equipment": ["tapis"],
+    "description": "Étirement excellent pour la sangle abdominale et le dos.",
+    "instructions": [
+      "Allongé sur le ventre, mains au sol.",
+      "Poussez pour lever le buste vers le ciel.",
+      "Gardez le bassin au sol."
+    ],
+    "gif": "abdominal-stretch.gif" 
+  },
+  {
+    "id": 1,
+    "title": "Fente Basse (Low Lunge)",
+    "sport_category": ["yoga", "running", "recuperation"],
+    "type": "etirement",
+    "difficulty": "debutant",
+    "target_muscles": ["psoas", "quadriceps", "hanches"],
+    "equipment": ["tapis"],
+    "description": "Ouvreture profonde des hanches.",
+    "instructions": [
+      "Un genou au sol, l'autre pied devant.",
+      "Poussez le bassin vers l'avant et le bas.",
+      "Levez les bras ou gardez-les sur le genou."
+    ],
+    "gif": "Anjaneyasana-Low-Lunge-Pose.gif"
+  },
+  {
+    "id": 2,
+    "title": "Cercles de Bras",
+    "sport_category": ["echauffement", "tous"],
+    "type": "echauffement",
+    "difficulty": "debutant",
+    "target_muscles": ["epaules", "coiffe_rotateurs"],
+    "equipment": ["aucun"],
+    "description": "Échauffement articulaire des épaules.",
+    "instructions": [
+      "Debout, bras tendus sur les côtés.",
+      "Effectuez des rotations contrôlées.",
+      "Changez de sens après 30 secondes."
+    ],
+    "gif": "Arm-Circles_Shoulders.gif"
+  },
+  {
+    "id": 3,
+    "title": "Soulevé de Terre Roumain (Barre)",
+    "sport_category": ["musculation", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["ischios", "fessiers", "lombaires"],
+    "equipment": ["barre", "disques"],
+    "description": "Ciblage spécifique de la chaîne postérieure.",
+    "instructions": [
+      "Jambes légèrement fléchies mais fixes.",
+      "Penchez le buste en envoyant les fesses loin derrière.",
+      "Descendez la barre sous les genoux sans arrondir le dos."
+    ],
+    "gif": "Barbell-Romanian-Deadlift.gif"
+  },
+  {
+    "id": 4,
+    "title": "Squat Barre (Back Squat)",
+    "sport_category": ["musculation", "powerlifting", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["quadriceps", "fessiers", "adducteurs"],
+    "equipment": ["barre", "rack"],
+    "description": "L'exercice roi pour la force des jambes.",
+    "instructions": [
+      "Barre sur les trapèzes, pieds largeur d'épaules.",
+      "Descendez en contrôlant la charge.",
+      "Remontez en poussant fort dans le sol."
+    ],
+    "gif": "BARBELL-SQUAT.gif"
+  },
+  {
+    "id": 5,
+    "title": "Marche de l'Ours (Bear Crawl)",
+    "sport_category": ["crossfit", "animal_flow", "cardio"],
+    "type": "cardio_renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["epaules", "abdominaux", "quadriceps"],
+    "equipment": ["aucun"],
+    "description": "Déplacement quadrupédique fonctionnel.",
+    "instructions": [
+      "À quatre pattes, genoux décollés du sol.",
+      "Avancez main droite et pied gauche simultanément.",
+      "Gardez le dos plat comme une table."
+    ],
+    "gif": "Bear-Crawl.gif" 
+  },
+  {
+    "id": 6,
+    "title": "Gainage Dynamique (Body Saw)",
+    "sport_category": ["musculation", "pilates"],
+    "type": "renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["abdominaux", "transverse"],
+    "equipment": ["tapis", "glisseurs"],
+    "description": "Variation intense de la planche.",
+    "instructions": [
+      "En position planche sur les avant-bras.",
+      "Poussez sur les orteils pour avancer le corps.",
+      "Revenez en position initiale."
+    ],
+    "gif": "body-saw-plank.gif" 
+  },
+  {
+    "id": 7,
+    "title": "Pompes Déclinées",
+    "sport_category": ["musculation", "calisthenics"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["pectoraux_superieurs", "epaules", "triceps"],
+    "equipment": ["banc", "chaise"],
+    "description": "Accentue le travail sur le haut des pectoraux.",
+    "instructions": [
+      "Pieds surélevés sur un support.",
+      "Mains au sol, corps gainé.",
+      "Descendez la poitrine vers le sol."
+    ],
+    "gif": "Bodyweight-Exercises-Decline-Push-Up.gif"
+  },
+  {
+    "id": 8,
+    "title": "Fentes Marchées",
+    "sport_category": ["running", "musculation", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["quadriceps", "fessiers", "cardio"],
+    "equipment": ["poids_du_corps"],
+    "description": "Fentes en déplacement continu.",
+    "instructions": [
+      "Faites un pas, descendez en fente.",
+      "Poussez pour vous relever et avancez l'autre jambe directement.",
+      "Gardez le buste droit."
+    ],
+    "gif": "Bodyweight-Exercises-Walking-Lunge.gif"
+  },
+  {
+    "id": 9,
+    "title": "Sumo Squat",
+    "sport_category": ["musculation", "pilates"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["adducteurs", "fessiers", "quadriceps"],
+    "equipment": ["poids_du_corps"],
+    "description": "Squat avec écartement large pour cibler l'intérieur des cuisses.",
+    "instructions": [
+      "Pieds très écartés, pointes vers l'extérieur.",
+      "Descendez le bassin verticalement.",
+      "Poussez dans les talons."
+    ],
+    "gif": "BODYWEIGHT-SUMO-SQUAT.gif"
+  },
+  {
+    "id": 10,
+    "title": "Burpee Saut Longueur",
+    "sport_category": ["crossfit", "cardio"],
+    "type": "cardio_renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["cardio", "explosivite", "total_body"],
+    "equipment": ["espace_libre"],
+    "description": "Variante explosive du burpee.",
+    "instructions": [
+      "Faites un burpee classique.",
+      "Au lieu de sauter en l'air, sautez loin devant vous.",
+      "Amortissez la réception."
+    ],
+    "gif": "Burpee-Long-Jump.gif"
+  },
+  {
+    "id": 11,
+    "title": "Burpee avec Pompe",
+    "sport_category": ["crossfit", "musculation"],
+    "type": "cardio_renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["pectoraux", "cardio", "triceps"],
+    "equipment": ["poids_du_corps"],
+    "description": "Le burpee strict avec une vraie pompe.",
+    "instructions": [
+      "Jetez-vous au sol.",
+      "Effectuez une pompe stricte.",
+      "Ramenez les pieds et sautez."
+    ],
+    "gif": "Burpee-with-Push-Up.gif"
+  },
+  {
+    "id": 12,
+    "title": "Pompe Yoga (Chaturanga)",
+    "sport_category": ["yoga"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["triceps", "epaules", "gainage"],
+    "equipment": ["tapis"],
+    "description": "Descente de pompe triceps contrôlée.",
+    "instructions": [
+      "Départ planche.",
+      "Avancez les épaules devant les poignets.",
+      "Descendez coudes collés aux côtes jusqu'à 90 degrés."
+    ],
+    "gif": "Chaturanga-Dandasana-Low-Plank-Pose.gif"
+  },
+  {
+    "id": 13,
+    "title": "Crunch Jambes Levées",
+    "sport_category": ["musculation", "abdominaux"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["grand_droit"],
+    "equipment": ["tapis"],
+    "description": "Abdominaux sans engagement des fléchisseurs.",
+    "instructions": [
+      "Dos au sol, jambes en l'air ou genoux à 90°.",
+      "Décollez les omoplates vers les genoux.",
+      "Soufflez en montant."
+    ],
+    "gif": "Crunch-With-Leg-Raise.gif"
+  },
+  {
+    "id": 14,
+    "title": "Bird Dog (Dandayamana)",
+    "sport_category": ["yoga", "pilates", "reeducation"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["lombaires", "fessiers", "equilibre"],
+    "equipment": ["tapis"],
+    "description": "Renforcement croisé de la chaîne postérieure.",
+    "instructions": [
+      "À quatre pattes.",
+      "Tendez le bras droit et la jambe gauche.",
+      "Cherchez la longueur, pas la hauteur.",
+      "Alternez."
+    ],
+    "gif": "Dandayamana-Bharmanasana-Balancing-Table-Pose.gif"
+  },
+  {
+    "id": 15,
+    "title": "Dips sur Chaise",
+    "sport_category": ["musculation", "maison"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["triceps", "epaules"],
+    "equipment": ["chaise"],
+    "description": "Exercice triceps accessible à la maison.",
+    "instructions": [
+      "Mains sur le bord de la chaise, fesses dans le vide.",
+      "Fléchissez les coudes pour descendre.",
+      "Poussez pour remonter."
+    ],
+    "gif": "Dips-Between-Chairs-for-bodyweight-workout.gif" 
+  },
+  {
+    "id": 16,
+    "title": "Curl Haltères",
+    "sport_category": ["musculation"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["biceps"],
+    "equipment": ["halteres"],
+    "description": "Isolation classique des biceps.",
+    "instructions": [
+      "Debout, un haltère dans chaque main.",
+      "Fléchissez les coudes sans bouger les épaules.",
+      "Contractez en haut."
+    ],
+    "gif": "Double-Arm-Dumbbell-Curl.gif"
+  },
+  {
+    "id": 17,
+    "title": "Mollets Debout (Haltères)",
+    "sport_category": ["musculation", "running"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["mollets"],
+    "equipment": ["halteres"],
+    "description": "Renforcement des jumeaux.",
+    "instructions": [
+      "Haltères en mains.",
+      "Montez sur la pointe des pieds.",
+      "Tenez 1 seconde en haut."
+    ],
+    "gif": "Dumbbell-Calf-Raise.gif"
+  },
+  {
+    "id": 18,
+    "title": "Élévations Latérales",
+    "sport_category": ["musculation"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["epaules_moyennes"],
+    "equipment": ["halteres"],
+    "description": "Pour la largeur d'épaules.",
+    "instructions": [
+      "Levez les haltères sur les côtés jusqu'à l'horizontale.",
+      "Gardez les coudes légèrement fléchis.",
+      "Contrôlez la descente."
+    ],
+    "gif": "Dumbbell-Lateral-Raise.gif"
+  },
+  {
+    "id": 19,
+    "title": "Pullover Haltère",
+    "sport_category": ["musculation"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["grand_dorsal", "pectoraux"],
+    "equipment": ["halteres", "banc"],
+    "description": "Ouvre la cage thoracique et travaille le dos.",
+    "instructions": [
+      "Allongé sur un banc, un haltère tenu à deux mains.",
+      "Amenez l'haltère derrière la tête bras semi-tendus.",
+      "Remontez au-dessus de la poitrine."
+    ],
+    "gif": "Dumbbell-Pullover.gif"
+  },
+  {
+    "id": 20,
+    "title": "Rowing Unilatéral (Bûcheron)",
+    "sport_category": ["musculation"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["grand_dorsal", "biceps"],
+    "equipment": ["halteres", "banc"],
+    "description": "Exercice unilatéral pour l'épaisseur du dos.",
+    "instructions": [
+      "Genou et main sur le banc.",
+      "Tirez l'haltère vers la hanche avec le bras libre.",
+      "Gardez le dos plat."
+    ],
+    "gif": "Dumbbell-Row.gif" 
+  },
+  {
+    "id": 21,
+    "title": "Shrugs (Haussements)",
+    "sport_category": ["musculation"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["trapezes"],
+    "equipment": ["halteres"],
+    "description": "Isolation des trapèzes supérieurs.",
+    "instructions": [
+      "Bras le long du corps.",
+      "Haussez les épaules vers les oreilles.",
+      "Relâchez doucement."
+    ],
+    "gif": "Dumbbell-Shrug.gif"
+  },
+  {
+    "id": 22,
+    "title": "Curl Poignet",
+    "sport_category": ["musculation", "escalade", "tennis"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["avant_bras"],
+    "equipment": ["halteres"],
+    "description": "Renforce la poigne et les fléchisseurs.",
+    "instructions": [
+      "Avant-bras posé sur la cuisse ou un banc.",
+      "Fléchissez le poignet pour remonter l'haltère.",
+      "Laissez redescendre jusqu'au bout des doigts."
+    ],
+    "gif": "Dumbbell-Wrist-Curl.gif"
+  },
+  {
+    "id": 23,
+    "title": "Pompes Inclinées",
+    "sport_category": ["musculation", "debutant"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["pectoraux", "triceps"],
+    "equipment": ["banc", "box"],
+    "description": "Version allégée des pompes pour débuter.",
+    "instructions": [
+      "Mains sur un support surélevé.",
+      "Corps gainé.",
+      "Amenez la poitrine au support."
+    ],
+    "gif": "Incline-Push-Up.gif"
+  },
+  {
+    "id": 24,
+    "title": "Jackknife Sit-ups (Portefeuille)",
+    "sport_category": ["musculation", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["abdominaux"],
+    "equipment": ["tapis"],
+    "description": "Fermeture complète du corps.",
+    "instructions": [
+      "Allongé, bras derrière la tête.",
+      "Relevez simultanément bras et jambes pour toucher les pieds.",
+      "Contrôlez la descente."
+    ],
+    "gif": "Jackknife-Sit-ups.gif" 
+  },
+  {
+    "id": 25,
+    "title": "Jumping Jack",
+    "sport_category": ["cardio", "echauffement"],
+    "type": "cardio",
+    "difficulty": "debutant",
+    "target_muscles": ["cardio", "coordination"],
+    "equipment": ["aucun"],
+    "description": "Le classique pour faire monter le cœur.",
+    "instructions": [
+      "Sauter en écartant pieds et mains.",
+      "Sauter en refermant.",
+      "Garder du rythme."
+    ],
+    "gif": "Jumping-jack.gif"
+  },
+  {
+    "id": 26,
+    "title": "Pompes sur Genoux",
+    "sport_category": ["musculation", "debutant"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["pectoraux", "triceps"],
+    "equipment": ["tapis"],
+    "description": "Pour apprendre le mouvement de poussée.",
+    "instructions": [
+      "En appui sur les genoux.",
+      "Gardez le bassin aligné avec les épaules.",
+      "Descendez la poitrine au sol."
+    ],
+    "gif": "Knee-Push-Up.gif"
+  },
+  {
+    "id": 27,
+    "title": "Crunch Groupé (Leg Pull-in)",
+    "sport_category": ["musculation", "abdominaux"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["abdominaux"],
+    "equipment": ["banc", "sol"],
+    "description": "Travail des abdos en position assise.",
+    "instructions": [
+      "Assis, mains en appui derrière.",
+      "Ramenez les genoux vers la poitrine.",
+      "Tendez les jambes devant sans toucher le sol."
+    ],
+    "gif": "Leg-Pull-In-Knee-up-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 28,
+    "title": "Relevé de Jambes Couché",
+    "sport_category": ["musculation", "abdominaux"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["abdominaux_inferieurs"],
+    "equipment": ["tapis"],
+    "description": "Cible le bas des abdominaux.",
+    "instructions": [
+      "Dos au sol, mains sous les fesses.",
+      "Levez les jambes tendues à la verticale.",
+      "Redescendez sans creuser le dos."
+    ],
+    "gif": "Lying-Leg-Raise.gif"
+  },
+  {
+    "id": 29,
+    "title": "Mountain Climber",
+    "sport_category": ["cardio", "crossfit"],
+    "type": "cardio",
+    "difficulty": "intermediaire",
+    "target_muscles": ["cardio", "abdominaux", "epaules"],
+    "equipment": ["tapis"],
+    "description": "Course sur place en position de planche.",
+    "instructions": [
+      "Position pompe.",
+      "Ramenez un genou puis l'autre à la poitrine très vite.",
+      "Gardez le bassin bas."
+    ],
+    "gif": "Mountain-climber-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 30,
+    "title": "Extension Triceps Couché (Unilatéral)",
+    "sport_category": ["musculation"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["triceps"],
+    "equipment": ["halteres", "banc"],
+    "description": "Isolation du triceps bras par bras.",
+    "instructions": [
+      "Allongé, un haltère au dessus de l'épaule.",
+      "Fléchissez le coude pour amener l'haltère à l'oreille opposée.",
+      "Tendez le bras."
+    ],
+    "gif": "One-Arm-Lying-Triceps-Extension.gif"
+  },
+  {
+    "id": 31,
+    "title": "Pike Push-up",
+    "sport_category": ["calisthenics", "musculation"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["epaules", "triceps"],
+    "equipment": ["tapis"],
+    "description": "Pompes ciblant les épaules (préparation au HSPU).",
+    "instructions": [
+      "Position de V inversé (fesses hautes).",
+      "Descendez le front vers le sol en triangle.",
+      "Repoussez vers l'arrière."
+    ],
+    "gif": "Pike-Push-up-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 32,
+    "title": "La Planche",
+    "sport_category": ["gainage", "tous"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["abdominaux", "transverse"],
+    "equipment": ["tapis"],
+    "description": "Gainage statique fondamental.",
+    "instructions": [
+      "Appui sur avant-bras et orteils.",
+      "Corps droit comme une planche.",
+      "Ne creusez pas le dos."
+    ],
+    "gif": "plank-for-bodyweight-exercises.gif"
+  },
+  {
+    "id": 33,
+    "title": "Fentes Sautées (Power Lunge)",
+    "sport_category": ["cardio", "crossfit"],
+    "type": "cardio_renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["cuisses", "explosivite", "cardio"],
+    "equipment": ["aucun"],
+    "description": "Explosivité des jambes.",
+    "instructions": [
+      "Démarrez en fente.",
+      "Sautez pour inverser les jambes en l'air.",
+      "Atterrissez souplement en fente opposée."
+    ],
+    "gif": "power-lunge.gif"
+  },
+  {
+    "id": 34,
+    "title": "Tractions (Pull Up)",
+    "sport_category": ["musculation", "calisthenics"],
+    "type": "renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["dos", "biceps"],
+    "equipment": ["barre_traction"],
+    "description": "Tirage vertical au poids du corps.",
+    "instructions": [
+      "Mains plus larges que les épaules, paumes vers l'avant.",
+      "Tirez le menton au-dessus de la barre.",
+      "Redescendez bras tendus."
+    ],
+    "gif": "Pull_up.gif"
+  },
+  {
+    "id": 35,
+    "title": "Chin Up (Traction Supination)",
+    "sport_category": ["musculation", "calisthenics"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["biceps", "dos"],
+    "equipment": ["barre_traction"],
+    "description": "Tractions paumes vers soi, cible les biceps.",
+    "instructions": [
+      "Paumes vers le visage.",
+      "Tirez pour passer le menton.",
+      "Contrôlez la descente."
+    ],
+    "gif": "pull-up-for-Bodyweight-Exercises.gif"
+  },
+  {
+    "id": 36,
+    "title": "Pompes Classiques (Push Up)",
+    "sport_category": ["musculation", "tous"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["pectoraux", "triceps"],
+    "equipment": ["poids_du_corps"],
+    "description": "Le standard pour le haut du corps.",
+    "instructions": [
+      "Mains au sol, corps gainé.",
+      "Poitrine au sol.",
+      "Extension complète."
+    ],
+    "gif": "Push-Up.gif"
+  },
+  {
+    "id": 37,
+    "title": "Pompe Touche Pieds",
+    "sport_category": ["crossfit", "calisthenics"],
+    "type": "renforcement",
+    "difficulty": "avance",
+    "target_muscles": ["pectoraux", "abdominaux", "souplesse"],
+    "equipment": ["poids_du_corps"],
+    "description": "Mélange de pompe et de souplesse dynamique.",
+    "instructions": [
+      "Faites une pompe.",
+      "Poussez les fesses en l'air et touchez le pied opposé avec la main.",
+      "Revenez en pompe."
+    ],
+    "gif": "Push-up-Toe-Touch.gif"
+  },
+  {
+    "id": 38,
+    "title": "Split Squat (Fente statique)",
+    "sport_category": ["musculation", "renforcement"],
+    "type": "renforcement",
+    "difficulty": "debutant",
+    "target_muscles": ["quadriceps", "fessiers"],
+    "equipment": ["poids_du_corps"],
+    "description": "Travail unilatéral sans impact.",
+    "instructions": [
+      "Pieds décalés (un devant, un derrière).",
+      "Descendez le genou arrière vers le sol.",
+      "Remontez sans bouger les pieds."
+    ],
+    "gif": "Split-Squat.gif"
+  },
+  {
+    "id": 39,
+    "title": "Standing Toe Touch",
+    "sport_category": ["echauffement", "souplesse"],
+    "type": "etirement",
+    "difficulty": "debutant",
+    "target_muscles": ["ischios", "dos"],
+    "equipment": ["aucun"],
+    "description": "Souplesse dynamique ou statique.",
+    "instructions": [
+      "Debout, jambes tendues.",
+      "Penchez-vous pour toucher vos orteils.",
+      "Gardez les jambes droites."
+    ],
+    "gif": "Standing-Toe-Touch.gif"
+  },
+  {
+    "id": 40,
+    "title": "Rowing Inversé (Table)",
+    "sport_category": ["calisthenics", "maison"],
+    "type": "renforcement",
+    "difficulty": "intermediaire",
+    "target_muscles": ["dos", "biceps", "gainage"],
+    "equipment": ["table_solide"],
+    "description": "Tirage horizontal au poids du corps à la maison.",
+    "instructions": [
+      "Allongé sous une table solide, mains sur le bord.",
+      "Corps gainé, talons au sol.",
+      "Tirez la poitrine vers la table."
+    ],
+    "gif": "Table-Inverted-Row-for-bodyweight-workout.gif"
+  }
 ]
