@@ -676,98 +676,114 @@ document.addEventListener("DOMContentLoaded", () => {
         // Ajout de l'écouteur sur chaque carte exercice pour ouvrir la modale
         // On suppose que workout est dans le même ordre que les exos affichés
         setTimeout(() => {
-            const allExos = workout; // On a déjà la liste des exos utilisés
-            document.querySelectorAll('.exo-card').forEach((card, idx) => {
-                card.onclick = () => openExerciseModal(allExos[idx]);
+            const allExos = workout // On a déjà la liste des exos utilisés
+            document.querySelectorAll(".exo-card").forEach((card, idx) => {
+                card.onclick = () => openExerciseModal(allExos[idx])
                 card.onkeydown = (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openExerciseModal(allExos[idx]);
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault()
+                        openExerciseModal(allExos[idx])
                     }
-                };
-            });
-        }, 0);
+                }
+            })
+        }, 0)
     }
 
     // Ajout de la modale exercice
     function createExerciseModal() {
-        if (document.getElementById('exercise-modal')) return;
-        const modal = document.createElement('div');
-        modal.id = 'exercise-modal';
-        modal.className = 'exercise-modal';
+        if (document.getElementById("exercise-modal")) return
+        const modal = document.createElement("div")
+        modal.id = "exercise-modal"
+        modal.className = "exercise-modal"
         modal.innerHTML = `
             <div class="exercise-modal-backdrop"></div>
             <div class="exercise-modal-content">
                 <button class="exercise-modal-close" aria-label="Fermer">&times;</button>
                 <div class="exercise-modal-body"></div>
             </div>
-        `;
-        document.body.appendChild(modal);
+        `
+        document.body.appendChild(modal)
 
         // Fermer la modale sur clic croix ou backdrop
-        modal.querySelector('.exercise-modal-close').onclick = closeExerciseModal;
-        modal.querySelector('.exercise-modal-backdrop').onclick = closeExerciseModal;
+        modal.querySelector(".exercise-modal-close").onclick =
+            closeExerciseModal
+        modal.querySelector(".exercise-modal-backdrop").onclick =
+            closeExerciseModal
     }
 
     // Utilitaire pour mettre la première lettre de chaque mot en majuscule
     function capitalizeWords(str) {
-        if (!str) return '';
+        if (!str) return ""
         return str
-            .split(' ')
-            .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-            .join(' ');
+            .split(" ")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+            .join(" ")
     }
     function capitalizeArray(arr) {
-        if (!arr) return '';
-        return arr.map(capitalizeWords).join(', ');
+        if (!arr) return ""
+        return arr.map(capitalizeWords).join(", ")
     }
 
     function openExerciseModal(exo) {
-        createExerciseModal();
-        const modal = document.getElementById('exercise-modal');
-        const body = modal.querySelector('.exercise-modal-body');
+        createExerciseModal()
+        const modal = document.getElementById("exercise-modal")
+        const body = modal.querySelector(".exercise-modal-body")
         body.innerHTML = `
             <h2>${exo.title}</h2>
-            <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exercise-modal-gif" />
+            <img src="src/gif/${exo.gif}" alt="${
+            exo.title
+        }" class="exercise-modal-gif" />
             <div class="exercise-modal-meta">
-                <span><b>Type :</b> ${capitalizeWords(exo.type.replace(/_/g, ' '))}</span>
-                <span><b>Difficulté :</b> ${capitalizeWords(exo.difficulty)}</span>
-                <span><b>Matériel :</b> ${capitalizeArray(exo.equipment) || 'Aucun'}</span>
-                <span><b>Groupes Musculaires :</b> ${capitalizeArray(exo.target_muscles)}</span>
+                <span><b>Type :</b> ${capitalizeWords(
+                    exo.type.replace(/_/g, " ")
+                )}</span>
+                <span><b>Difficulté :</b> ${capitalizeWords(
+                    exo.difficulty
+                )}</span>
+                <span><b>Matériel :</b> ${
+                    capitalizeArray(exo.equipment) || "Aucun"
+                }</span>
+                <span><b>Groupes Musculaires :</b> ${capitalizeArray(
+                    exo.target_muscles
+                )}</span>
             </div>
-            <p class="exercise-modal-desc">${exo.description || ''}</p>
+            <p class="exercise-modal-desc">${exo.description || ""}</p>
             <div class="exercise-modal-instructions">
                 <b>Instructions :</b>
                 <ol>
-                    ${(exo.instructions || []).map(step => `<li>${step}</li>`).join('')}
+                    ${(exo.instructions || [])
+                        .map((step) => `<li>${step}</li>`)
+                        .join("")}
                 </ol>
             </div>
-        `;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        `
+        modal.classList.add("active")
+        document.body.style.overflow = "hidden"
 
         // Ajustement dynamique : si le contenu dépasse la fenêtre, réduit la taille du gif
         setTimeout(() => {
-            const content = modal.querySelector('.exercise-modal-content');
-            const gif = modal.querySelector('.exercise-modal-gif');
+            const content = modal.querySelector(".exercise-modal-content")
+            const gif = modal.querySelector(".exercise-modal-gif")
             if (content && gif) {
-                const winH = window.innerHeight;
-                const contentH = content.offsetHeight;
+                const winH = window.innerHeight
+                const contentH = content.offsetHeight
                 if (contentH > winH - 40) {
-                    gif.style.width = "120px";
-                    gif.style.height = "120px";
+                    gif.style.width = "120px"
+                    gif.style.height = "120px"
                 }
             }
-        }, 0);
+        }, 0)
     }
 
     function closeExerciseModal() {
-        const modal = document.getElementById('exercise-modal');
+        const modal = document.getElementById("exercise-modal")
         if (modal) {
-            modal.classList.remove('active');
-            setTimeout(() => { modal.remove(); }, 200);
+            modal.classList.remove("active")
+            setTimeout(() => {
+                modal.remove()
+            }, 200)
         }
-        document.body.style.overflow = '';
+        document.body.style.overflow = ""
     }
 
     function showStep(stepIndex) {
