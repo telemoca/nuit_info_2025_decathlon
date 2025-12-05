@@ -2,7 +2,7 @@
   {
     "id": 0,
     "title": "Étirement du Sphinx",
-    "sport_category": ["yoga", "étirement", "récupération"],
+    "sport_category": ["yoga", "étirement", "récupération", "relaxation", "pilates"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["abdominaux", "lombaires", "fléchisseurs de hanche"],
@@ -18,7 +18,7 @@
   {
     "id": 1,
     "title": "Split Squat Statique",
-    "sport_category": ["musculation", "renforcement", "fitness"],
+    "sport_category": ["musculation", "renforcement", "fitness", "cyclisme", "randonnee", "course à pied"],
     "type": "renforcement",
     "difficulty": "débutant",
     "target_muscles": ["quadriceps", "fessiers", "ischio-jambiers"],
@@ -34,7 +34,7 @@
   {
     "id": 2,
     "title": "Étirement Ischio-jambiers Jambes Croisées",
-    "sport_category": ["étirement", "souplesse", "récupération"],
+    "sport_category": ["étirement", "souplesse", "récupération", "course à pied", "cyclisme", "randonnee"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["ischio-jambiers", "bas du dos"],
@@ -50,7 +50,7 @@
   {
     "id": 3,
     "title": "Abduction de la Hanche Debout",
-    "sport_category": ["échauffement", "fitness", "rééducation"],
+    "sport_category": ["échauffement", "fitness", "rééducation", "randonnee", "course à pied"],
     "type": "échauffement",
     "difficulty": "débutant",
     "target_muscles": ["moyen fessier", "abducteurs de la hanche"],
@@ -66,7 +66,7 @@
   {
     "id": 4,
     "title": "Étirement Quadriceps Debout",
-    "sport_category": ["étirement", "course à pied", "récupération"],
+    "sport_category": ["étirement", "course à pied", "récupération", "cyclisme", "sport", "randonnee"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["quadriceps", "fléchisseurs de hanche"],
@@ -82,7 +82,7 @@
   {
     "id": 5,
     "title": "Rotation du Buste Debout (Dynamique)",
-    "sport_category": ["échauffement", "golf", "sports de raquette"],
+    "sport_category": ["échauffement", "golf", "sports de raquette", "sport"],
     "type": "échauffement",
     "difficulty": "débutant",
     "target_muscles": ["obliques", "lombaires", "épaules"],
@@ -98,7 +98,7 @@
   {
     "id": 6,
     "title": "Touche d'Orteils Alternée (Dynamique)",
-    "sport_category": ["échauffement", "souplesse"],
+    "sport_category": ["échauffement", "souplesse", "crossfit", "sport"],
     "type": "échauffement",
     "difficulty": "débutant",
     "target_muscles": ["ischio-jambiers", "abdominaux", "bas du dos"],
@@ -114,7 +114,7 @@
   {
     "id": 7,
     "title": "Pince Debout (Uttanasana)",
-    "sport_category": ["yoga", "étirement", "souplesse"],
+    "sport_category": ["yoga", "étirement", "souplesse", "relaxation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["ischio-jambiers", "mollets", "dos"],
@@ -130,7 +130,7 @@
   {
     "id": 8,
     "title": "Dips entre Chaises (ou Barres)",
-    "sport_category": ["musculation", "calisthenics"],
+    "sport_category": ["musculation", "calisthenics", "crossfit", "force"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["triceps", "pectoraux inférieurs", "épaules"],
@@ -146,7 +146,7 @@
   {
     "id": 9,
     "title": "Saut sur Box (Box Jump)",
-    "sport_category": ["crossfit", "plyométrie", "explosivité"],
+    "sport_category": ["crossfit", "plyométrie", "explosivité", "sport", "randonnee", "course à pied"],
     "type": "cardio_renforcement",
     "difficulty": "avancé",
     "target_muscles": ["quadriceps", "ischio-jambiers", "fessiers"],
@@ -162,7 +162,7 @@
   {
     "id": 10,
     "title": "Posture du Tigre (Vyaghrasana)",
-    "sport_category": ["yoga", "souplesse"],
+    "sport_category": ["yoga", "souplesse", "pilates"],
     "type": "étirement_dynamique",
     "difficulty": "débutant",
     "target_muscles": ["dos", "abdominaux", "fessiers"],
@@ -178,7 +178,7 @@
   {
     "id": 11,
     "title": "Posture de l'Angle Assis (Upavistha Konasana)",
-    "sport_category": ["yoga", "souplesse", "récupération"],
+    "sport_category": ["yoga", "souplesse", "récupération", "relaxation"],
     "type": "étirement",
     "difficulty": "intermédiaire",
     "target_muscles": ["ischio-jambiers", "adducteurs", "bas du dos"],
@@ -194,7 +194,7 @@
   {
     "id": 12,
     "title": "Posture du Chameau (Ustrasana)",
-    "sport_category": ["yoga", "souplesse"],
+    "sport_category": ["yoga", "souplesse", "relaxation"],
     "type": "étirement",
     "difficulty": "avancé",
     "target_muscles": ["pectoraux", "abdominaux", "quadriceps"],
@@ -210,7 +210,7 @@
   {
     "id": 13,
     "title": "Triangle Étendu (Utthita Trikonasana)",
-    "sport_category": ["yoga", "étirement", "force"],
+    "sport_category": ["yoga", "étirement", "force", "pilates"],
     "type": "étirement_renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["ischio-jambiers", "obliques", "dos"],
@@ -226,7 +226,7 @@
   {
     "id": 14,
     "title": "Posture du Guerrier 1 (Virabhadrasana I)",
-    "sport_category": ["yoga", "force", "équilibre"],
+    "sport_category": ["yoga", "force", "équilibre", "renforcement"],
     "type": "renforcement_étirement",
     "difficulty": "débutant",
     "target_muscles": ["quadriceps", "fessiers", "épaules"],
@@ -242,7 +242,7 @@
   {
     "id": 15,
     "title": "Posture du Guerrier 2 (Virabhadrasana II)",
-    "sport_category": ["yoga", "force", "équilibre"],
+    "sport_category": ["yoga", "force", "équilibre", "renforcement"],
     "type": "renforcement_étirement",
     "difficulty": "débutant",
     "target_muscles": ["quadriceps", "adducteurs", "épaules"],
@@ -258,7 +258,7 @@
   {
     "id": 16,
     "title": "Posture du Guerrier 3 (Virabhadrasana III)",
-    "sport_category": ["yoga", "équilibre", "force"],
+    "sport_category": ["yoga", "équilibre", "force", "renforcement", "sports de raquette"],
     "type": "renforcement_équilibre",
     "difficulty": "avancé",
     "target_muscles": ["jambes", "fessiers", "tronc"],
@@ -274,7 +274,7 @@
   {
     "id": 17,
     "title": "Posture de la Roue (Urdhva Dhanurasana)",
-    "sport_category": ["yoga", "souplesse", "calisthenics"],
+    "sport_category": ["yoga", "souplesse", "calisthenics", "sports_aquatique"],
     "type": "étirement_renforcement",
     "difficulty": "avancé",
     "target_muscles": ["dos", "épaules", "triceps", "fessiers"],
@@ -290,7 +290,7 @@
   {
     "id": 18,
     "title": "Hops en Zig-Zag (Plyométrie)",
-    "sport_category": ["plyométrie", "agilité", "sport"],
+    "sport_category": ["plyométrie", "agilité", "sport", "sports de raquette", "course à pied"],
     "type": "cardio_explosivité",
     "difficulty": "intermédiaire",
     "target_muscles": ["mollets", "chevilles", "force latérale"],
@@ -306,7 +306,7 @@
   {
     "id": 19,
     "title": "Étirement 90/90 de la Hanche",
-    "sport_category": ["étirement", "yoga", "récupération"],
+    "sport_category": ["étirement", "yoga", "récupération", "randonnee", "course à pied"],
     "type": "étirement",
     "difficulty": "intermédiaire",
     "target_muscles": ["fessiers", "rotateurs de la hanche (piriforme)"],
@@ -322,7 +322,7 @@
   {
     "id": 20,
     "title": "Étirement de la Poitrine Bras au Dessus de la Tête",
-    "sport_category": ["étirement", "posture", "récupération"],
+    "sport_category": ["étirement", "posture", "récupération", "sports_aquatique", "sports de raquette"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["pectoraux", "épaules", "dorsaux"],
@@ -338,7 +338,7 @@
   {
     "id": 21,
     "title": "Étirement Squat à Quatre Pattes",
-    "sport_category": ["étirement", "souplesse", "mobilité"],
+    "sport_category": ["étirement", "souplesse", "mobilité", "crossfit", "musculation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["hanches", "adducteurs", "bas du dos"],
@@ -354,7 +354,7 @@
   {
     "id": 22,
     "title": "Demi-Flexion Avant (Ardha Uttanasana)",
-    "sport_category": ["yoga", "étirement"],
+    "sport_category": ["yoga", "étirement", "souplesse"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["ischio-jambiers", "dos"],
@@ -370,7 +370,7 @@
   {
     "id": 23,
     "title": "Ciseaux de Bras (Arm Scissors)",
-    "sport_category": ["échauffement", "cardio léger"],
+    "sport_category": ["échauffement", "cardio léger", "sports_aquatique", "sports de raquette"],
     "type": "échauffement",
     "difficulty": "débutant",
     "target_muscles": ["épaules", "pectoraux", "deltoïdes"],
@@ -386,7 +386,7 @@
   {
     "id": 24,
     "title": "Étirement Pectoraux Derrière le Dos",
-    "sport_category": ["étirement", "posture"],
+    "sport_category": ["étirement", "posture", "musculation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["pectoraux", "deltoïdes antérieurs"],
@@ -402,7 +402,7 @@
   {
     "id": 25,
     "title": "Papillon (Badhakonasana)",
-    "sport_category": ["yoga", "étirement", "souplesse"],
+    "sport_category": ["yoga", "étirement", "souplesse", "relaxation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["adducteurs", "hanches", "aine"],
@@ -418,7 +418,7 @@
   {
     "id": 26,
     "title": "Posture de l'Enfant (Balasana)",
-    "sport_category": ["yoga", "relaxation", "récupération"],
+    "sport_category": ["yoga", "relaxation", "récupération", "repos"],
     "type": "repos",
     "difficulty": "débutant",
     "target_muscles": ["dos", "épaules"],
@@ -434,7 +434,7 @@
   {
     "id": 27,
     "title": "Rowing Incliné à la Barre (Bent-Over Row)",
-    "sport_category": ["musculation", "force"],
+    "sport_category": ["musculation", "force", "crossfit", "sports_aquatique"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["dorsaux", "trapèzes", "biceps"],
@@ -450,7 +450,7 @@
   {
     "id": 28,
     "title": "Rollout à la Barre",
-    "sport_category": ["musculation", "gainage"],
+    "sport_category": ["musculation", "gainage", "crossfit", "sports_aquatique"],
     "type": "renforcement",
     "difficulty": "avancé",
     "target_muscles": ["abdominaux", "épaules", "transverse"],
@@ -466,7 +466,7 @@
   {
     "id": 29,
     "title": "Cobra Fléchi (Bhekasana / Frog Pose)",
-    "sport_category": ["yoga", "souplesse"],
+    "sport_category": ["yoga", "souplesse", "étirement"],
     "type": "étirement",
     "difficulty": "avancé",
     "target_muscles": ["quadriceps", "pectoraux", "fléchisseurs de hanche"],
@@ -482,7 +482,7 @@
   {
     "id": 30,
     "title": "Crunches Bicyclette",
-    "sport_category": ["musculation", "abdominaux", "pilates"],
+    "sport_category": ["musculation", "abdominaux", "pilates", "renforcement"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["obliques", "grand droit"],
@@ -498,7 +498,7 @@
   {
     "id": 31,
     "title": "Posture de la Vache (Bitilasana)",
-    "sport_category": ["yoga", "échauffement"],
+    "sport_category": ["yoga", "échauffement", "relaxation", "pilates"],
     "type": "échauffement_mobilité",
     "difficulty": "débutant",
     "target_muscles": ["colonne vertébrale", "abdominaux"],
@@ -514,7 +514,7 @@
   {
     "id": 32,
     "title": "Squat Poids du Corps",
-    "sport_category": ["fitness", "musculation", "échauffement"],
+    "sport_category": ["fitness", "musculation", "échauffement", "cyclisme", "randonnee", "course à pied", "sport"],
     "type": "renforcement",
     "difficulty": "débutant",
     "target_muscles": ["quadriceps", "fessiers"],
@@ -530,7 +530,7 @@
   {
     "id": 33,
     "title": "Développé Militaire Poids du Corps",
-    "sport_category": ["calisthenics", "musculation"],
+    "sport_category": ["calisthenics", "musculation", "crossfit", "sports_aquatique"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["épaules", "triceps"],
@@ -546,7 +546,7 @@
   {
     "id": 34,
     "title": "Soulevé de Terre sur Une Jambe (Poids du Corps)",
-    "sport_category": ["équilibre", "renforcement", "rééducation"],
+    "sport_category": ["équilibre", "renforcement", "rééducation", "randonnee", "course à pied", "cyclisme"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["ischio-jambiers", "fessiers", "équilibre"],
@@ -562,7 +562,7 @@
   {
     "id": 35,
     "title": "Extension Triceps Poids du Corps (Skull Crusher)",
-    "sport_category": ["calisthenics", "musculation"],
+    "sport_category": ["calisthenics", "musculation", "renforcement"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["triceps", "gainage"],
@@ -578,9 +578,9 @@
   {
     "id": 36,
     "title": "Squat Poids du Corps (Amplitude Complète)",
-    "sport_category": ["fitness", "mobilité", "renforcement"],
+    "sport_category": ["fitness", "mobilité", "renforcement", "cyclisme", "randonnee"],
     "type": "renforcement",
-    "difficulty": "débutant",
+    "difficulty": "intermédiaire",
     "target_muscles": ["quadriceps", "fessiers", "mobilité de la hanche"],
     "equipment": ["aucun"],
     "description": "Squat avec une amplitude maximale (fesses sous les genoux).",
@@ -594,7 +594,7 @@
   {
     "id": 37,
     "title": "Moulin à Vent Poids du Corps (Windmill)",
-    "sport_category": ["mobilité", "yoga", "souplesse"],
+    "sport_category": ["mobilité", "yoga", "souplesse", "crossfit"],
     "type": "mobilité_étirement",
     "difficulty": "intermédiaire",
     "target_muscles": ["obliques", "épaules", "ischio-jambiers"],
@@ -610,7 +610,7 @@
   {
     "id": 38,
     "title": "Pont avec Abduction de Hanche",
-    "sport_category": ["renforcement", "rééducation", "pilates"],
+    "sport_category": ["renforcement", "rééducation", "pilates", "randonnee"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["fessiers", "ischio-jambiers", "abducteurs"],
@@ -626,7 +626,7 @@
   {
     "id": 39,
     "title": "Posture du Pont (Setu Bandhasana)",
-    "sport_category": ["yoga", "renforcement", "étirement"],
+    "sport_category": ["yoga", "renforcement", "étirement", "pilates"],
     "type": "renforcement_étirement",
     "difficulty": "débutant",
     "target_muscles": ["fessiers", "ischio-jambiers", "bas du dos"],
@@ -642,7 +642,7 @@
   {
     "id": 40,
     "title": "Marche Rapide",
-    "sport_category": ["cardio", "fitness", "échauffement"],
+    "sport_category": ["cardio", "fitness", "échauffement", "randonnee"],
     "type": "cardio",
     "difficulty": "débutant",
     "target_muscles": ["jambes", "cardio-vasculaire"],
@@ -657,7 +657,7 @@
   {
     "id": 41,
     "title": "Posture du Crocodile (Makarasana)",
-    "sport_category": ["yoga", "relaxation"],
+    "sport_category": ["yoga", "relaxation", "récupération", "repos"],
     "type": "repos",
     "difficulty": "débutant",
     "target_muscles": ["bas du dos (détente)"],
@@ -673,7 +673,7 @@
   {
     "id": 42,
     "title": "Étirement Poitrine/Épaule en Cadre de Porte",
-    "sport_category": ["étirement", "posture"],
+    "sport_category": ["étirement", "posture", "musculation", "sports_aquatique"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["pectoraux", "deltoïdes antérieurs"],
@@ -689,7 +689,7 @@
   {
     "id": 43,
     "title": "Marche du Canard (Duck Walk)",
-    "sport_category": ["mobilité", "force fonctionnelle"],
+    "sport_category": ["mobilité", "force fonctionnelle", "crossfit"],
     "type": "mobilité_renforcement",
     "difficulty": "avancé",
     "target_muscles": ["quadriceps", "adducteurs", "chevilles"],
@@ -705,7 +705,7 @@
   {
     "id": 44,
     "title": "Essuie-Glace au Sol (Dumbbell Floor Wipers)",
-    "sport_category": ["musculation", "abdominaux"],
+    "sport_category": ["musculation", "abdominaux", "crossfit", "sports de raquette"],
     "type": "renforcement",
     "difficulty": "avancé",
     "target_muscles": ["obliques", "abdominaux", "épaules"],
@@ -721,7 +721,7 @@
   {
     "id": 45,
     "title": "Demi-Pont sur Une Jambe (Eka Pada Setu Bandha)",
-    "sport_category": ["yoga", "renforcement", "équilibre"],
+    "sport_category": ["yoga", "renforcement", "équilibre", "pilates", "randonnee"],
     "type": "renforcement_équilibre",
     "difficulty": "intermédiaire",
     "target_muscles": ["fessiers", "ischio-jambiers", "tronc"],
@@ -737,7 +737,7 @@
   {
     "id": 46,
     "title": "Course Pieds Rapides (Fast Feet Run)",
-    "sport_category": ["échauffement", "agilité", "cardio"],
+    "sport_category": ["échauffement", "agilité", "cardio", "sport", "sports de raquette", "course à pied"],
     "type": "cardio_échauffement",
     "difficulty": "débutant",
     "target_muscles": ["cardio", "mollets", "agilité"],
@@ -753,7 +753,7 @@
   {
     "id": 47,
     "title": "Pattes de Chien (Fire Hydrant)",
-    "sport_category": ["pilates", "renforcement", "rééducation"],
+    "sport_category": ["pilates", "renforcement", "rééducation", "fitness"],
     "type": "renforcement",
     "difficulty": "débutant",
     "target_muscles": ["abducteurs de la hanche", "fessiers"],
@@ -769,7 +769,7 @@
   {
     "id": 48,
     "title": "Extension Lombaire au Sol (Floor Hyperextension)",
-    "sport_category": ["renforcement", "rééducation"],
+    "sport_category": ["renforcement", "rééducation", "sports_aquatique", "cyclisme"],
     "type": "renforcement",
     "difficulty": "débutant",
     "target_muscles": ["lombaires", "fessiers"],
@@ -785,7 +785,7 @@
   {
     "id": 49,
     "title": "Sauts Montée de Genoux (High Knee Skips)",
-    "sport_category": ["échauffement", "plyométrie", "course à pied"],
+    "sport_category": ["échauffement", "plyométrie", "course à pied", "sport", "cardio"],
     "type": "cardio_échauffement",
     "difficulty": "intermédiaire",
     "target_muscles": ["cardio", "fléchisseurs de hanche", "mollets"],
@@ -801,7 +801,7 @@
   {
     "id": 50,
     "title": "Squat Montée de Genoux (High Knee Squat)",
-    "sport_category": ["échauffement", "fitness"],
+    "sport_category": ["échauffement", "fitness", "cardio", "course à pied"],
     "type": "échauffement_dynamique",
     "difficulty": "débutant",
     "target_muscles": ["quadriceps", "fléchisseurs de hanche"],
@@ -817,7 +817,7 @@
   {
     "id": 51,
     "title": "Burpee Jack",
-    "sport_category": ["crossfit", "cardio"],
+    "sport_category": ["crossfit", "cardio", "explosivité", "sport", "agilité"],
     "type": "cardio_renforcement",
     "difficulty": "avancé",
     "target_muscles": ["total body", "cardio", "explosivité"],
@@ -833,7 +833,7 @@
   {
     "id": 52,
     "title": "Balancement Latéral de la Nuque (Kneeling Neck Stretch)",
-    "sport_category": ["étirement", "mobilité", "récupération"],
+    "sport_category": ["étirement", "mobilité", "récupération", "relaxation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["trapèzes supérieurs", "cou"],
@@ -849,7 +849,7 @@
   {
     "id": 53,
     "title": "Rotation du Tronc à Genoux",
-    "sport_category": ["étirement", "mobilité", "yoga"],
+    "sport_category": ["étirement", "mobilité", "yoga", "golf", "sports de raquette"],
     "type": "étirement_mobilité",
     "difficulty": "débutant",
     "target_muscles": ["dos (rotation)", "épaules"],
@@ -865,7 +865,7 @@
   {
     "id": 54,
     "title": "Rotation du Haut du Corps Couché",
-    "sport_category": ["étirement", "récupération", "pilates"],
+    "sport_category": ["étirement", "récupération", "pilates", "relaxation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["bas du dos", "obliques", "hanches"],
@@ -897,7 +897,7 @@
   {
     "id": 56,
     "title": "Tirage à la Machine (Rear Delt Fly)",
-    "sport_category": ["musculation", "isolation"],
+    "sport_category": ["musculation", "isolation", "sports_aquatique", "force"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
     "target_muscles": ["deltoïdes postérieurs", "trapèzes"],
@@ -913,7 +913,7 @@
   {
     "id": 57,
     "title": "Étirement Épaule Inversé",
-    "sport_category": ["étirement", "souplesse"],
+    "sport_category": ["étirement", "souplesse", "sports_aquatique", "sports de raquette"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["coiffe des rotateurs", "épaule"],
@@ -929,7 +929,7 @@
   {
     "id": 58,
     "title": "Rotation de la Nuque",
-    "sport_category": ["échauffement", "mobilité", "récupération"],
+    "sport_category": ["échauffement", "mobilité", "récupération", "relaxation"],
     "type": "mobilité",
     "difficulty": "débutant",
     "target_muscles": ["cou"],
@@ -945,7 +945,7 @@
   {
     "id": 59,
     "title": "Écart Facial (Samakonasana / Straddle Split)",
-    "sport_category": ["yoga", "souplesse"],
+    "sport_category": ["yoga", "souplesse", "gymnastique"],
     "type": "étirement",
     "difficulty": "avancé",
     "target_muscles": ["adducteurs", "ischio-jambiers", "aine"],
@@ -961,7 +961,7 @@
   {
     "id": 60,
     "title": "Étirement du Ballet Assis",
-    "sport_category": ["étirement", "danse", "pilates"],
+    "sport_category": ["étirement", "danse", "pilates", "souplesse"],
     "type": "étirement",
     "difficulty": "intermédiaire",
     "target_muscles": ["ischio-jambiers", "fléchisseurs de hanche", "dos"],
@@ -977,7 +977,7 @@
   {
     "id": 61,
     "title": "Étirement Poitrine Assis",
-    "sport_category": ["étirement", "posture"],
+    "sport_category": ["étirement", "posture", "relaxation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["pectoraux", "épaules"],
@@ -993,7 +993,7 @@
   {
     "id": 62,
     "title": "Étirement Ischio-jambiers Assis",
-    "sport_category": ["étirement", "souplesse"],
+    "sport_category": ["étirement", "souplesse", "course à pied", "cyclisme"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["ischio-jambiers", "mollets", "dos"],
@@ -1009,7 +1009,7 @@
   {
     "id": 63,
     "title": "Rétraction Scapulaire Assise",
-    "sport_category": ["rééducation", "posture", "renforcement"],
+    "sport_category": ["rééducation", "posture", "renforcement", "sports_aquatique"],
     "type": "renforcement_mobilité",
     "difficulty": "débutant",
     "target_muscles": ["rhomboides", "trapèzes moyens"],
@@ -1025,7 +1025,7 @@
   {
     "id": 64,
     "title": "Touche d'Orteils Assis (Dynamique)",
-    "sport_category": ["échauffement", "souplesse"],
+    "sport_category": ["échauffement", "souplesse", "fitness"],
     "type": "échauffement_étirement",
     "difficulty": "débutant",
     "target_muscles": ["ischio-jambiers", "dos"],
@@ -1041,7 +1041,7 @@
   {
     "id": 65,
     "title": "Clam (Palourde) Latérale",
-    "sport_category": ["pilates", "rééducation", "renforcement"],
+    "sport_category": ["pilates", "rééducation", "renforcement", "randonnee"],
     "type": "renforcement",
     "difficulty": "débutant",
     "target_muscles": ["fessiers", "abducteurs de la hanche"],
@@ -1057,7 +1057,7 @@
   {
     "id": 66,
     "title": "Étirement Cervical avec Pression Latérale",
-    "sport_category": ["étirement", "mobilité", "récupération"],
+    "sport_category": ["étirement", "mobilité", "récupération", "relaxation"],
     "type": "étirement",
     "difficulty": "débutant",
     "target_muscles": ["trapèzes supérieurs", "scalènes"],
@@ -1073,7 +1073,7 @@
   {
     "id": 67,
     "title": "Saut à la Corde",
-    "sport_category": ["cardio", "échauffement", "boxe"],
+    "sport_category": ["cardio", "échauffement", "boxe", "crossfit", "sport", "course à pied"],
     "type": "cardio",
     "difficulty": "débutant",
     "target_muscles": ["cardio", "mollets", "coordination"],
@@ -1085,5 +1085,726 @@
       "Gardez les coudes près du corps et tournez avec les poignets."
     ],
     "gif": "Skip-Jump-Rope.gif"
+  },
+  {
+    "id": 68,
+    "title": "Cercles de Bras",
+    "sport_category": ["échauffement", "mobilité", "sports_aquatique", "sports de raquette"],
+    "type": "échauffement_mobilité",
+    "difficulty": "débutant",
+    "target_muscles": ["épaules", "coiffe des rotateurs"],
+    "equipment": ["aucun"],
+    "description": "Échauffement dynamique pour les épaules et la mobilité.",
+    "instructions": [
+      "Debout, bras tendus sur les côtés.",
+      "Faites de petits cercles vers l'avant, puis vers l'arrière.",
+      "Augmentez progressivement l'amplitude du mouvement."
+    ],
+    "gif": "Arm-Circles_Shoulders.gif"
+  },
+  {
+    "id": 69,
+    "title": "Fente Dynamique",
+    "sport_category": ["échauffement", "renforcement", "fitness", "course à pied", "randonnee"],
+    "type": "échauffement_renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["quadriceps", "fessiers", "ischio-jambiers"],
+    "equipment": ["aucun"],
+    "description": "Fente avec élan pour l'échauffement et le renforcement.",
+    "instructions": [
+      "Faites une grande fente en avant en fléchissant les deux genoux.",
+      "Poussez explosivement pour revenir à la position initiale.",
+      "Avancez avec l'autre jambe et répétez."
+    ],
+    "gif": "Bodyweight-Exercises-Walking-Lunge.gif"
+  },
+  {
+    "id": 70,
+    "title": "Marche de Ours (Bear Crawl)",
+    "sport_category": ["crossfit", "renforcement", "mobilité", "cardio"],
+    "type": "cardio_renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["épaules", "tronc", "jambes"],
+    "equipment": ["aucun"],
+    "description": "Mouvement fonctionnel complet pour le corps entier.",
+    "instructions": [
+      "À quatre pattes, levez légèrement les genoux du sol (2-3 cm).",
+      "Avancez en mouvements de crawling contrôlés.",
+      "Gardez le tronc engagé et les hanches basses."
+    ],
+    "gif": "Bear-Crawl.gif"
+  },
+  {
+    "id": 71,
+    "title": "Squat Sumo Poids du Corps",
+    "sport_category": ["fitness", "musculation", "mobilité", "randonnee"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["adducteurs", "quadriceps", "fessiers"],
+    "equipment": ["aucun"],
+    "description": "Squat avec écartement large pour cibler les adducteurs.",
+    "instructions": [
+      "Pieds écartés bien au-delà de la largeur des épaules, pointes vers l'extérieur.",
+      "Descendez en squat en gardant le buste droit.",
+      "Poussez sur les talons pour remonter."
+    ],
+    "gif": "BODYWEIGHT-SUMO-SQUAT.gif"
+  },
+  {
+    "id": 72,
+    "title": "Planche Poids du Corps",
+    "sport_category": ["gainage", "renforcement", "pilates", "yoga"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["abdominaux", "tronc", "épaules"],
+    "equipment": ["tapis"],
+    "description": "Exercice classique de gainage pour le renforcement du tronc.",
+    "instructions": [
+      "Position horizontale, avant-bras et orteils au sol.",
+      "Gardez le corps en ligne droite de la tête aux pieds.",
+      "Maintenez la position sans creuser le dos."
+    ],
+    "gif": "plank-for-bodyweight-exercises.gif"
+  },
+  {
+    "id": 73,
+    "title": "Pompes Classiques",
+    "sport_category": ["musculation", "renforcement", "calisthenics", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["pectoraux", "triceps", "épaules"],
+    "equipment": ["aucun"],
+    "description": "L'exercice fondamental pour le haut du corps.",
+    "instructions": [
+      "Position de planche, mains légèrement plus larges que les épaules.",
+      "Descendez en gardant le corps droit, coudes près du corps.",
+      "Poussez pour remonter en contractant la poitrine."
+    ],
+    "gif": "Push-Up.gif"
+  },
+  {
+    "id": 74,
+    "title": "Tractions (Pull-ups)",
+    "sport_category": ["musculation", "force", "calisthenics", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "avancé",
+    "target_muscles": ["dorsaux", "biceps", "trapèzes"],
+    "equipment": ["mur pour support"],
+    "description": "L'un des meilleurs exercices pour le haut du corps.",
+    "instructions": [
+      "Accrochez-vous à une barre, mains écartées.",
+      "Tirez votre corps vers le haut jusqu'à ce que le menton dépasse la barre.",
+      "Descendez lentement en contrôle."
+    ],
+    "gif": "Pull-up.gif"
+  },
+  {
+    "id": 75,
+    "title": "Levée de Jambes Couché",
+    "sport_category": ["abdominaux", "renforcement", "pilates"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["abdominaux", "fléchisseurs de hanche"],
+    "equipment": ["tapis"],
+    "description": "Renforcement des abdominaux inférieurs.",
+    "instructions": [
+      "Allongé sur le dos, bras le long du corps.",
+      "Levez les jambes tendues jusqu'à 90 degrés.",
+      "Redescendez sans toucher le sol, puis répétez."
+    ],
+    "gif": "Lying-Leg-Raise.gif"
+  },
+  {
+    "id": 76,
+    "title": "Rowing Inversé (Table)",
+    "sport_category": ["musculation", "renforcement", "calisthenics"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["dorsaux", "biceps", "trapèzes"],
+    "equipment": ["bancs"],
+    "description": "Renforcement du dos sans équipement lourd.",
+    "instructions": [
+      "Sous une table, mains sur le bord, pieds au sol.",
+      "Tirez votre corps vers le haut jusqu'à ce que la poitrine touche presque la table.",
+      "Descendez lentement en contrôle."
+    ],
+    "gif": "Table-Inverted-Row-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 77,
+    "title": "Squat Décliné",
+    "sport_category": ["musculation", "renforcement", "fitness"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["quadriceps", "fessiers"],
+    "equipment": ["aucun", "bancs"],
+    "description": "Squat avec les pieds surélevés pour intensifier le travail des quadriceps.",
+    "instructions": [
+      "Placez vos pieds sur une surface surélevée (banc ou marche).",
+      "Squat classique en descendant aussi bas que possible.",
+      "Remontez en poussant sur les jambes."
+    ],
+    "gif": "Bodyweight-Exercises-Decline-Push-Up.gif"
+  },
+  {
+    "id": 78,
+    "title": "Crunch avec Levée de Jambes",
+    "sport_category": ["abdominaux", "renforcement", "pilates"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["abdominaux", "fléchisseurs de hanche"],
+    "equipment": ["tapis"],
+    "description": "Combinaison de crunch et levée de jambes pour plus d'intensité.",
+    "instructions": [
+      "Allongé sur le back, mains derrière la tête.",
+      "Levez les jambes et le buste simultanément.",
+      "Redescendez lentement en contrôle."
+    ],
+    "gif": "Crunch-With-Leg-Raise.gif"
+  },
+  {
+    "id": 79,
+    "title": "Jackknife Sit-ups",
+    "sport_category": ["abdominaux", "renforcement", "fitness"],
+    "type": "renforcement",
+    "difficulty": "avancé",
+    "target_muscles": ["abdominaux", "fléchisseurs de hanche"],
+    "equipment": ["tapis"],
+    "description": "Exercice intense pour les abdominaux.",
+    "instructions": [
+      "Allongé sur le dos, bras et jambes tendus.",
+      "Soulevez simultanément le buste et les jambes.",
+      "Touchez vos pieds avec vos mains, puis redescendez lentement."
+    ],
+    "gif": "Jackknife-Sit-ups.gif"
+  },
+  {
+    "id": 80,
+    "title": "Jumping Jacks",
+    "sport_category": ["cardio", "échauffement", "fitness", "sport"],
+    "type": "cardio_échauffement",
+    "difficulty": "débutant",
+    "target_muscles": ["cardio", "jambes", "bras"],
+    "equipment": ["aucun"],
+    "description": "Exercice cardio classique et efficace.",
+    "instructions": [
+      "Pieds joints, bras le long du corps.",
+      "Sautez en écartant les jambes et levez les bras au-dessus de la tête.",
+      "Revenez à la position initiale et répétez rapidement."
+    ],
+    "gif": "Jumping-jack.gif"
+  },
+  {
+    "id": 81,
+    "title": "Mountain Climbers",
+    "sport_category": ["cardio", "renforcement", "crossfit", "fitness"],
+    "type": "cardio_renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["tronc", "épaules", "jambes"],
+    "equipment": ["aucun"],
+    "description": "Exercice cardio intense pour tout le corps.",
+    "instructions": [
+      "Position de planche.",
+      "Alternez rapidement les jambes en les ramenant vers la poitrine.",
+      "Gardez le tronc engagé et les hanches basses."
+    ],
+    "gif": "Mountain-climber-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 82,
+    "title": "Pompes Inclinées",
+    "sport_category": ["musculation", "renforcement", "calisthenics"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["pectoraux inférieurs", "triceps", "épaules"],
+    "equipment": ["bancs", "marche"],
+    "description": "Pompes avec les mains surélevées pour un travail plus facile.",
+    "instructions": [
+      "Placez les mains sur une surface surélevée (banc, table).",
+      "Faites une pompe classique en descendant vers la surface.",
+      "Remontez en contractant la poitrine."
+    ],
+    "gif": "Incline-Push-Up.gif"
+  },
+  {
+    "id": 83,
+    "title": "Pompes sur Genoux",
+    "sport_category": ["musculation", "renforcement", "débutant"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["pectoraux", "triceps", "épaules"],
+    "equipment": ["tapis"],
+    "description": "Version allégée des pompes pour les débutants.",
+    "instructions": [
+      "À genoux, mains sur le sol largeur d'épaules.",
+      "Descendez en pliant les coudes.",
+      "Remontez en contractant la poitrine."
+    ],
+    "gif": "Knee-Push-Up.gif"
+  },
+  {
+    "id": 84,
+    "title": "Curl Haltère Bilatéral",
+    "sport_category": ["musculation", "force", "isolation"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["biceps"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Exercice d'isolation pour les biceps.",
+    "instructions": [
+      "Debout, haltères dans chaque main, bras le long du corps.",
+      "Fléchissez les coudes pour amener les haltères à la poitrine.",
+      "Redescendez lentement en contrôle."
+    ],
+    "gif": "Double-Arm-Dumbbell-Curl.gif"
+  },
+  {
+    "id": 85,
+    "title": "Curl Haltère Poignet",
+    "sport_category": ["musculation", "force", "isolation"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["avant-bras", "poignets"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Renforcement des avant-bras et poignets.",
+    "instructions": [
+      "Debout, haltères dans les mains, avant-bras soutenus sur une table.",
+      "Fléchissez seulement les poignets pour lever les haltères.",
+      "Redescendez lentement."
+    ],
+    "gif": "Dumbbell-Wrist-Curl.gif"
+  },
+  {
+    "id": 86,
+    "title": "Montée de Mollets Haltère",
+    "sport_category": ["musculation", "renforcement", "fitness"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["mollets"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Renforcement des mollets.",
+    "instructions": [
+      "Debout, haltères dans les mains.",
+      "Montez sur les pointes de pieds en soulevant les talons.",
+      "Redescendez lentement en contrôle."
+    ],
+    "gif": "Dumbbell-Calf-Raise.gif"
+  },
+  {
+    "id": 87,
+    "title": "Élévation Latérale Haltère",
+    "sport_category": ["musculation", "force", "isolation"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["deltoïdes", "épaules"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Exercice d'isolation pour les épaules latérales.",
+    "instructions": [
+      "Debout, haltères dans les mains.",
+      "Levez les bras sur les côtés jusqu'à l'horizontale.",
+      "Redescendez lentement en contrôle."
+    ],
+    "gif": "Dumbbell-Lateral-Raise.gif"
+  },
+  {
+    "id": 88,
+    "title": "Shrug Haltère",
+    "sport_category": ["musculation", "force", "isolation"],
+    "type": "renforcement",
+    "difficulty": "débutant",
+    "target_muscles": ["trapèzes", "épaules"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Renforcement des trapèzes supérieurs.",
+    "instructions": [
+      "Debout, haltères dans les mains.",
+      "Haussez les épaules vers les oreilles.",
+      "Redescendez les épaules lentement."
+    ],
+    "gif": "Dumbbell-Shrug.gif"
+  },
+  {
+    "id": 89,
+    "title": "Pullovers Haltère",
+    "sport_category": ["musculation", "renforcement", "crossfit"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["pectoraux", "dorsaux", "triceps"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Exercice polyarticulaire pour le haut du corps.",
+    "instructions": [
+      "Allongé sur un banc, un haltère dans les mains au-dessus de la poitrine.",
+      "Descendez l'haltère derrière la tête en gardant une légère flexion des coudes.",
+      "Revenez à la position initiale."
+    ],
+    "gif": "Dumbbell-Pullover.gif"
+  },
+  {
+    "id": 90,
+    "title": "Rowing Haltère",
+    "sport_category": ["musculation", "force", "renforcement"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["dorsaux", "biceps", "trapèzes"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Renforcement du dos avec haltères.",
+    "instructions": [
+      "Penchez-vous en avant, haltère dans les mains.",
+      "Tirez l'haltère vers le bas de la poitrine.",
+      "Redescendez lentement en contrôle."
+    ],
+    "gif": "Dumbbell-Row.gif"
+  },
+  {
+    "id": 91,
+    "title": "Squat Barre",
+    "sport_category": ["musculation", "force", "renforcement"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["quadriceps", "fessiers", "ischio-jambiers"],
+    "equipment": ["barre", "disques"],
+    "description": "L'exercice fondamental pour le bas du corps.",
+    "instructions": [
+      "Barre sur les trapèzes, pieds largeur d'épaules.",
+      "Descendez en squat en gardant le dos droit.",
+      "Remontez en poussant avec les jambes."
+    ],
+    "gif": "BARBELL-SQUAT.gif"
+  },
+  {
+    "id": 92,
+    "title": "Soulevé de Terre Barre",
+    "sport_category": ["musculation", "force", "renforcement"],
+    "type": "renforcement",
+    "difficulty": "avancé",
+    "target_muscles": ["dorsaux", "lombaires", "fessiers", "jambes"],
+    "equipment": ["barre", "disques"],
+    "description": "Le roi des exercices pour la force totale du corps.",
+    "instructions": [
+      "Barre au sol, pieds largeur d'épaules.",
+      "Fléchissez les jambes et tirez la barre vers le haut.",
+      "Gardez le dos droit et les bras tendus."
+    ],
+    "gif": "Barbell-Romanian-Deadlift.gif"
+  },
+  {
+    "id": 93,
+    "title": "Clean et Press Kettlebell",
+    "sport_category": ["crossfit", "explosivité", "force", "renforcement"],
+    "type": "cardio_explosivité",
+    "difficulty": "avancé",
+    "target_muscles": ["total body", "explosivité"],
+    "equipment": ["kettlebell"],
+    "description": "Exercice explosif pour la puissance et la force.",
+    "instructions": [
+      "Kettlebell au sol entre les pieds.",
+      "Tirez explosivement le kettlebell à hauteur d'épaule.",
+      "Poussez au-dessus de la tête puis redescendez en contrôle."
+    ],
+    "gif": "Kettlebell-Clean-and-Press.gif"
+  },
+  {
+    "id": 94,
+    "title": "Fente Puissance",
+    "sport_category": ["plyométrie", "explosivité", "renforcement"],
+    "type": "cardio_explosivité",
+    "difficulty": "avancé",
+    "target_muscles": ["jambes", "fessiers", "explosivité"],
+    "equipment": ["aucun"],
+    "description": "Fente dynamique pour développer la puissance.",
+    "instructions": [
+      "Fente avant classique.",
+      "Sautez explosivement en changeant de jambe.",
+      "Atterrissez en fente de l'autre côté."
+    ],
+    "gif": "power-lunge.gif"
+  },
+  {
+    "id": 95,
+    "title": "Sauts Puissance",
+    "sport_category": ["plyométrie", "explosivité", "cardio"],
+    "type": "cardio_explosivité",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["jambes", "mollets", "explosivité"],
+    "equipment": ["aucun"],
+    "description": "Sauts rapides pour développer la puissance.",
+    "instructions": [
+      "Pieds largeur d'épaules.",
+      "Sautez aussi haut que possible en minimisant le temps au sol.",
+      "Atterrissez doucement et répétez rapidement."
+    ],
+    "gif": "Power-Skips.gif"
+  },
+  {
+    "id": 96,
+    "title": "Burpee avec Push-Up",
+    "sport_category": ["crossfit", "cardio", "renforcement", "explosivité"],
+    "type": "cardio_renforcement",
+    "difficulty": "avancé",
+    "target_muscles": ["total body", "cardio"],
+    "equipment": ["aucun"],
+    "description": "L'exercice cardio le plus complet et intensif.",
+    "instructions": [
+      "Accroupissez-vous et posez les mains au sol.",
+      "Sautez les jambes en arrière (position planche).",
+      "Faites une pompe.",
+      "Sautez les jambes en avant et sautez vers le haut."
+    ],
+    "gif": "Burpee-with-Push-Up.gif"
+  },
+  {
+    "id": 97,
+    "title": "Burpee Long Jump",
+    "sport_category": ["crossfit", "plyométrie", "explosivité"],
+    "type": "cardio_explosivité",
+    "difficulty": "avancé",
+    "target_muscles": ["total body", "explosivité"],
+    "equipment": ["aucun"],
+    "description": "Burpee avec saut en longueur pour plus d'explosivité.",
+    "instructions": [
+      "Faites un Burpee classique.",
+      "Au lieu de sauter vers le haut, sautez en longueur.",
+      "Continuez en effectuant plusieurs sauts burpee."
+    ],
+    "gif": "Burpee-Long-Jump.gif"
+  },
+  {
+    "id": 98,
+    "title": "Extension Triceps Couché Haltère",
+    "sport_category": ["musculation", "isolation", "force"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["triceps"],
+    "equipment": ["haltère (ou barre)"],
+    "description": "Isolation des triceps avec haltères.",
+    "instructions": [
+      "Allongé sur le dos, haltère au-dessus de la poitrine.",
+      "Fléchissez les coudes pour abaisser l'haltère derrière la tête.",
+      "Remontez en étendant les bras."
+    ],
+    "gif": "One-Arm-Lying-Triceps-Extension.gif"
+  },
+  {
+    "id": 99,
+    "title": "Pike Push-Up",
+    "sport_category": ["calisthenics", "renforcement", "épaules"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["deltoïdes", "triceps", "tronc"],
+    "equipment": ["aucun"],
+    "description": "Pompe ciblée pour les épaules.",
+    "instructions": [
+      "Position inversée de V (Pike).",
+      "Descendez en fléchissant les coudes.",
+      "Poussez pour remonter en contractant les épaules."
+    ],
+    "gif": "Pike-Push-up-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 100,
+    "title": "Leg Pull-In Montée de Genoux",
+    "sport_category": ["calisthenics", "renforcement", "abdominaux"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["abdominaux", "fléchisseurs de hanche"],
+    "equipment": ["aucun"],
+    "description": "Remontée de genoux en suspension pour les abdominaux.",
+    "instructions": [
+      "Suspendez-vous à une barre.",
+      "Remontez les genoux vers la poitrine.",
+      "Redescendez lentement en contrôle."
+    ],
+    "gif": "Leg-Pull-In-Knee-up-for-bodyweight-workout.gif"
+  },
+  {
+    "id": 101,
+    "title": "Posture de la Planche Basse (Chaturanga)",
+    "sport_category": ["yoga", "renforcement", "pilates"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["pectoraux", "triceps", "tronc"],
+    "equipment": ["tapis"],
+    "description": "Posture yoga qui renforce le haut du corps.",
+    "instructions": [
+      "Position de planche.",
+      "Abaissez-vous en gardant les coudes près du corps.",
+      "Gardez le buste 2-3 cm du sol et maintenez."
+    ],
+    "gif": "Chaturanga-Dandasana-Low-Plank-Pose.gif"
+  },
+  {
+    "id": 102,
+    "title": "Posture Balançante Inversée (Dandayamana Bharmanasana)",
+    "sport_category": ["yoga", "équilibre", "renforcement"],
+    "type": "renforcement_équilibre",
+    "difficulty": "avancé",
+    "target_muscles": ["équilibre", "tronc"],
+    "equipment": ["tapis"],
+    "description": "Posture yoga d'équilibre intense.",
+    "instructions": [
+      "Debout sur une jambe.",
+      "Basculez le tronc en avant et levez l'autre jambe.",
+      "Maintenez l'équilibre quelques secondes."
+    ],
+    "gif": "Dandayamana-Bharmanasana-Balancing-Table-Pose.gif"
+  },
+  {
+    "id": 103,
+    "title": "Posture de la Fente Basse (Anjaneyasana)",
+    "sport_category": ["yoga", "étirement", "souplesse"],
+    "type": "étirement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["fléchisseurs de hanche", "quadriceps"],
+    "equipment": ["tapis"],
+    "description": "Fente yoga pour étirer les fléchisseurs de hanche.",
+    "instructions": [
+      "Position de fente avant.",
+      "Abaissez le genou arrière au sol.",
+      "Basculez le bassin vers l'avant pour intensifier l'étirement."
+    ],
+    "gif": "Anjaneyasana-Low-Lunge-Pose.gif"
+  },
+  {
+    "id": 104,
+    "title": "Posture Debout Flexion Arrière (Anuvittasana)",
+    "sport_category": ["yoga", "étirement", "souplesse"],
+    "type": "étirement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["abdominaux", "fléchisseurs de hanche", "poitrine"],
+    "equipment": ["aucun"],
+    "description": "Flexion arrière debout pour étirer l'avant du corps.",
+    "instructions": [
+      "Debout, mains jointes dans le dos.",
+      "Tirez les mains vers le bas et basculez le buste en arrière.",
+      "Ouvrez la poitrine vers le ciel."
+    ],
+    "gif": "Anuvittasana-Standing-Backbend-Pose.gif"
+  },
+  {
+    "id": 105,
+    "title": "Posture Reclinée Angle Fermé (Supta Baddha Konasana)",
+    "sport_category": ["yoga", "étirement", "relaxation"],
+    "type": "étirement",
+    "difficulty": "débutant",
+    "target_muscles": ["adducteurs", "hanches", "aine"],
+    "equipment": ["tapis"],
+    "description": "Étirement relaxant des adducteurs en position couchée.",
+    "instructions": [
+      "Allongé sur le dos, pieds joints, genoux écartés.",
+      "Vous pouvez placer un bloc sous le dos pour plus d'ouverture.",
+      "Relâchez complètement et respirez profondément."
+    ],
+    "gif": "Supta-Baddha-Konasana-Reclining-Bound-Angle.gif"
+  },
+  {
+    "id": 106,
+    "title": "Soulevé de Terre Jambe Unique",
+    "sport_category": ["équilibre", "renforcement", "rééducation"],
+    "type": "renforcement_équilibre",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["ischio-jambiers", "fessiers", "équilibre"],
+    "equipment": ["aucun"],
+    "description": "Renforcement et équilibre d'une seule jambe.",
+    "instructions": [
+      "Debout sur une jambe.",
+      "Penchez-vous en avant en levant l'autre jambe.",
+      "Revenez à la position initiale sans toucher le sol."
+    ],
+    "gif": "Bodyweight-Single-Leg-Deadlift.gif"
+  },
+  {
+    "id": 107,
+    "title": "Planche Leg Lift",
+    "sport_category": ["gainage", "renforcement", "tronc"],
+    "type": "renforcement",
+    "difficulty": "intermédiaire",
+    "target_muscles": ["abdominaux", "tronc", "fessiers"],
+    "equipment": ["tapis"],
+    "description": "Planche avec levée de jambes pour plus d'intensité.",
+    "instructions": [
+      "Position de planche.",
+      "Soulevez une jambe vers le haut.",
+      "Revenez et changez de jambe."
+    ],
+    "gif": "Plank-Leg-Lift.gif"
+  },
+  {
+    "id": 108,
+    "title": "Posture du Titli (Butterfly Pose)",
+    "sport_category": ["yoga", "étirement", "souplesse"],
+    "type": "étirement",
+    "difficulty": "débutant",
+    "target_muscles": ["adducteurs", "hanches"],
+    "equipment": ["tapis"],
+    "description": "Étirement classique yoga des adducteurs.",
+    "instructions": [
+      "Assis, plante des pieds ensemble.",
+      "Laissez les genoux tomber sur les côtés.",
+      "Penchez-vous doucement vers l'avant."
+    ],
+    "gif": "Titli-Asana-Butterfly-Pose.gif"
+  },
+  {
+    "id": 109,
+    "title": "Course à Pied",
+    "sport_category": ["cardio", "course à pied", "fitness"],
+    "type": "cardio",
+    "difficulty": "débutant",
+    "target_muscles": ["jambes", "cardio"],
+    "equipment": ["aucun"],
+    "description": "Activité cardiovasculaire fondamentale.",
+    "instructions": [
+      "Courez à un rythme confortable.",
+      "Maintenez une bonne foulée et la respiration.",
+      "Augmentez graduellement la vitesse ou la distance."
+    ],
+    "gif": "Run.gif"
+  },
+  {
+    "id": 110,
+    "title": "Marche",
+    "sport_category": ["cardio", "fitness", "récupération"],
+    "type": "cardio",
+    "difficulty": "débutant",
+    "target_muscles": ["jambes", "cardio"],
+    "equipment": ["aucun"],
+    "description": "Activité cardio douce et accessible.",
+    "instructions": [
+      "Marchez à un rythme soutenu.",
+      "Maintenez une bonne posture.",
+      "Balancez vos bras naturellement."
+    ],
+    "gif": "Walking.gif"
+  },
+  {
+    "id": 111,
+    "title": "Marche Supplémentaire",
+    "sport_category": ["cardio", "fitness", "récupération"],
+    "type": "cardio",
+    "difficulty": "débutant",
+    "target_muscles": ["jambes", "cardio"],
+    "equipment": ["aucun"],
+    "description": "Marche pour la récupération active.",
+    "instructions": [
+      "Marchez à un rythme léger et détendu.",
+      "Respirez profondément.",
+      "Restez hydraté."
+    ],
+    "gif": "Walking_1.gif"
+  },
+  {
+    "id": 112,
+    "title": "Étirement Dorsal Reach Back",
+    "sport_category": ["étirement", "mobilité", "posture"],
+    "type": "étirement",
+    "difficulty": "débutant",
+    "target_muscles": ["dos", "épaules"],
+    "equipment": ["aucun"],
+    "description": "Étirement du haut du dos.",
+    "instructions": [
+      "Debout ou assis, levez un bras derrière la tête.",
+      "Tirez le coude vers l'arrière.",
+      "Sentez l'étirement du dos et des épaules."
+    ],
+    "gif": "Standing-Reach-Up-Back-rotation-Stretch.gif"
   }
 ]
