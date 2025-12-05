@@ -239,16 +239,16 @@ document.addEventListener("DOMContentLoaded", () => {
         grid.innerHTML = "" // Vider
 
         // Correction : s'assurer que catalog est bien un tableau
-        let catalogArray = catalog;
+        let catalogArray = catalog
         if (!Array.isArray(catalogArray)) {
             // Essaye de trouver la clé qui contient le tableau (ex: "products" ou "data")
             if (Array.isArray(catalog.products)) {
-                catalogArray = catalog.products;
+                catalogArray = catalog.products
             } else if (Array.isArray(catalog.data)) {
-                catalogArray = catalog.data;
+                catalogArray = catalog.data
             } else {
                 // Si rien ne correspond, on ne fait rien
-                return;
+                return
             }
         }
 
