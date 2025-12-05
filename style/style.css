@@ -75,6 +75,7 @@ h2 {
 
 /* Bouton Retour */
 /* --- Bouton Précédent (Style Amélioré) --- */
+/* --- Bouton Précédent (Style Amélioré) --- */
 .btn-back {
     display: inline-flex; /* Garde le bouton compact */
     align-items: center;  /* Aligne verticalement le texte et l'icône */
@@ -106,7 +107,7 @@ h2 {
 
 /* --- Effet au survol --- */
 .btn-back:hover {
-    color: #3643ba; /* Devient Bleu Decathlon */
+    color: #3643BA; /* Devient Bleu Decathlon */
 }
 
 .btn-back:hover svg {
@@ -118,7 +119,6 @@ h2 {
     display: none;
     visibility: hidden;
 }
-
 /* =========================================
    5. ÉTAPES (STEPS)
    ========================================= */

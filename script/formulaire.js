@@ -281,4 +281,20 @@ document.addEventListener("DOMContentLoaded", () => {
         subtitle.style.display = "block"
         workoutContainer.innerHTML = workoutHtml
     }
+    function showStep(stepIndex) {
+    // ... ton code existant qui affiche l'étape ...
+
+    // GESTION DU BOUTON PRÉCÉDENT
+    const btnBack = document.getElementById('btnBack');
+    
+    if (stepIndex === 1) {
+        // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
+        btnBack.style.visibility = 'hidden'; 
+        // ou btnBack.style.display = 'none';
+    } else {
+        // Sinon, on l'affiche
+        btnBack.style.visibility = 'visible';
+        // ou btnBack.style.display = 'flex';
+    }
+}
 })
