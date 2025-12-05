@@ -641,60 +641,150 @@ h2 {
     color: #222;
 }
 
-.exercise-modal-body h2 {
-    margin-top: 0;
-    margin-bottom: 18px;
-    font-size: 1.5rem;
-    color: #3643ba;
-    text-align: center;
+/* MODALE EXERCICE (nouvelle disposition) */
+.exercise-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
 }
 
+.exercise-modal-main-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 10px;
+}
 .exercise-modal-gif {
-    display: block;
-    margin: 0 auto 18px auto;
-    width: 200px; /* plus petit pour éviter le débordement */
+    width: 200px;
     height: 200px;
     object-fit: contain;
     border-radius: 12px;
     background: #f7f9fc;
-    box-shadow: 0 2px 8px rgba(54, 67, 186, 0.07);
+    box-shadow: 0 2px 8px rgba(54,67,186,0.07);
+    flex-shrink: 0;
 }
-
-/* Responsive : padding réduit et image plus petite sur mobile */
-@media (max-width: 700px) {
-    .exercise-modal-content {
-        width: 99vw;
-        padding: 10px 2vw 14px 2vw;
-    }
-    .exercise-modal-gif {
-        width: 120px;
-        height: 120px;
-    }
-}
-
-.exercise-modal-meta {
+.exercise-modal-meta-col {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px 24px;
+    flex-direction: column;
     justify-content: center;
-    margin-bottom: 16px;
+    gap: 10px;
+    min-width: 0;
+    flex: 1 1 0;
+}
+.exercise-modal-meta-col span {
     font-size: 1.05rem;
     color: #555;
+    margin-bottom: 2px;
+    word-break: break-word;
 }
-
 .exercise-modal-desc {
-    margin: 14px 0 20px 0;
+    margin: 10px 0 18px 0;
     color: #444;
     font-size: 1.08rem;
     text-align: center;
 }
 
 .exercise-modal-instructions {
-    margin-top: 14px;
+    margin: 10px 0 0 0;
     font-size: 1.04rem;
+    padding-bottom: 10px;
+}
+.exercise-modal-instructions ol {
+    margin: 8px 0 0 22px;
+    padding: 0;
 }
 
-.exercise-modal-instructions ol {
-    margin: 10px 0 0 22px;
+/* MODALE : Section produits recommandés */
+.exercise-modal-products {
+    margin: 10px 0 0 0;
     padding: 0;
+}
+.exercise-modal-products-title {
+    font-weight: bold;
+    color: #3643ba;
+    font-size: 1.08rem;
+    margin-bottom: 6px;
+    text-align: left;
+}
+.exercise-modal-products-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+.exercise-modal-product-card {
+    display: flex;
+    align-items: center;
+    background: #f7f9fc;
+    border-radius: 8px;
+    border: 1px solid #e3e8ef;
+    padding: 7px 10px;
+    text-decoration: none;
+    color: #222;
+    min-width: 0;
+    max-width: 180px;
+    flex: 1 1 120px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+.exercise-modal-product-card:hover {
+    border-color: #3643ba;
+    box-shadow: 0 2px 10px rgba(54,67,186,0.12);
+}
+.exercise-modal-product-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    background: #e3e8ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    overflow: hidden;
+}
+.exercise-modal-product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+.exercise-modal-product-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.exercise-modal-product-name {
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #3643ba;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.exercise-modal-product-price {
+    font-size: 0.92rem;
+    color: #444;
+    font-weight: 400;
+}
+
+/* Responsive modale produits et layout */
+@media (max-width: 700px) {
+    .exercise-modal-main-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .exercise-modal-gif {
+        width: 120px;
+        height: 120px;
+    }
+    .exercise-modal-products-list {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .exercise-modal-product-card {
+        max-width: 98vw;
+    }
 }
