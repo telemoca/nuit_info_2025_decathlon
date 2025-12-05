@@ -75,6 +75,7 @@ h2 {
 
 /* Bouton Retour */
 /* --- Bouton Précédent (Style Amélioré) --- */
+/* --- Bouton Précédent (Style Amélioré) --- */
 .btn-back {
     display: inline-flex; /* Garde le bouton compact */
     align-items: center;  /* Aligne verticalement le texte et l'icône */
@@ -106,7 +107,7 @@ h2 {
 
 /* --- Effet au survol --- */
 .btn-back:hover {
-    color: #3643ba; /* Devient Bleu Decathlon */
+    color: #3643BA; /* Devient Bleu Decathlon */
 }
 
 .btn-back:hover svg {
@@ -118,7 +119,6 @@ h2 {
     display: none;
     visibility: hidden;
 }
-
 /* =========================================
    5. ÉTAPES (STEPS)
    ========================================= */
@@ -278,7 +278,13 @@ h2 {
     transition: background 0.3s ease, transform 0.2s ease;
     text-align: center;
 }
-
+.btn-validate:disabled {
+    background-color: #e0e0e0; /* Gris clair */
+    color: #a0a0a0; /* Texte gris foncé */
+    cursor: not-allowed; /* Curseur "interdit" */
+    transform: none; /* On annule l'effet de grossissement */
+    box-shadow: none;
+}
 .btn-validate:hover,
 .btn-decathlon:hover {
     background-color: #2a3494; /* Bleu plus foncé */

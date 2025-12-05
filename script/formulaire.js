@@ -4,15 +4,54 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentStep = 1
     const totalSteps = 6
     const progressBar = document.getElementById("progressBar")
-    const btnBack = document.getElementById("btnBack")
     let isAnimating = false // Sécurité pour empêcher le double clic rapide
+// ... tes variables existantes ...
+    const btnBack = document.getElementById("btnBack")
+    
+    // --- NOUVEAU CODE : Gestion du bouton "Valider mes sports" ---
+    const sportsInputs = document.querySelectorAll('input[name="sports"]');
+    const validateBtn = document.querySelector('.btn-validate');
 
+    if (validateBtn) {
+        // Fonction qui active/désactive le bouton
+        function updateValidateButton() {
+            // Compte combien de cases sont cochées
+            const count = document.querySelectorAll('input[name="sports"]:checked').length;
+            
+            // Si 0 cochée, disabled = true (bouton gris). Sinon false (bouton bleu).
+            validateBtn.disabled = count === 0;
+        }
+
+        // On ajoute l'écouteur sur chaque checkbox
+        sportsInputs.forEach(input => {
+            input.addEventListener('change', updateValidateButton);
+        });
+
+        // On lance la fonction une première fois pour désactiver le bouton au démarrage
+        updateValidateButton();
+    }
+    // -------------------------------------------------------------
     // Initialisation
     updateProgress()
     updateUI() // Important de l'appeler au début aussi
 
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
+    // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     window.nextStep = function () {
+        
+        // --- DÉBUT AJOUT : Validation pour l'étape 3 (Sports) ---
+        if (currentStep === 3) {
+            // On sélectionne toutes les cases "sports" qui sont cochées
+            const sportsCoques = document.querySelectorAll('input[name="sports"]:checked');
+            
+            // Si aucune n'est cochée, on alerte l'utilisateur et on bloque
+            if (sportsCoques.length === 0) {
+                alert("Veuillez sélectionner au moins un sport pour continuer.");
+                return; // On arrête la fonction ici, l'étape ne changera pas
+            }
+        }
+        // --- FIN AJOUT ---
+
         if (currentStep < totalSteps && !isAnimating) {
             isAnimating = true // Verrouille le clic
 
@@ -281,4 +320,21 @@ document.addEventListener("DOMContentLoaded", () => {
         subtitle.style.display = "block"
         workoutContainer.innerHTML = workoutHtml
     }
+    function showStep(stepIndex) {
+    // ... ton code existant qui affiche l'étape ...
+
+    // GESTION DU BOUTON PRÉCÉDENT
+    const btnBack = document.getElementById('btnBack');
+    
+    if (stepIndex === 1) {
+        // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
+        btnBack.style.visibility = 'hidden'; 
+        // ou btnBack.style.display = 'none';
+    } else {
+        // Sinon, on l'affiche
+        btnBack.style.visibility = 'visible';
+        // ou btnBack.style.display = 'flex';
+    }
+}
+
 })
