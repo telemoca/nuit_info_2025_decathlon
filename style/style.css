@@ -135,12 +135,12 @@ h2 {
 /* --- VERSION PC / TABLETTE (Horizontal) --- */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 1000px; /* On élargit le conteneur */
+        max-width: 1000px;
     }
 
     .options-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 Colonnes */
-        gap: 30px; /* Plus d'espace entre les cartes */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px; /* Retour à 30px */
     }
 }
 
@@ -159,27 +159,30 @@ h2 {
     justify-content: center;
     text-align: center;
     
-    /* Dimensions et espacement */
-    padding: 30px 20px;
-    min-height: 180px; /* Cartes plus hautes */
+    /* --- AJUSTEMENTS ICI --- */
+    padding: 25px 20px; /* Plus compact */
+    min-height: 200px;  /* Hauteur équilibrée */
+    /* ----------------------- */
     
-    /* Couleurs et Bordures */
-    background-color: #F7F9FC; /* Gris clair bleuté */
+    background-color: #F7F9FC;
     border: 2px solid #E3E8EF;
     border-radius: 12px;
     color: #333;
     
-    /* Effets */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .tile-icon {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
-    fill: #3643BA; /* Icône BLEUE par défaut */
+    /* --- AJUSTEMENTS ICI --- */
+    width: 75px;   /* Taille moyenne (Ni trop petit, ni trop gros) */
+    height: 75px;
+    margin-bottom: 15px; /* On rapproche un peu le texte */
+    /* ----------------------- */
+    
+    fill: #3643BA; 
     transition: fill 0.3s ease;
+    object-fit: contain;
 }
 
 .tile-label {
