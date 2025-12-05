@@ -81,7 +81,7 @@
   },
   {
     "id": 5,
-    "title": "Rotation du Buste Debout (Dynamique)",
+    "title": "Rotation du Buste Debout",
     "sport_category": ["échauffement", "golf", "sports de raquette"],
     "type": "échauffement",
     "difficulty": "débutant",
@@ -97,7 +97,7 @@
   },
   {
     "id": 6,
-    "title": "Touche d'Orteils Alternée (Dynamique)",
+    "title": "Touche d'Orteils Alternée",
     "sport_category": ["échauffement", "souplesse"],
     "type": "échauffement",
     "difficulty": "débutant",
@@ -113,7 +113,7 @@
   },
   {
     "id": 7,
-    "title": "Pince Debout (Uttanasana)",
+    "title": "Pince Debout",
     "sport_category": ["yoga", "étirement", "souplesse"],
     "type": "étirement",
     "difficulty": "débutant",
@@ -145,7 +145,7 @@
   },
   {
     "id": 9,
-    "title": "Saut sur Box (Box Jump)",
+    "title": "Saut sur Box",
     "sport_category": ["crossfit", "plyométrie", "explosivité"],
     "type": "cardio_renforcement",
     "difficulty": "avancé",
@@ -161,7 +161,7 @@
   },
   {
     "id": 10,
-    "title": "Posture du Tigre (Vyaghrasana)",
+    "title": "Posture du Tigre",
     "sport_category": ["yoga", "souplesse"],
     "type": "étirement_dynamique",
     "difficulty": "débutant",
@@ -177,7 +177,7 @@
   },
   {
     "id": 11,
-    "title": "Posture de l'Angle Assis (Upavistha Konasana)",
+    "title": "Posture de l'Angle Assis",
     "sport_category": ["yoga", "souplesse", "récupération"],
     "type": "étirement",
     "difficulty": "intermédiaire",
@@ -193,7 +193,7 @@
   },
   {
     "id": 12,
-    "title": "Posture du Chameau (Ustrasana)",
+    "title": "Posture du Chameau",
     "sport_category": ["yoga", "souplesse"],
     "type": "étirement",
     "difficulty": "avancé",
@@ -209,7 +209,7 @@
   },
   {
     "id": 13,
-    "title": "Triangle Étendu (Utthita Trikonasana)",
+    "title": "Triangle Étendu",
     "sport_category": ["yoga", "étirement", "force"],
     "type": "étirement_renforcement",
     "difficulty": "intermédiaire",
@@ -225,7 +225,7 @@
   },
   {
     "id": 14,
-    "title": "Posture du Guerrier 1 (Virabhadrasana I)",
+    "title": "Posture du Guerrier 1",
     "sport_category": ["yoga", "force", "équilibre"],
     "type": "renforcement_étirement",
     "difficulty": "débutant",
@@ -241,7 +241,7 @@
   },
   {
     "id": 15,
-    "title": "Posture du Guerrier 2 (Virabhadrasana II)",
+    "title": "Posture du Guerrier 2",
     "sport_category": ["yoga", "force", "équilibre"],
     "type": "renforcement_étirement",
     "difficulty": "débutant",
@@ -257,7 +257,7 @@
   },
   {
     "id": 16,
-    "title": "Posture du Guerrier 3 (Virabhadrasana III)",
+    "title": "Posture du Guerrier 3",
     "sport_category": ["yoga", "équilibre", "force"],
     "type": "renforcement_équilibre",
     "difficulty": "avancé",
@@ -273,7 +273,7 @@
   },
   {
     "id": 17,
-    "title": "Posture de la Roue (Urdhva Dhanurasana)",
+    "title": "Posture de la Roue",
     "sport_category": ["yoga", "souplesse", "calisthenics"],
     "type": "étirement_renforcement",
     "difficulty": "avancé",
@@ -289,7 +289,7 @@
   },
   {
     "id": 18,
-    "title": "Hops en Zig-Zag (Plyométrie)",
+    "title": "Hops en Zig-Zag",
     "sport_category": ["plyométrie", "agilité", "sport"],
     "type": "cardio_explosivité",
     "difficulty": "intermédiaire",
@@ -353,7 +353,7 @@
   },
   {
     "id": 22,
-    "title": "Demi-Flexion Avant (Ardha Uttanasana)",
+    "title": "Demi-Flexion Avant",
     "sport_category": ["yoga", "étirement"],
     "type": "étirement",
     "difficulty": "débutant",
@@ -369,7 +369,7 @@
   },
   {
     "id": 23,
-    "title": "Ciseaux de Bras (Arm Scissors)",
+    "title": "Ciseaux de Bras",
     "sport_category": ["échauffement", "cardio léger"],
     "type": "échauffement",
     "difficulty": "débutant",
@@ -401,7 +401,7 @@
   },
   {
     "id": 25,
-    "title": "Papillon (Badhakonasana)",
+    "title": "Papillon",
     "sport_category": ["yoga", "étirement", "souplesse"],
     "type": "étirement",
     "difficulty": "débutant",
@@ -417,7 +417,7 @@
   },
   {
     "id": 26,
-    "title": "Posture de l'Enfant (Balasana)",
+    "title": "Posture de l'Enfant",
     "sport_category": ["yoga", "relaxation", "récupération"],
     "type": "repos",
     "difficulty": "débutant",
@@ -433,7 +433,7 @@
   },
   {
     "id": 27,
-    "title": "Rowing Incliné à la Barre (Bent-Over Row)",
+    "title": "Rowing Incliné à la Barre",
     "sport_category": ["musculation", "force"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
@@ -465,7 +465,7 @@
   },
   {
     "id": 29,
-    "title": "Cobra Fléchi (Bhekasana / Frog Pose)",
+    "title": "Cobra Fléchi",
     "sport_category": ["yoga", "souplesse"],
     "type": "étirement",
     "difficulty": "avancé",
@@ -497,7 +497,7 @@
   },
   {
     "id": 31,
-    "title": "Posture de la Vache (Bitilasana)",
+    "title": "Posture de la Vache",
     "sport_category": ["yoga", "échauffement"],
     "type": "échauffement_mobilité",
     "difficulty": "débutant",
@@ -545,7 +545,7 @@
   },
   {
     "id": 34,
-    "title": "Soulevé de Terre sur Une Jambe (Poids du Corps)",
+    "title": "Soulevé de Terre sur Une Jambe",
     "sport_category": ["équilibre", "renforcement", "rééducation"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
@@ -561,7 +561,7 @@
   },
   {
     "id": 35,
-    "title": "Extension Triceps Poids du Corps (Skull Crusher)",
+    "title": "Extension Triceps Poids du Corps",
     "sport_category": ["calisthenics", "musculation"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
@@ -577,7 +577,7 @@
   },
   {
     "id": 36,
-    "title": "Squat Poids du Corps (Amplitude Complète)",
+    "title": "Squat Poids du Corps",
     "sport_category": ["fitness", "mobilité", "renforcement"],
     "type": "renforcement",
     "difficulty": "débutant",
@@ -593,7 +593,7 @@
   },
   {
     "id": 37,
-    "title": "Moulin à Vent Poids du Corps (Windmill)",
+    "title": "Moulin à Vent Poids du Corps",
     "sport_category": ["mobilité", "yoga", "souplesse"],
     "type": "mobilité_étirement",
     "difficulty": "intermédiaire",
@@ -625,7 +625,7 @@
   },
   {
     "id": 39,
-    "title": "Posture du Pont (Setu Bandhasana)",
+    "title": "Posture du Pont",
     "sport_category": ["yoga", "renforcement", "étirement"],
     "type": "renforcement_étirement",
     "difficulty": "débutant",
@@ -656,7 +656,7 @@
   },
   {
     "id": 41,
-    "title": "Posture du Crocodile (Makarasana)",
+    "title": "Posture du Crocodile",
     "sport_category": ["yoga", "relaxation"],
     "type": "repos",
     "difficulty": "débutant",
@@ -688,7 +688,7 @@
   },
   {
     "id": 43,
-    "title": "Marche du Canard (Duck Walk)",
+    "title": "Marche du Canard",
     "sport_category": ["mobilité", "force fonctionnelle"],
     "type": "mobilité_renforcement",
     "difficulty": "avancé",
@@ -704,7 +704,7 @@
   },
   {
     "id": 44,
-    "title": "Essuie-Glace au Sol (Dumbbell Floor Wipers)",
+    "title": "Essuie-Glace au Sol",
     "sport_category": ["musculation", "abdominaux"],
     "type": "renforcement",
     "difficulty": "avancé",
@@ -720,7 +720,7 @@
   },
   {
     "id": 45,
-    "title": "Demi-Pont sur Une Jambe (Eka Pada Setu Bandha)",
+    "title": "Demi-Pont sur Une Jambe",
     "sport_category": ["yoga", "renforcement", "équilibre"],
     "type": "renforcement_équilibre",
     "difficulty": "intermédiaire",
@@ -736,7 +736,7 @@
   },
   {
     "id": 46,
-    "title": "Course Pieds Rapides (Fast Feet Run)",
+    "title": "Course Pieds Rapides",
     "sport_category": ["échauffement", "agilité", "cardio"],
     "type": "cardio_échauffement",
     "difficulty": "débutant",
@@ -752,7 +752,7 @@
   },
   {
     "id": 47,
-    "title": "Pattes de Chien (Fire Hydrant)",
+    "title": "Pattes de Chien",
     "sport_category": ["pilates", "renforcement", "rééducation"],
     "type": "renforcement",
     "difficulty": "débutant",
@@ -768,7 +768,7 @@
   },
   {
     "id": 48,
-    "title": "Extension Lombaire au Sol (Floor Hyperextension)",
+    "title": "Extension Lombaire au Sol",
     "sport_category": ["renforcement", "rééducation"],
     "type": "renforcement",
     "difficulty": "débutant",
@@ -784,7 +784,7 @@
   },
   {
     "id": 49,
-    "title": "Sauts Montée de Genoux (High Knee Skips)",
+    "title": "Sauts Montée de Genoux",
     "sport_category": ["échauffement", "plyométrie", "course à pied"],
     "type": "cardio_échauffement",
     "difficulty": "intermédiaire",
@@ -800,7 +800,7 @@
   },
   {
     "id": 50,
-    "title": "Squat Montée de Genoux (High Knee Squat)",
+    "title": "Squat Montée de Genoux",
     "sport_category": ["échauffement", "fitness"],
     "type": "échauffement_dynamique",
     "difficulty": "débutant",
@@ -832,7 +832,7 @@
   },
   {
     "id": 52,
-    "title": "Balancement Latéral de la Nuque (Kneeling Neck Stretch)",
+    "title": "Balancement Latéral de la Nuque",
     "sport_category": ["étirement", "mobilité", "récupération"],
     "type": "étirement",
     "difficulty": "débutant",
@@ -896,7 +896,7 @@
   },
   {
     "id": 56,
-    "title": "Tirage à la Machine (Rear Delt Fly)",
+    "title": "Tirage à la Machine",
     "sport_category": ["musculation", "isolation"],
     "type": "renforcement",
     "difficulty": "intermédiaire",
@@ -944,7 +944,7 @@
   },
   {
     "id": 59,
-    "title": "Écart Facial (Samakonasana / Straddle Split)",
+    "title": "Écart Facial",
     "sport_category": ["yoga", "souplesse"],
     "type": "étirement",
     "difficulty": "avancé",
@@ -1024,7 +1024,7 @@
   },
   {
     "id": 64,
-    "title": "Touche d'Orteils Assis (Dynamique)",
+    "title": "Touche d'Orteils Assis",
     "sport_category": ["échauffement", "souplesse"],
     "type": "échauffement_étirement",
     "difficulty": "débutant",
