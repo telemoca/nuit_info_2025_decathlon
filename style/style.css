@@ -428,3 +428,103 @@ h2 {
         padding: 20px;
     }
 }
+
+/* =========================================
+   11. SECTION PRODUITS (SHOP)
+   ========================================= */
+   #products-section {
+    margin-top: 50px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 30px;
+    animation: fadeIn 0.8s ease;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Responsive auto */
+    gap: 15px;
+    justify-items: center;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #e3e8ef;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; /* Pour le lien */
+    color: #333;
+    position: relative;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-color: #3643ba;
+}
+
+/* Image simulée par une icône ou un placeholder (car pas d'image dans le JSON) */
+.product-image-placeholder {
+    width: 100%;
+    height: 100px;
+    background-color: #f4f5f7;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.product-image-placeholder svg {
+    width: 40px;
+    height: 40px;
+    fill: #ccc;
+}
+
+.product-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    flex-grow: 1; /* Pousse le bouton vers le bas */
+}
+
+.btn-shop {
+    background-color: #ffea28; /* Jaune Decathlon (ou bleu #3643ba selon préférence) */
+    color: #333;
+    font-weight: bold;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.btn-shop:hover {
+    background-color: #ffda00;
+}
+
+.btn-shop svg {
+    width: 16px;
+    height: 16px;
+    fill: #333;
+}
+
+/* Responsive tablette/desktop */
+@media screen and (min-width: 600px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px;
+    }
+}

@@ -1,0 +1,220 @@
+[
+    {
+      "category_group": "Indispensables",
+      "sub_categories": [
+        {
+          "type": "Tapis de Sol",
+          "products": [
+            {
+              "label": "Catégorie Tapis Fitness (Tous les modèles)",
+              "url": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/tapis-de-sol/f-partner_decathlon"
+            },
+            {
+              "label": "Dalles de protection sol (Puzzle 55x55cm)",
+              "url": "https://www.decathlon.fr/p/tapis-de-protection-sol-pour-materiel-de-fitness-taille-s-55x55-cm/_/R-p-334184?mc=8648655&c=noir_gris"
+            },
+            {
+              "label": "Tapis Pilates Confort 15mm (Bordeaux)",
+              "url": "https://www.decathlon.fr/p/tapis-de-pilates-confort-epaisseur-15-mm-bordeaux/_/R-p-351006?mc=8851736&c=vert"
+            },
+            {
+              "label": "Catégorie Tapis de Yoga (Tous les modèles)",
+              "url": "https://www.decathlon.fr/tous-les-sports/yoga/tapis-de-yoga/f-partner_decathlon"
+            },
+            {
+              "label": "Tapis Yoga Doux 5mm (Vert/Beige)",
+              "url": "https://www.decathlon.fr/p/tapis-de-yoga-doux-adherence-et-confort-5-mm-vert-fonce-et-beige/_/R-p-344489?mc=8785799&c=beige_bleu"
+            },
+            {
+              "label": "Tapis Yoga Dynamique Ultra-Adhérent 4mm",
+              "url": "https://www.decathlon.fr/p/tapis-de-yoga-dynamique-ultra-adherent-epaisseur-4-mm-vert/_/R-p-352352?mc=8936896&c=incolore_bleu"
+            }
+          ]
+        },
+        {
+          "type": "Bandes Élastiques",
+          "products": [
+            {
+              "label": "Catégorie Élastiques Fitness",
+              "url": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/elastique-fitness/f-partner_decathlon"
+            },
+            {
+              "label": "Pack 3 Élastiques Textiles (Fessiers)",
+              "url": "https://www.decathlon.fr/p/pack-de-3-elastiques-textiles-pour-fessier-de-fitness/_/R-p-353227?mc=8872877"
+            },
+            {
+              "label": "Kit 3 Training Bands (15kg/25kg/35kg)",
+              "url": "https://www.decathlon.fr/p/kit-3-training-band-elastiques-15-25-35kg-avec-3-mois-offerts-freeletics/_/R-p-373225?mc=8966621&c=bleu_orange_jaune"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category_group": "Musculation & Charges Libres",
+      "sub_categories": [
+        {
+          "type": "Haltères",
+          "products": [
+            {
+              "label": "Catégorie Haltères Fitness",
+              "url": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/halteres-fitness/f-partner_decathlon"
+            },
+            {
+              "label": "Kit Haltères 20kg (Valisette)",
+              "url": "https://www.decathlon.fr/p/kit-d-halteres-de-musculation-20-kg-avec-disques-en-fonte-a-80-percent-recyclee/_/R-p-7449?mc=8018574&c=noir"
+            },
+            {
+              "label": "Kit Haltères 50kg (Coffret)",
+              "url": "https://www.decathlon.fr/p/kit-d-halteres-de-musculation-50-kg-avec-disques-en-fonte-a-80-percent-recyclee/_/R-p-335265?mc=8655649"
+            }
+          ]
+        },
+        {
+          "type": "Kettlebell",
+          "products": [
+            {
+              "label": "Catégorie Kettlebells",
+              "url": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/kettlebells/f-partner_decathlon"
+            },
+            {
+              "label": "Kettlebell Fonte & Caoutchouc 12kg",
+              "url": "https://www.decathlon.fr/p/kettlebell-en-fonte-et-base-caoutchouc-12-kg-compose-a-80-percent-de-fonte-recyclee/_/R-p-152874?mc=8354816&c=noir_jaune"
+            },
+            {
+              "label": "Kettlebell Fonte & Caoutchouc 6kg",
+              "url": "https://www.decathlon.fr/p/kettlebell-en-fonte-et-base-caoutchouc-6-kg-compose-a-80-percent-de-fonte-recyclee/_/R-p-182833?mc=8399332&c=noir"
+            }
+          ]
+        },
+        {
+          "type": "Barre et Poids",
+          "products": [
+            {
+              "label": "Catégorie Poids Fitness",
+              "url": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/poids-fitness/f-partner_decathlon"
+            },
+            {
+              "label": "Disque Fonte 5kg (28mm)",
+              "url": "https://www.decathlon.fr/p/disque-de-musculation-fonte-5kg-28mm-compose-a-80-percent-de-fonte-recyclee/_/R-p-348960?mc=8816725"
+            },
+            {
+              "label": "Disque Fonte 10kg (28mm)",
+              "url": "https://www.decathlon.fr/p/disque-de-musculation-fonte-10kg-28mm-compose-a-80-percent-de-fonte-recyclee/_/R-p-348895?mc=8816726"
+            },
+            {
+              "label": "Disque Fonte 20kg (28mm)",
+              "url": "https://www.decathlon.fr/p/disque-de-musculation-fonte-20kg-28mm-compose-a-80-percent-de-fonte-recyclee/_/R-p-348941?mc=8816727"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category_group": "Mobilier & Supports",
+      "sub_categories": [
+        {
+          "type": "Banc de Musculation",
+          "products": [
+            {
+              "label": "Catégorie Bancs de Musculation",
+              "url": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/bancs-de-musculation/f-partner_decathlon"
+            },
+            {
+              "label": "Banc Inclinable/Déclinable (Bench 900)",
+              "url": "https://www.decathlon.fr/p/banc-de-musculation-renforce-inclinable-et-declinable-bench-900/_/R-p-342936?mc=8766093"
+            },
+            {
+              "label": "Banc Pliable (Bench 100)",
+              "url": "https://www.decathlon.fr/p/banc-de-musculation-pliable-bench-100/_/R-p-344848?mc=8788244"
+            }
+          ]
+        },
+        {
+          "type": "Traction & Structure",
+          "products": [
+            {
+              "label": "Catégorie Barres de Traction",
+              "url": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/barres-de-traction/f-partner_decathlon"
+            },
+            {
+              "label": "Catégorie Chaises Romaines",
+              "url": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/chaise-romaine-fitness-tower/f-partner_decathlon"
+            },
+            {
+              "label": "Barre de Porte Verrouillage (70-95cm)",
+              "url": "https://www.decathlon.fr/p/barre-de-traction-pour-porte-avec-verrouillage-bt-150-70-cm/_/R-p-325833?mc=8588490"
+            },
+            {
+              "label": "Barre de Traction Murale Repliable",
+              "url": "https://www.decathlon.fr/p/barre-de-traction-murale-repliable/_/R-p-119673?mc=8385106&c=noir"
+            },
+            {
+              "label": "Chaise Romaine (Training Station 900)",
+              "url": "https://www.decathlon.fr/p/chaise-romaine-de-musculation-training-station-900/_/R-p-342926?mc=8766094"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category_group": "Accessoires Spécifiques",
+      "sub_categories": [
+        {
+          "type": "Suspension & Glisse",
+          "products": [
+            {
+              "label": "Catégorie Sangles de Suspension",
+              "url": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/sangle-de-suspension"
+            },
+            {
+              "label": "Sangles de Suspension (Burn)",
+              "url": "https://www.decathlon.fr/p/sangles-de-suspension-burn/_/R-p-379149?mc=8993381"
+            },
+            {
+              "label": "Kit Résistance (Poignées + Élastique + Porte)",
+              "url": "https://www.decathlon.fr/p/kit-musculation-poignees-accroche-porte-et-elastique-15kg-kit-de-resistance/_/R-p-333917?mc=8647670"
+            },
+            {
+              "label": "Disques de Glisse (Sliders)",
+              "url": "https://www.decathlon.fr/p/disques-de-glisse-musculation-utilisables-sur-tous-les-sols-x2/_/R-p-171417?mc=8608703"
+            }
+          ]
+        },
+        {
+          "type": "Cardio & Abdos",
+          "products": [
+            {
+              "label": "Catégorie Cordes à Sauter",
+              "url": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training/cordes-a-sauter/f-partner_decathlon"
+            },
+            {
+              "label": "Corde à Sauter 800 (Double Compteur)",
+              "url": "https://www.decathlon.fr/p/corde-a-sauter-800-avec-double-compteur-noir/_/R-p-347914?mc=8808880"
+            },
+            {
+              "label": "Corde à Sauter 500 (Gomme)",
+              "url": "https://www.decathlon.fr/p/corde-a-sauter-500-gomme/_/R-p-309793?mc=8861567&c=incolore"
+            },
+            {
+              "label": "Roulette Abdominale Évolutive (Ab Wheel)",
+              "url": "https://www.decathlon.fr/p/roulette-abdominale-musculation-avec-ou-sans-elastique-de-guidage-ab-wheel-evo/_/R-p-311440?mc=8556755"
+            }
+          ]
+        },
+        {
+          "type": "Protection",
+          "products": [
+            {
+              "label": "Ceinture Lombaire Cuir",
+              "url": "https://www.decathlon.fr/p/ceinture-lombaire-de-musculation-en-cuir-resistante-noire/_/R-p-360592?mc=8928388&c=noir"
+            },
+            {
+              "label": "Protège-poignets (Wrist Wraps)",
+              "url": "https://www.decathlon.fr/p/poignet-de-force-musculation-violet/_/R-p-324386?mc=8916550&c=vert"
+            }
+          ]
+        }
+      ]
+    }
+  ]

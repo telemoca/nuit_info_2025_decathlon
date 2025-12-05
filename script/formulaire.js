@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         progressBar.style.width = "0%"
     }
 
-    // Fonction finale de soumission (rendue globale)
+    // Remplace ta fonction window.submitForm actuelle par celle-ci :
     window.submitForm = function () {
         const form = document.getElementById("quizForm")
         const formData = new FormData(form)
@@ -134,8 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const loader = document.getElementById("loader")
         const title = finalStepContent.querySelector("h2")
         const subtitle = finalStepContent.querySelector(".subtitle")
+        const productsSection = document.getElementById("products-section") // Récup section produits
 
         finalStepContent.classList.add("is-loading")
+        if (productsSection) productsSection.style.display = 'none'; // Cacher si on relance
 
         btn.style.display = "none"
         title.innerText = "GÉNÉRATION EN COURS..."
@@ -144,26 +146,160 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(async () => {
             try {
-                const response = await fetch("exo.json")
-                if (!response.ok)
-                    throw new Error(`HTTP error! status: ${response.status}`)
-                const allExos = await response.json()
+                // 1. Charger les deux fichiers JSON en parallèle
+                const [exoResponse, prodResponse] = await Promise.all([
+                    fetch("exo.json"),
+                    fetch("produits.json")
+                ]);
 
+                if (!exoResponse.ok || !prodResponse.ok)
+                    throw new Error("Erreur chargement JSON")
+
+                const allExos = await exoResponse.json()
+                const allProducts = await prodResponse.json() // Données produits
+
+                // 2. Générer la séance
                 const workout = generateWorkout(profilData, allExos)
+
+                // 3. Afficher la séance
                 displayWorkout(workout, profilData)
+
+                // 4. Générer et afficher les produits recommandés
+                displayRecommendedProducts(workout, allProducts);
+
             } catch (error) {
-                console.error(
-                    "Erreur lors de la génération de la séance:",
-                    error
-                )
-                finalStepContent.classList.remove("is-loading") // On retire la classe en cas d'erreur
+                console.error("Erreur:", error)
+                finalStepContent.classList.remove("is-loading")
                 title.innerText = "Oops !"
-                subtitle.innerText =
-                    "Nous n'avons pas pu générer votre séance. Veuillez réessayer."
+                subtitle.innerText = "Une erreur est survenue."
                 subtitle.style.display = "block"
                 loader.style.display = "none"
             }
         }, 1500)
+    }
+
+    /**
+     * Analyse la séance, trouve le matériel manquant et affiche les produits.
+     */
+    function displayRecommendedProducts(workout, catalog) {
+        const productsSection = document.getElementById("products-section");
+        const grid = document.getElementById("products-grid");
+        grid.innerHTML = ""; // Vider
+
+        // 1. Extraire les équipements uniques nécessaires pour cette séance
+        const neededEquipment = new Set();
+        workout.forEach(exo => {
+            if (exo.equipment) {
+                exo.equipment.forEach(eq => {
+                    // On normalise (minuscule) et on ignore "aucun", "mur", etc.
+                    const cleanEq = eq.toLowerCase();
+                    if (!['aucun', 'mur', 'mur pour support', 'chaises', 'cadre de porte'].includes(cleanEq)) {
+                        neededEquipment.add(cleanEq);
+                    }
+                });
+            }
+        });
+
+        // S'il n'y a besoin de rien (ex: full poids du corps sans tapis), on n'affiche rien
+        if (neededEquipment.size === 0) return;
+
+        // 2. Trouver les produits correspondants dans le catalogue JSON
+        const suggestions = [];
+
+        // Dictionnaire de mapping : Mot clé exercice => Type de produit dans le JSON
+        // Cela permet de relier "tapis" (exo) à "Tapis de Sol" (produit)
+        const mapping = {
+            "tapis": "Tapis de Sol",
+            "elastique": "Bandes Élastiques",
+            "bande": "Bandes Élastiques",
+            "haltère": "Haltères",
+            "barre": "Barre et Poids",
+            "bancs": "Banc de Musculation",
+            "kettlebell": "Kettlebell",
+            "corde": "Cardio & Abdos", // Corde à sauter
+            "roues": "Cardio & Abdos", // Roue abdos
+            "disques": "Accessoires Spécifiques" // Sliders
+        };
+
+        neededEquipment.forEach(eq => {
+            // On cherche un mot clé correspondant
+            let targetCategory = null;
+            for (const [keyword, category] of Object.entries(mapping)) {
+                if (eq.includes(keyword)) {
+                    targetCategory = category;
+                    break;
+                }
+            }
+
+            if (targetCategory) {
+                // On cherche dans le JSON
+                const foundProducts = findProductsByCategory(catalog, targetCategory);
+                // On en prend 1 ou 2 max pour ne pas spammer
+                if (foundProducts.length > 0) {
+                    // On évite les doublons globaux (si plusieurs exos demandent des haltères)
+                    foundProducts.slice(0, 1).forEach(p => suggestions.push(p));
+                }
+            }
+        });
+
+        // 3. Afficher les cartes HTML
+        if (suggestions.length > 0) {
+            // Supprimer les doublons (au cas où)
+            const uniqueSuggestions = [...new Set(suggestions.map(JSON.stringify))].map(JSON.parse);
+
+            uniqueSuggestions.forEach(product => {
+                const card = document.createElement("a");
+                card.className = "product-card";
+                card.href = product.url;
+                card.target = "_blank"; // Ouvrir dans un nouvel onglet
+
+                card.innerHTML = `
+                <div class="product-top">
+                    <div class="product-image-placeholder">
+                       <svg viewBox="0 0 24 24"><path d="M22,12V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V12A1,1 0 0,1 1,11V8A2,2 0 0,1 3,6H21A2,2 0 0,1 23,8V11A1,1 0 0,1 22,12M4,8V11H20V8H4M4,13V20H20V13H4Z" /></svg>
+                    </div>
+                    <div class="product-title">${product.label}</div>
+                </div>
+                <button class="btn-shop">
+                    <svg viewBox="0 0 24 24"><path d="M11,9H13V6H16V4H13V1H11V4H8V6H11M7,18A2,2 0 0,0 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20A2,2 0 0,0 7,18M17,18A2,2 0 0,0 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20A2,2 0 0,0 17,18M7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.59 17.3,11.97L21.16,4.96L19.42,4H19.41L18.31,6L15.55,11H8.53L8.4,10.73L6.16,6L5.21,4L4.27,2H1V4H3L6.6,11.59L5.25,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75Z" /></svg>
+                    Voir
+                </button>
+            `;
+                grid.appendChild(card);
+            });
+
+            // Afficher la section
+            productsSection.style.display = "block";
+        }
+    }
+
+    /**
+     * Cherche récursivement dans la structure complexe de produits.json
+     */
+    function findProductsByCategory(catalog, categoryType) {
+        let results = [];
+
+        // Le JSON est structuré : Array -> category_group -> sub_categories -> type
+        catalog.forEach(group => {
+            if (group.sub_categories) {
+                group.sub_categories.forEach(sub => {
+                    // On cherche si le "type" (ex: "Tapis de Sol") correspond ou contient le mot clé
+                    if (sub.type && (sub.type === categoryType || sub.type.includes(categoryType))) {
+                        // On prend les produits de cette sous-catégorie
+                        if (sub.products && sub.products.length > 0) {
+                            // On prend le premier produit spécifique, pas la catégorie générale si possible
+                            // Ici on prend tout pour laisser le choix, ou on filtre
+                            results = results.concat(sub.products);
+                        }
+                    }
+                    // Cas spécial pour "Cardio & Abdos" qui est un type mais contient des produits variés
+                    else if (categoryType === "Cardio & Abdos" && sub.type === "Cardio & Abdos") {
+                        results = results.concat(sub.products);
+                    }
+                });
+            }
+        });
+        return results;
     }
 
     /**
@@ -214,8 +350,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
             : profile.sports
-            ? [profile.sports]
-            : []
+                ? [profile.sports]
+                : []
 
         // 1. Filtrer les exercices éligibles par difficulté et matériel
         const eligibleExos = allExos.filter((exo) => {
@@ -288,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let candidates = scored.slice(0, 15)
             for (let i = candidates.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
-                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+                    ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
             }
 
             return candidates.slice(0, count)
