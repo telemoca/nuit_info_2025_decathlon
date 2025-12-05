@@ -74,27 +74,49 @@ h2 {
 }
 
 /* Bouton Retour */
+/* --- Bouton Précédent (Style Amélioré) --- */
 .btn-back {
-    background: none;
-    border: none;
+    display: inline-flex; /* Garde le bouton compact */
+    align-items: center;  /* Aligne verticalement le texte et l'icône */
+    justify-content: flex-start;
+    
+    background: transparent; /* Fond transparent */
+    border: none; /* Pas de bordure */
+    
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #707070; /* Gris neutre pour ne pas voler la vedette */
+    
     cursor: pointer;
-    font-size: 0.9rem;
-    color: #666;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 0;
+    margin-bottom: 20px; /* Espace avant le titre */
+    padding: 10px 0; /* Zone de clic confortable */
+    
+    transition: all 0.3s ease;
 }
 
+/* Taille et couleur de l'icône SVG */
 .btn-back svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    margin-right: 5px;
+    width: 22px;
+    height: 22px;
+    margin-right: 8px; /* Espace entre flèche et texte */
+    fill: currentColor; /* L'icône prend la couleur du texte */
+    transition: transform 0.3s ease;
 }
 
+/* --- Effet au survol --- */
 .btn-back:hover {
-    color: #3643BA;
+    color: #3643BA; /* Devient Bleu Decathlon */
+}
+
+.btn-back:hover svg {
+    transform: translateX(-4px); /* La flèche bouge un peu vers la gauche */
+}
+
+/* Optionnel : Cacher le bouton si on est désactivé (via JS) */
+.btn-back.hidden {
+    display: none;
+    visibility: hidden;
 }
 
 /* =========================================
@@ -173,16 +195,18 @@ h2 {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* L'icône prend la couleur du texte ou une couleur définie */
 .tile-icon {
-    /* --- AJUSTEMENTS ICI --- */
-    width: 75px;   /* Taille moyenne (Ni trop petit, ni trop gros) */
+    width: 75px;
     height: 75px;
-    margin-bottom: 15px; /* On rapproche un peu le texte */
-    /* ----------------------- */
-    
-    fill: #3643BA; 
+    margin-bottom: 15px;
+    fill: #3643BA; /* Bleu par défaut */
     transition: fill 0.3s ease;
-    object-fit: contain;
+}
+
+/* Quand c'est coché, l'icône devient blanche AUTOMATIQUEMENT */
+.option-input:checked + .option-tile .tile-icon {
+    fill: #ffffff; /* Pas besoin de changer d'image ! */
 }
 
 .tile-label {
