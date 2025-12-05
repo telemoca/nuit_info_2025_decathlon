@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 displayWorkout(workout, profilData)
 
                 // 4. Générer et afficher les produits recommandés
-                displayRecommendedProducts(workout, allProducts)
+                displayRecommendedProducts(workout, allProducts, profilData)
             } catch (error) {
                 console.error("Erreur:", error)
                 finalStepContent.classList.remove("is-loading")
@@ -250,126 +250,283 @@ document.addEventListener("DOMContentLoaded", () => {
     /**
      * Analyse la séance, trouve le matériel manquant et affiche les produits.
      */
-    function displayRecommendedProducts(workout, catalog) {
-        const productsSection = document.getElementById("products-section")
-        const grid = document.getElementById("products-grid")
-        grid.innerHTML = "" // Vider
+    // function displayRecommendedProducts(workout, catalog) {
+    //     const productsSection = document.getElementById("products-section")
+    //     const grid = document.getElementById("products-grid")
+    //     grid.innerHTML = "" // Vider
 
-        // Correction : s'assurer que catalog est bien un tableau
-        let catalogArray = catalog
-        if (!Array.isArray(catalogArray)) {
-            // Essaye de trouver la clé qui contient le tableau (ex: "products" ou "data")
-            if (Array.isArray(catalog.products)) {
-                catalogArray = catalog.products
-            } else if (Array.isArray(catalog.data)) {
-                catalogArray = catalog.data
-            } else {
-                // Si rien ne correspond, on ne fait rien
-                return
-            }
-        }
+    //     // Correction : s'assurer que catalog est bien un tableau
+    //     let catalogArray = catalog
+    //     if (!Array.isArray(catalogArray)) {
+    //         // Essaye de trouver la clé qui contient le tableau (ex: "products" ou "data")
+    //         if (Array.isArray(catalog.products)) {
+    //             catalogArray = catalog.products
+    //         } else if (Array.isArray(catalog.data)) {
+    //             catalogArray = catalog.data
+    //         } else {
+    //             // Si rien ne correspond, on ne fait rien
+    //             return
+    //         }
+    //     }
 
-        // 1. Extraire les équipements uniques nécessaires pour cette séance
-        const neededEquipment = new Set()
-        workout.forEach((exo) => {
-            if (exo.equipment) {
-                exo.equipment.forEach((eq) => {
-                    // On normalise (minuscule) et on ignore "aucun", "mur", etc.
-                    const cleanEq = eq.toLowerCase()
-                    if (
-                        ![
-                            "aucun",
-                            "mur",
-                            "mur pour support",
-                            "chaises",
-                            "cadre de porte",
-                        ].includes(cleanEq)
-                    ) {
-                        neededEquipment.add(cleanEq)
-                    }
-                })
-            }
-        })
+    //     // 1. Extraire les équipements uniques nécessaires pour cette séance
+    //     const neededEquipment = new Set()
+    //     workout.forEach((exo) => {
+    //         if (exo.equipment) {
+    //             exo.equipment.forEach((eq) => {
+    //                 // On normalise (minuscule) et on ignore "aucun", "mur", etc.
+    //                 const cleanEq = eq.toLowerCase()
+    //                 if (
+    //                     ![
+    //                         "aucun",
+    //                         "mur",
+    //                         "mur pour support",
+    //                         "chaises",
+    //                         "cadre de porte",
+    //                     ].includes(cleanEq)
+    //                 ) {
+    //                     neededEquipment.add(cleanEq)
+    //                 }
+    //             })
+    //         }
+    //     })
 
-        // S'il n'y a besoin de rien (ex: full poids du corps sans tapis), on n'affiche rien
-        if (neededEquipment.size === 0) return
+    //     // S'il n'y a besoin de rien (ex: full poids du corps sans tapis), on n'affiche rien
+    //     if (neededEquipment.size === 0) return
 
-        // 2. Trouver les produits correspondants dans le catalogue JSON
-        const suggestions = []
+    //     // 2. Trouver les produits correspondants dans le catalogue JSON
+    //     const suggestions = []
 
-        // Dictionnaire de mapping : Mot clé exercice => Type de produit dans le JSON
-        // Cela permet de relier "tapis" (exo) à "Tapis de Sol" (produit)
-        const mapping = {
-            tapis: "Tapis de Sol",
-            elastique: "Bandes Élastiques",
-            bande: "Bandes Élastiques",
-            haltère: "Haltères",
-            barre: "Barre et Poids",
-            bancs: "Banc de Musculation",
-            kettlebell: "Kettlebell",
-            corde: "Cardio & Abdos", // Corde à sauter
-            roues: "Cardio & Abdos", // Roue abdos
-            disques: "Accessoires Spécifiques", // Sliders
-        }
+    //     // Dictionnaire de mapping : Mot clé exercice => Type de produit dans le JSON
+    //     // Cela permet de relier "tapis" (exo) à "Tapis de Sol" (produit)
+    //     const mapping = {
+    //         tapis: "Tapis de Sol",
+    //         elastique: "Bandes Élastiques",
+    //         bande: "Bandes Élastiques",
+    //         haltère: "Haltères",
+    //         barre: "Barre et Poids",
+    //         bancs: "Banc de Musculation",
+    //         kettlebell: "Kettlebell",
+    //         corde: "Cardio & Abdos", // Corde à sauter
+    //         roues: "Cardio & Abdos", // Roue abdos
+    //         disques: "Accessoires Spécifiques", // Sliders
+    //     }
 
-        neededEquipment.forEach((eq) => {
-            // On cherche un mot clé correspondant
-            let targetCategory = null
-            for (const [keyword, category] of Object.entries(mapping)) {
-                if (eq.includes(keyword)) {
-                    targetCategory = category
-                    break
+    //     neededEquipment.forEach((eq) => {
+    //         // On cherche un mot clé correspondant
+    //         let targetCategory = null
+    //         for (const [keyword, category] of Object.entries(mapping)) {
+    //             if (eq.includes(keyword)) {
+    //                 targetCategory = category
+    //                 break
+    //             }
+    //         }
+
+    //         if (targetCategory) {
+    //             // Correction ici : passer catalogArray au lieu de catalog
+    //             const foundProducts = findProductsByCategory(
+    //                 catalogArray,
+    //                 targetCategory
+    //             )
+    //             // On en prend 1 ou 2 max pour ne pas spammer
+    //             if (foundProducts.length > 0) {
+    //                 // On évite les doublons globaux (si plusieurs exos demandent des haltères)
+    //                 foundProducts
+    //                     .slice(0, 1)
+    //                     .forEach((p) => suggestions.push(p))
+    //             }
+    //         }
+    //     })
+
+    //     // 3. Afficher les cartes HTML
+    //     if (suggestions.length > 0) {
+    //         // Supprimer les doublons (au cas où)
+    //         const uniqueSuggestions = [
+    //             ...new Set(suggestions.map(JSON.stringify)),
+    //         ].map(JSON.parse)
+
+    //         uniqueSuggestions.forEach((product) => {
+    //             const card = document.createElement("a")
+    //             card.className = "product-card"
+    //             card.href = product.url
+    //             card.target = "_blank" // Ouvrir dans un nouvel onglet
+
+    //             card.innerHTML = `
+    //             <div class="product-top">
+    //                 <div class="product-image-placeholder">
+    //                    <svg viewBox="0 0 24 24"><path d="M22,12V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V12A1,1 0 0,1 1,11V8A2,2 0 0,1 3,6H21A2,2 0 0,1 23,8V11A1,1 0 0,1 22,12M4,8V11H20V8H4M4,13V20H20V13H4Z" /></svg>
+    //                 </div>
+    //                 <div class="product-title">${product.label}</div>
+    //             </div>
+    //             <button class="btn-shop">
+    //                 <svg viewBox="0 0 24 24"><path d="M11,9H13V6H16V4H13V1H11V4H8V6H11M7,18A2,2 0 0,0 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20A2,2 0 0,0 7,18M17,18A2,2 0 0,0 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20A2,2 0 0,0 17,18M7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.59 17.3,11.97L21.16,4.96L19.42,4H19.41L18.31,6L15.55,11H8.53L8.4,10.73L6.16,6L5.21,4L4.27,2H1V4H3L6.6,11.59L5.25,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75Z" /></svg>
+    //                 Voir
+    //             </button>
+    //         `
+    //             grid.appendChild(card)
+    //         })
+
+    //         // Afficher la section
+    //         productsSection.style.display = "block"
+    //     }
+    // }
+
+    /**
+ * Affiche 4 produits recommandés + 1 carte "Voir tout"
+ */
+function displayRecommendedProducts(workout, catalog, userProfile) {
+    const productsSection = document.getElementById("products-section");
+    const grid = document.getElementById("products-grid");
+    
+    // Nettoyer la grille et afficher la section
+    grid.innerHTML = "";
+    productsSection.style.display = "block";
+    
+    // --- 1. LOGIQUE DE SELECTION DES PRODUITS ---
+    let suggestions = [];
+    const neededEquipment = new Set();
+    
+    // Récupérer le matériel nécessaire pour la séance générée
+    workout.forEach(exo => {
+        if (exo.equipment) {
+            exo.equipment.forEach(eq => {
+                const cleanEq = eq.toLowerCase();
+                if (!['aucun', 'mur', 'chaise', 'sol'].includes(cleanEq)) {
+                    neededEquipment.add(cleanEq);
                 }
-            }
+            });
+        }
+    });
 
-            if (targetCategory) {
-                // Correction ici : passer catalogArray au lieu de catalog
-                const foundProducts = findProductsByCategory(
-                    catalogArray,
-                    targetCategory
-                )
-                // On en prend 1 ou 2 max pour ne pas spammer
-                if (foundProducts.length > 0) {
-                    // On évite les doublons globaux (si plusieurs exos demandent des haltères)
-                    foundProducts
-                        .slice(0, 1)
-                        .forEach((p) => suggestions.push(p))
+    // Chercher les produits correspondants dans le catalogue
+    // On utilise une fonction helper (déjà présente ou à adapter)
+    if (globalProductsCatalog && globalProductsCatalog.categories) {
+        neededEquipment.forEach(eq => {
+            // Logique simplifiée pour trouver la catégorie correspondante
+            // On cherche dans les noms de produits ou tags
+            const found = findProductsByKeyword(globalProductsCatalog.categories, eq);
+            if(found) suggestions.push(...found);
+        });
+
+        // Si on n'a pas assez de produits (ex: séance poids du corps), on complète
+        // avec des produits liés à l'objectif (ex: Tapis, Elastiques, Protéines)
+        if (suggestions.length < 4) {
+            const objectiveMap = {
+                "Perte de poids": ["corde", "cardio", "tapis"],
+                "Renforcement": ["halteres", "elastique", "proteine"],
+                "Souplesse": ["yoga", "brique", "tapis"],
+                "Bien-Être": ["yoga", "massage", "ball"]
+            };
+            
+            const keywords = objectiveMap[userProfile.objectif] || ["fitness"];
+            keywords.forEach(kw => {
+                if (suggestions.length < 4) {
+                    const found = findProductsByKeyword(globalProductsCatalog.categories, kw);
+                    if(found) suggestions.push(...found);
                 }
-            }
-        })
-
-        // 3. Afficher les cartes HTML
-        if (suggestions.length > 0) {
-            // Supprimer les doublons (au cas où)
-            const uniqueSuggestions = [
-                ...new Set(suggestions.map(JSON.stringify)),
-            ].map(JSON.parse)
-
-            uniqueSuggestions.forEach((product) => {
-                const card = document.createElement("a")
-                card.className = "product-card"
-                card.href = product.url
-                card.target = "_blank" // Ouvrir dans un nouvel onglet
-
-                card.innerHTML = `
-                <div class="product-top">
-                    <div class="product-image-placeholder">
-                       <svg viewBox="0 0 24 24"><path d="M22,12V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V12A1,1 0 0,1 1,11V8A2,2 0 0,1 3,6H21A2,2 0 0,1 23,8V11A1,1 0 0,1 22,12M4,8V11H20V8H4M4,13V20H20V13H4Z" /></svg>
-                    </div>
-                    <div class="product-title">${product.label}</div>
-                </div>
-                <button class="btn-shop">
-                    <svg viewBox="0 0 24 24"><path d="M11,9H13V6H16V4H13V1H11V4H8V6H11M7,18A2,2 0 0,0 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20A2,2 0 0,0 7,18M17,18A2,2 0 0,0 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20A2,2 0 0,0 17,18M7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.59 17.3,11.97L21.16,4.96L19.42,4H19.41L18.31,6L15.55,11H8.53L8.4,10.73L6.16,6L5.21,4L4.27,2H1V4H3L6.6,11.59L5.25,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75Z" /></svg>
-                    Voir
-                </button>
-            `
-                grid.appendChild(card)
-            })
-
-            // Afficher la section
-            productsSection.style.display = "block"
+            });
         }
     }
+
+    // Déduplication et limitation à 4 produits
+    const uniqueIds = new Set();
+    const finalProducts = [];
+    for (const p of suggestions) {
+        if (!uniqueIds.has(p.id)) {
+            uniqueIds.add(p.id);
+            finalProducts.push(p);
+        }
+        if (finalProducts.length >= 4) break;
+    }
+
+    // --- 2. GENERATION HTML DES 4 PRODUITS ---
+    finalProducts.forEach(prod => {
+        const priceDisplay = prod.prix ? `${prod.prix.valeur}€` : "Voir prix";
+        const imgDisplay = prod.image_path ? prod.image_path : "src/icon/icon_site.png";
+        
+        const cardHTML = `
+            <a href="${prod.url}" target="_blank" class="decathlon-product-card">
+                <div class="d-card-img-container">
+                    <img src="${imgDisplay}" alt="${prod.nom}" class="d-card-img" onerror="this.src='src/icon/icon_site.png'">
+                </div>
+                <div class="d-card-content">
+                    <span class="d-card-price-tag">${priceDisplay}</span>
+                    <span class="d-card-title">${prod.nom}</span>
+                </div>
+            </a>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+    });
+
+    // --- 3. GENERATION DE LA 5EME CARTE "VOIR TOUT" ---
+    // Déterminer l'URL de catégorie la plus pertinente
+    let categoryUrl = "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training"; // Défaut
+    
+    // Mapping simple basé sur le sport ou l'objectif
+    const urlMap = {
+        "Yoga": "https://www.decathlon.fr/tous-les-sports/yoga",
+        "Pilates": "https://www.decathlon.fr/tous-les-sports/pilates-gym-douce",
+        "Musculation": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training",
+        "Crossfit": "https://www.decathlon.fr/tous-les-sports/musculation-cross-training/cross-training",
+        "Running": "https://www.decathlon.fr/tous-les-sports/course-a-pied",
+        "Cyclisme": "https://www.decathlon.fr/tous-les-sports/velo-cyclisme",
+        "Perte de poids": "https://www.decathlon.fr/tous-les-sports/fitness-cardio-training",
+        "Souplesse": "https://www.decathlon.fr/tous-les-sports/yoga"
+    };
+
+    // On regarde d'abord les sports sélectionnés
+    if (userProfile.sports && userProfile.sports.length > 0) {
+        // On prend le premier sport coché pour simplifier
+        const mainSport = Array.isArray(userProfile.sports) ? userProfile.sports[0] : userProfile.sports;
+        // On cherche une correspondance partielle
+        for (const [key, url] of Object.entries(urlMap)) {
+            if (mainSport.includes(key) || key.includes(mainSport)) {
+                categoryUrl = url;
+                break;
+            }
+        }
+    } else {
+        // Sinon on regarde l'objectif
+        categoryUrl = urlMap[userProfile.objectif] || categoryUrl;
+    }
+
+    const seeMoreCardHTML = `
+        <a href="${categoryUrl}" target="_blank" class="decathlon-product-card see-more-card">
+            <div class="see-more-icon">
+                <svg viewBox="0 0 24 24"><path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-8.9-5h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4l-3.87 7H8.53L4.27 2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2z"/></svg>
+            </div>
+            <span>PARCOURIR LE RAYON</span>
+        </a>
+    `;
+    grid.insertAdjacentHTML('beforeend', seeMoreCardHTML);
+
+    // --- 4. AJOUT DU BOUTON RETOUR ACCUEIL (S'il n'existe pas déjà) ---
+    const existingBtn = document.getElementById("btn-final-home");
+    if (!existingBtn) {
+        const btnHome = document.createElement("a");
+        btnHome.id = "btn-final-home";
+        btnHome.href = "welcome.html";
+        btnHome.className = "btn-home-final";
+        btnHome.innerText = "Accueil";
+        productsSection.appendChild(btnHome);
+    }
+}
+
+// Fonction utilitaire simple pour chercher dans le catalogue JSON
+function findProductsByKeyword(categories, keyword) {
+    let results = [];
+    categories.forEach(cat => {
+        if (cat.produits) {
+            cat.produits.forEach(prod => {
+                const searchStr = (prod.nom + " " + (prod.tags_objectif || []).join(" ")).toLowerCase();
+                if (searchStr.includes(keyword.toLowerCase())) {
+                    results.push(prod);
+                }
+            });
+        }
+    });
+    return results;
+}
 
     /**
      * Affiche les équipements recommandés pour la séance complète

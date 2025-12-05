@@ -938,3 +938,158 @@ h2 {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(54, 67, 186, 0.2);
 }
+
+/* --- SECTION PRODUITS FINALE --- */
+.products-grid {
+    display: grid;
+    /* 5 colonnes : 4 produits + 1 carte "voir plus" */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+/* Style Carte Produit (Look Decathlon) */
+.decathlon-product-card {
+    background: white;
+    border-radius: 4px; /* Coins légèrement arrondis comme sur le site */
+    overflow: hidden;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    border: 1px solid #e0e0e0;
+}
+
+.decathlon-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.d-card-img-container {
+    background: #f7f8f9;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.d-card-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.d-card-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.d-card-price-tag {
+    background-color: #ffea28; /* Le jaune Decathlon */
+    color: black;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.d-card-title {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    font-weight: 500;
+    color: #111;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+/* Style Carte "Voir Plus" (5ème élément) */
+.see-more-card {
+    background-color: #f0f1f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #cecece;
+    color: #0082c3; /* Bleu Decathlon */
+    font-weight: 700;
+    text-align: center;
+    min-height: 250px; /* S'assurer qu'elle a la même hauteur visuelle */
+}
+
+.see-more-card:hover {
+    background-color: #e6e8eb;
+    border-color: #0082c3;
+}
+
+.see-more-icon {
+    width: 50px;
+    height: 50px;
+    background: #0082c3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.see-more-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* Bouton Retour Accueil en bas */
+.btn-home-final {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 40px auto 20px;
+    padding: 15px;
+    background-color: white;
+    color: #333;
+    border: 2px solid #ddd;
+    text-align: center;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-home-final:hover {
+    background-color: #f5f5f5;
+    border-color: #bbb;
+}
+
+/* Responsive pour mobile : Scroll horizontal ou grille 2x2 */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 par ligne sur mobile */
+    }
+    .see-more-card {
+        grid-column: span 2; /* La carte voir plus prend toute la largeur en bas */
+        height: 100px;
+        min-height: auto;
+        flex-direction: row;
+        gap: 15px;
+    }
+    .see-more-icon {
+        margin-bottom: 0;
+    }
+}
