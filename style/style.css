@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif; /* Police par défaut recommandée */
+    font-family: "Roboto", sans-serif; /* Police par défaut recommandée */
     background-color: #ffffff;
     color: #333;
     line-height: 1.6;
@@ -24,7 +24,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start; /* Aligné à gauche */
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Légère ombre sous le menu */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Légère ombre sous le menu */
 }
 
 .logo-img {
@@ -44,7 +44,7 @@ header {
 
 .progress-bar {
     height: 100%;
-    background-color: #3643BA; /* BLEU DECATHLON */
+    background-color: #3643ba; /* BLEU DECATHLON */
     width: 0%;
     transition: width 0.4s ease;
 }
@@ -94,7 +94,7 @@ h2 {
 }
 
 .btn-back:hover {
-    color: #3643BA;
+    color: #3643ba;
 }
 
 /* =========================================
@@ -110,8 +110,14 @@ h2 {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* =========================================
@@ -158,29 +164,29 @@ h2 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    
+
     /* --- AJUSTEMENTS ICI --- */
     padding: 25px 20px; /* Plus compact */
-    min-height: 200px;  /* Hauteur équilibrée */
+    min-height: 200px; /* Hauteur équilibrée */
     /* ----------------------- */
-    
-    background-color: #F7F9FC;
-    border: 2px solid #E3E8EF;
+
+    background-color: #f7f9fc;
+    border: 2px solid #e3e8ef;
     border-radius: 12px;
     color: #333;
-    
+
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .tile-icon {
     /* --- AJUSTEMENTS ICI --- */
-    width: 75px;   /* Taille moyenne (Ni trop petit, ni trop gros) */
+    width: 75px; /* Taille moyenne (Ni trop petit, ni trop gros) */
     height: 75px;
     margin-bottom: 15px; /* On rapproche un peu le texte */
     /* ----------------------- */
-    
-    fill: #3643BA; 
+
+    fill: #3643ba;
     transition: fill 0.3s ease;
     object-fit: contain;
 }
@@ -194,7 +200,7 @@ h2 {
 /* Règle générale pour le survol */
 .options-grid label:hover .option-tile {
     background-color: #ffffff;
-    border-color: #3643BA;
+    border-color: #3643ba;
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(54, 67, 186, 0.15);
 }
@@ -202,8 +208,8 @@ h2 {
 /* --- EFFET SÉLECTIONNÉ (Checked) --- */
 /* Règle pour une case sélectionnée */
 .option-input:checked + .option-tile {
-    background-color: #3643BA; /* FOND BLEU OFFICIEL */
-    border-color: #3643BA;
+    background-color: #3643ba; /* FOND BLEU OFFICIEL */
+    border-color: #3643ba;
     color: #ffffff; /* Texte blanc */
     transform: translateY(-2px);
     box-shadow: 0 8px 15px rgba(54, 67, 186, 0.3);
@@ -228,13 +234,14 @@ h2 {
 /* =========================================
    8. BOUTONS D'ACTION
    ========================================= */
-.btn-validate, .btn-decathlon {
+.btn-validate,
+.btn-decathlon {
     display: block;
     width: 100%;
     max-width: 300px; /* Pas trop large sur PC */
     margin: 30px auto 0; /* Centré */
     padding: 15px;
-    background-color: #3643BA; /* BLEU DECATHLON */
+    background-color: #3643ba; /* BLEU DECATHLON */
     color: white;
     border: none;
     border-radius: 50px; /* Bouton arrondi */
@@ -245,7 +252,8 @@ h2 {
     text-align: center;
 }
 
-.btn-validate:hover, .btn-decathlon:hover {
+.btn-validate:hover,
+.btn-decathlon:hover {
     background-color: #2a3494; /* Bleu plus foncé */
     transform: scale(1.02);
 }
@@ -261,20 +269,24 @@ h2 {
 .loader-icon {
     width: 60px;
     height: 60px;
-    fill: #3643BA; /* Loader BLEU */
+    fill: #3643ba; /* Loader BLEU */
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Quand l'input est coché, on applique un filtre sur l'image dans la tuile */
 .option-input:checked + .option-tile .tile-icon {
     /* Rend l'image complètement blanche */
-    filter: brightness(0) invert(1); 
+    filter: brightness(0) invert(1);
 }
 
 /* =========================================
@@ -286,9 +298,9 @@ h2 {
 
 .exo-card {
     display: flex;
-    background-color: #F7F9FC;
+    background-color: #f7f9fc;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     margin-bottom: 25px;
     overflow: hidden;
     gap: 20px;
@@ -310,7 +322,7 @@ h2 {
 
 .exo-details h3 {
     margin: 0 0 8px 0;
-    color: #3643BA;
+    color: #3643ba;
     font-size: 1.3rem;
 }
 
