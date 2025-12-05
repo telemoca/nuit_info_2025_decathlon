@@ -170,55 +170,44 @@ document.addEventListener("DOMContentLoaded", () => {
      * Filtre et sélectionne les exercices en fonction du profil utilisateur.
      * @param {object} profile - Les données du formulaire de l'utilisateur.
      * @param {Array} allExos - La liste de tous les exercices disponibles.
-     * @returns {Array} Une sélection de 5 exercices.
+     * @returns {Array} Une sélection d'exercices structurée.
      */
     function generateWorkout(profile, allExos) {
         const difficultyMap = {
-            Debutant: ["debutant"],
-            Intermediaire: ["debutant", "intermediaire"],
-            Avancé: ["intermediaire", "avance", "expert"],
+            Debutant: ["débutant"],
+            Intermediaire: ["débutant", "intermédiaire"],
+            Avancé: ["intermédiaire", "avancé"],
         }
-        const allowedDifficulties = difficultyMap[profile.experience] || [
-            "debutant",
-        ]
+        const allowedDifficulties =
+            difficultyMap[profile.experience] || ["débutant"]
 
         const equipmentMap = {
-            Aucun: [
-                "poids_du_corps",
-                "tapis",
-                "aucun",
-                "mur",
-                "chaise",
-                "marche_escalier",
-                "table_solide",
-            ],
+            Aucun: ["aucun", "tapis", "mur pour support", "cadre de porte"],
             Basique: [
-                "poids_du_corps",
-                "tapis",
                 "aucun",
-                "mur",
-                "chaise",
-                "marche_escalier",
-                "table_solide",
-                "elastique",
-                "kettlebell",
-                "halteres",
-                "banc",
-                "banc_solide",
+                "tapis",
+                "mur pour support",
+                "cadre de porte",
+                "chaises",
+                "bancs",
                 "box",
+                "marche",
+                "haltère (ou barre)",
+                "bande de résistance (optionnel)",
+                "cônes (optionnel)",
+                "roues d'abdos",
             ],
             Complet: null,
         }
         const allowedEquipment = equipmentMap[profile.materiel]
 
         const objectiveMap = {
-            "Perte de poids": ["cardio", "cardio_renforcement"],
+            "Perte de poids": ["cardio", "explosivité"],
             Renforcement: ["renforcement"],
-            Souplesse: ["etirement", "relaxation"],
+            Souplesse: ["étirement", "mobilité", "souplesse", "relaxation"],
         }
-        const allowedMainTypes = objectiveMap[profile.objectif] || [
-            "renforcement",
-        ]
+        const allowedMainTypes =
+            objectiveMap[profile.objectif] || ["renforcement"]
 
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
@@ -236,26 +225,37 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
         // 2. Créer des listes pour chaque phase de l'entraînement
-        const warmupPool = eligibleExos.filter(
-            (exo) => exo.type === "echauffement"
+        const warmupPool = eligibleExos.filter((exo) =>
+            exo.type.includes("échauffement")
         )
-        const mainPool = eligibleExos.filter((exo) =>
-            allowedMainTypes.includes(exo.type)
+        const mainPool = eligibleExos.filter(
+            (exo) =>
+                allowedMainTypes.some((type) => exo.type.includes(type)) &&
+                !exo.type.includes("échauffement") &&
+                !exo.type.includes("étirement") &&
+                !exo.type.includes("repos")
         )
-        const cooldownPool = eligibleExos.filter((exo) =>
-            ["etirement", "relaxation"].includes(exo.type)
+        const cooldownPool = eligibleExos.filter(
+            (exo) => exo.type.includes("étirement") || exo.type.includes("repos")
         )
 
         const sportValueMap = {
-            Crossfit: "crossfit",
-            Cyclisme: "cyclisme",
-            Musculation: "musculation",
-            SportsAquatiques: "sports_aquatique",
-            SportsRelaxation: "sport_relaxation",
-            Randonnees: "randonnee",
-            Running: "running",
-            SportsCollectifs: "sport_collectif",
-            SportsRaquettes: "sports_raquete",
+            Crossfit: ["crossfit", "plyométrie", "explosivité", "calisthenics"],
+            Cyclisme: ["cyclisme"],
+            Musculation: ["musculation", "force", "calisthenics"],
+            SportsAquatiques: ["sports_aquatique"],
+            SportsRelaxation: [
+                "yoga",
+                "étirement",
+                "relaxation",
+                "récupération",
+                "souplesse",
+                "pilates",
+            ],
+            Randonnees: ["randonnee"],
+            Running: ["course à pied"],
+            SportsCollectifs: ["sport", "agilité"],
+            SportsRaquettes: ["sports de raquette"],
         }
 
         // 3. Fonction pour sélectionner les meilleurs exercices d'une liste
@@ -267,24 +267,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     let score = 0
                     if (userSports.length > 0) {
                         userSports.forEach((sport) => {
-                            const jsonSport = sportValueMap[sport]
+                            const jsonSports = sportValueMap[sport] || []
                             if (
-                                jsonSport &&
-                                exo.sport_category.includes(jsonSport)
-                            )
+                                jsonSports.some((jsonSport) =>
+                                    exo.sport_category.includes(jsonSport)
+                                )
+                            ) {
                                 score++
+                            }
                         })
                     }
-                    if (exo.sport_category.includes("tous")) score += 0.5
                     return { ...exo, score }
                 })
                 .sort((a, b) => b.score - a.score)
 
             // On mélange les meilleurs candidats pour la variété
-            let candidates = scored.slice(0, 10)
+            let candidates = scored.slice(0, 15)
             for (let i = candidates.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
-                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+                ;[candidates[i], candidates[j]] = [
+                    candidates[j],
+                    candidates[i],
+                ]
             }
 
             return candidates.slice(0, count)
@@ -335,8 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const typeIconMap = {
             renforcement: "src/icon/muscle_V.png",
             cardio: "src/icon/coeurs_V.png",
-            cardio_renforcement: "src/icon/fonctionnement_V.png",
-            etirement: "src/icon/yoga_V.png",
+            explosivité: "src/icon/fonctionnement_V.png", // Associé à la course/explosivité
+            étirement: "src/icon/yoga_V.png",
+            mobilité: "src/icon/yoga_V.png", // Même icône pour la mobilité
         }
 
         let warmupHtml = ""
@@ -345,11 +350,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         workout.forEach((exo) => {
             const isTimeBased =
-                ["etirement", "relaxation", "cardio"].includes(exo.type) ||
+                exo.type.includes("étirement") ||
+                exo.type.includes("repos") ||
+                exo.type.includes("cardio") ||
                 exo.title.toLowerCase().includes("planche") ||
                 exo.title.toLowerCase().includes("chaise")
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
-            const iconSrc = typeIconMap[exo.type] // On récupère l'icône, peut être undefined
+
+            let iconSrc = ""
+            // On cherche le premier type correspondant dans notre map pour trouver une icône
+            for (const type in typeIconMap) {
+                if (exo.type.includes(type)) {
+                    iconSrc = typeIconMap[type]
+                    break
+                }
+            }
 
             let iconHtml = "" // Par défaut, pas d'icône
             if (iconSrc) {
@@ -371,9 +386,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `
 
-            if (exo.type === "echauffement") {
+            if (exo.type.includes("échauffement")) {
                 warmupHtml += cardHtml
-            } else if (["etirement", "relaxation"].includes(exo.type)) {
+            } else if (
+                exo.type.includes("étirement") ||
+                exo.type.includes("repos")
+            ) {
                 cooldownHtml += cardHtml
             } else {
                 mainHtml += cardHtml
