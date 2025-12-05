@@ -238,6 +238,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const grid = document.getElementById("products-grid")
         grid.innerHTML = "" // Vider
 
+        // Correction : s'assurer que catalog est bien un tableau
+        let catalogArray = catalog;
+        if (!Array.isArray(catalogArray)) {
+            // Essaye de trouver la clé qui contient le tableau (ex: "products" ou "data")
+            if (Array.isArray(catalog.products)) {
+                catalogArray = catalog.products;
+            } else if (Array.isArray(catalog.data)) {
+                catalogArray = catalog.data;
+            } else {
+                // Si rien ne correspond, on ne fait rien
+                return;
+            }
+        }
+
         // 1. Extraire les équipements uniques nécessaires pour cette séance
         const neededEquipment = new Set()
         workout.forEach((exo) => {
@@ -292,9 +306,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (targetCategory) {
-                // On cherche dans le JSON
+                // Correction ici : passer catalogArray au lieu de catalog
                 const foundProducts = findProductsByCategory(
-                    catalog,
+                    catalogArray,
                     targetCategory
                 )
                 // On en prend 1 ou 2 max pour ne pas spammer
