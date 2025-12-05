@@ -78,21 +78,21 @@ h2 {
 /* --- Bouton Précédent (Style Amélioré) --- */
 .btn-back {
     display: inline-flex; /* Garde le bouton compact */
-    align-items: center;  /* Aligne verticalement le texte et l'icône */
+    align-items: center; /* Aligne verticalement le texte et l'icône */
     justify-content: flex-start;
-    
+
     background: transparent; /* Fond transparent */
     border: none; /* Pas de bordure */
-    
-    font-family: 'Roboto', sans-serif;
+
+    font-family: "Roboto", sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     color: #707070; /* Gris neutre pour ne pas voler la vedette */
-    
+
     cursor: pointer;
     margin-bottom: 20px; /* Espace avant le titre */
     padding: 10px 0; /* Zone de clic confortable */
-    
+
     transition: all 0.3s ease;
 }
 
@@ -107,7 +107,7 @@ h2 {
 
 /* --- Effet au survol --- */
 .btn-back:hover {
-    color: #3643BA; /* Devient Bleu Decathlon */
+    color: #3643ba; /* Devient Bleu Decathlon */
 }
 
 .btn-back:hover svg {
@@ -380,7 +380,8 @@ h2 {
     width: 22px;
     height: 22px;
     /* Ce filtre colore l'icône en bleu Decathlon */
-    filter: invert(24%) sepia(84%) saturate(2222%) hue-rotate(228deg) brightness(88%) contrast(92%);
+    filter: invert(24%) sepia(84%) saturate(2222%) hue-rotate(228deg)
+        brightness(88%) contrast(92%);
 }
 
 .exo-reps {

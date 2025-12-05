@@ -5,30 +5,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalSteps = 6
     const progressBar = document.getElementById("progressBar")
     let isAnimating = false // Sécurité pour empêcher le double clic rapide
-// ... tes variables existantes ...
+    // ... tes variables existantes ...
     const btnBack = document.getElementById("btnBack")
-    
+
     // --- NOUVEAU CODE : Gestion du bouton "Valider mes sports" ---
-    const sportsInputs = document.querySelectorAll('input[name="sports"]');
-    const validateBtn = document.querySelector('.btn-validate');
+    const sportsInputs = document.querySelectorAll('input[name="sports"]')
+    const validateBtn = document.querySelector(".btn-validate")
 
     if (validateBtn) {
         // Fonction qui active/désactive le bouton
         function updateValidateButton() {
             // Compte combien de cases sont cochées
-            const count = document.querySelectorAll('input[name="sports"]:checked').length;
-            
+            const count = document.querySelectorAll(
+                'input[name="sports"]:checked'
+            ).length
+
             // Si 0 cochée, disabled = true (bouton gris). Sinon false (bouton bleu).
-            validateBtn.disabled = count === 0;
+            validateBtn.disabled = count === 0
         }
 
         // On ajoute l'écouteur sur chaque checkbox
-        sportsInputs.forEach(input => {
-            input.addEventListener('change', updateValidateButton);
-        });
+        sportsInputs.forEach((input) => {
+            input.addEventListener("change", updateValidateButton)
+        })
 
         // On lance la fonction une première fois pour désactiver le bouton au démarrage
-        updateValidateButton();
+        updateValidateButton()
     }
     // -------------------------------------------------------------
     // Initialisation
@@ -38,16 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     window.nextStep = function () {
-        
         // --- DÉBUT AJOUT : Validation pour l'étape 3 (Sports) ---
         if (currentStep === 3) {
             // On sélectionne toutes les cases "sports" qui sont cochées
-            const sportsCoques = document.querySelectorAll('input[name="sports"]:checked');
-            
+            const sportsCoques = document.querySelectorAll(
+                'input[name="sports"]:checked'
+            )
+
             // Si aucune n'est cochée, on alerte l'utilisateur et on bloque
             if (sportsCoques.length === 0) {
-                alert("Veuillez sélectionner au moins un sport pour continuer.");
-                return; // On arrête la fonction ici, l'étape ne changera pas
+                alert("Veuillez sélectionner au moins un sport pour continuer.")
+                return // On arrête la fonction ici, l'étape ne changera pas
             }
         }
         // --- FIN AJOUT ---
@@ -132,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = finalStepContent.querySelector("h2")
         const subtitle = finalStepContent.querySelector(".subtitle")
 
-        finalStepContent.classList.add('is-loading');
+        finalStepContent.classList.add("is-loading")
 
         btn.style.display = "none"
         title.innerText = "GÉNÉRATION EN COURS..."
@@ -153,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Erreur lors de la génération de la séance:",
                     error
                 )
-                finalStepContent.classList.remove('is-loading'); // On retire la classe en cas d'erreur
+                finalStepContent.classList.remove("is-loading") // On retire la classe en cas d'erreur
                 title.innerText = "Oops !"
                 subtitle.innerText =
                     "Nous n'avons pas pu générer votre séance. Veuillez réessayer."
@@ -277,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const loader = document.getElementById("loader")
         const workoutContainer = document.getElementById("workout-container")
 
-        finalStepContent.classList.remove('is-loading'); // On retire la classe
+        finalStepContent.classList.remove("is-loading") // On retire la classe
         loader.style.display = "none"
 
         if (!workout || workout.length === 0) {
@@ -306,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
             etirement: "src/icon/yoga_V.png",
             relaxation: "src/icon/lotus_V.png",
             echauffement: "src/icon/debut_V.png",
-        };
+        }
 
         let workoutHtml = ""
         workout.forEach((exo) => {
@@ -315,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 exo.title.toLowerCase().includes("planche") ||
                 exo.title.toLowerCase().includes("chaise")
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
-            const iconSrc = typeIconMap[exo.type] || "src/icon/kettlebell_V.png"; // Icône par défaut
+            const iconSrc = typeIconMap[exo.type] || "src/icon/kettlebell_V.png" // Icône par défaut
 
             workoutHtml += `
                 <div class="exo-card">
@@ -338,20 +341,19 @@ document.addEventListener("DOMContentLoaded", () => {
         workoutContainer.innerHTML = workoutHtml
     }
     function showStep(stepIndex) {
-    // ... ton code existant qui affiche l'étape ...
+        // ... ton code existant qui affiche l'étape ...
 
-    // GESTION DU BOUTON PRÉCÉDENT
-    const btnBack = document.getElementById('btnBack');
-    
-    if (stepIndex === 1) {
-        // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
-        btnBack.style.visibility = 'hidden'; 
-        // ou btnBack.style.display = 'none';
-    } else {
-        // Sinon, on l'affiche
-        btnBack.style.visibility = 'visible';
-        // ou btnBack.style.display = 'flex';
+        // GESTION DU BOUTON PRÉCÉDENT
+        const btnBack = document.getElementById("btnBack")
+
+        if (stepIndex === 1) {
+            // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
+            btnBack.style.visibility = "hidden"
+            // ou btnBack.style.display = 'none';
+        } else {
+            // Sinon, on l'affiche
+            btnBack.style.visibility = "visible"
+            // ou btnBack.style.display = 'flex';
+        }
     }
-}
-
 })
