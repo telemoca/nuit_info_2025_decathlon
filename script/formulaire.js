@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // La page est considérée en fin de défilement si le bas du contenu est très proche du bas du viewport
             const hasReachedEndOfContent =
                 mainScrollContainer.scrollHeight -
-                mainScrollContainer.scrollTop <=
+                    mainScrollContainer.scrollTop <=
                 mainScrollContainer.clientHeight + 5
 
             // La flèche est active si le bouton n'est PAS visible ET qu'on n'est PAS en bas
@@ -88,7 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     window.nextStep = function () {
         // Validation étape 3 (Sports) - On garde ton code existant
         if (currentStep === 3) {
-            const sportsCoques = document.querySelectorAll('input[name="sports"]:checked')
+            const sportsCoques = document.querySelectorAll(
+                'input[name="sports"]:checked'
+            )
             if (sportsCoques.length === 0) {
                 alert("Veuillez sélectionner au moins un sport pour continuer.")
                 return
@@ -99,13 +101,17 @@ document.addEventListener("DOMContentLoaded", () => {
             isAnimating = true
 
             setTimeout(() => {
-                document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove("active")
+                document
+                    .querySelector(`.step[data-step="${currentStep}"]`)
+                    .classList.remove("active")
                 currentStep++
-                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add("active")
+                document
+                    .querySelector(`.step[data-step="${currentStep}"]`)
+                    .classList.add("active")
 
                 // --- AJOUT ICI : Réinitialiser l'étape finale si on y arrive ---
                 if (currentStep === totalSteps) {
-                    resetFinalStepUI();
+                    resetFinalStepUI()
                 }
                 // -------------------------------------------------------------
 
@@ -121,8 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.prevStep = function () {
         // Cas spécial : Si on est à l'étape 1, on retourne à l'accueil
         if (currentStep === 1) {
-            window.location.href = "welcome.html";
-            return;
+            window.location.href = "welcome.html"
+            return
         }
 
         // Sinon, comportement normal (étape précédente du formulaire)
@@ -146,20 +152,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100
         progressBar.style.width = percentage + "%"
 
-        // Bouton retour : 
+        // Bouton retour :
         // AVANT : Il était caché à l'étape 1.
         // MAINTENANT : Il est toujours visible.
         if (btnBack) {
-            btnBack.style.visibility = "visible";
+            btnBack.style.visibility = "visible"
 
             // Optionnel : Changer le texte pour être plus précis sur l'étape 1
             // Tu peux supprimer ce bloc si tu veux garder juste "Précédent"
-            const btnText = btnBack.lastChild; // Le noeud texte après le SVG
+            const btnText = btnBack.lastChild // Le noeud texte après le SVG
             if (currentStep === 1) {
                 // Sur l'étape 1, on peut suggérer "Accueil" ou garder "Précédent"
-                if (btnText.nodeType === 3) btnText.textContent = " Accueil";
+                if (btnText.nodeType === 3) btnText.textContent = " Accueil"
             } else {
-                if (btnText.nodeType === 3) btnText.textContent = " Précédent";
+                if (btnText.nodeType === 3) btnText.textContent = " Précédent"
             }
         }
 
@@ -374,616 +380,177 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /**
-     * Cherche récursivement dans la structure complexe de produits.json
+     * Affiche les équipements recommandés pour la séance complète
      */
-    function findProductsByCategory(catalog, categoryType) {
-        let results = []
+    function displayWorkoutEquipmentSection(workout, allExos) {
+        const workoutContainer = document.getElementById("workout-container")
 
-        // Le JSON est structuré : Array -> category_group -> sub_categories -> type
-        catalog.forEach((group) => {
-            if (group.sub_categories) {
-                group.sub_categories.forEach((sub) => {
-                    // On cherche si le "type" (ex: "Tapis de Sol") correspond ou contient le mot clé
+        // Collecter tous les équipements uniques de la séance
+        const allEquipment = new Set()
+        const equipmentToProducts = {}
+
+        workout.forEach((exo) => {
+            if (exo.equipment && Array.isArray(exo.equipment)) {
+                exo.equipment.forEach((eq) => {
+                    const cleanEq = eq.toLowerCase()
                     if (
-                        sub.type &&
-                        (sub.type === categoryType ||
-                            sub.type.includes(categoryType))
+                        ![
+                            "aucun",
+                            "mur",
+                            "mur pour support",
+                            "cadre de porte",
+                            "sol",
+                        ].includes(cleanEq)
                     ) {
-                        // On prend les produits de cette sous-catégorie
-                        if (sub.products && sub.products.length > 0) {
-                            // On prend le premier produit spécifique, pas la catégorie générale si possible
-                            // Ici on prend tout pour laisser le choix, ou on filtre
-                            results = results.concat(sub.products)
+                        allEquipment.add(cleanEq)
+                        if (!equipmentToProducts[cleanEq]) {
+                            equipmentToProducts[cleanEq] = []
                         }
                     }
-                    // Cas spécial pour "Cardio & Abdos" qui est un type mais contient des produits variés
-                    else if (
-                        categoryType === "Cardio & Abdos" &&
-                        sub.type === "Cardio & Abdos"
-                    ) {
-                        results = results.concat(sub.products)
+                })
+            }
+        })
+
+        if (allEquipment.size === 0) return
+
+        // Mapping des équipements aux catégories de produits
+        const equipmentCategoryMapping = {
+            tapis: "Tapis de Sol",
+            élastique: "Bandes Élastiques",
+            bande: "Bandes Élastiques",
+            haltère: "Haltères",
+            "haltère (ou barre)": "Haltères",
+            barre: "Barre et Poids",
+            disques: "Barre et Poids",
+            bancs: "Banc de Musculation",
+            chaises: "Banc de Musculation",
+            kettlebell: "Kettlebell",
+            corde: "Cordes à Sauter",
+            "roues d'abdos": "Cardio & Abdos",
+            box: "Plyométrie & Agilité",
+            marche: "Plyométrie & Agilité",
+            cônes: "Plyométrie & Agilité",
+            "bande de résistance": "Bandes Élastiques",
+        }
+
+        // Trouver les produits correspondants
+        const suggestedProducts = new Map()
+        const bonusProducts = []
+
+        allEquipment.forEach((eq) => {
+            const categoryKey = Object.keys(equipmentCategoryMapping).find(
+                (key) => eq.includes(key)
+            )
+            if (categoryKey) {
+                const categoryName = equipmentCategoryMapping[categoryKey]
+                const foundProducts = findProductsByCategory(
+                    globalProductsCatalog.categories,
+                    categoryName
+                )
+
+                foundProducts.slice(0, 1).forEach((prod) => {
+                    if (!suggestedProducts.has(prod.id)) {
+                        suggestedProducts.set(prod.id, prod)
+                    }
+                })
+            }
+        })
+
+        // Ajouter quelques produits bonus optionnels (pas strictement nécessaires mais utiles)
+        const bonusCategories = [
+            "Sangles de Yoga",
+            "Briques de Yoga",
+            "Swiss Balls (Gym Ball)",
+            "Accessoires de Glisse",
+        ]
+        bonusCategories.forEach((cat) => {
+            const bonusProds = findProductsByCategory(
+                globalProductsCatalog.categories,
+                cat
+            )
+            if (
+                bonusProds.length > 0 &&
+                !suggestedProducts.has(bonusProds[0].id)
+            ) {
+                bonusProducts.push(bonusProds[0])
+            }
+        })
+
+        // Générer le HTML
+        if (suggestedProducts.size > 0 || bonusProducts.length > 0) {
+            let equipmentHTML = `<h3 class="workout-section-title">Équipements pour cette séance</h3>`
+            equipmentHTML += `<p class="subtitle" style="margin-bottom: 20px;">Voici le matériel recommandé pour réaliser tous les exercices.</p>`
+            equipmentHTML += `<div class="workout-equipment-grid">`
+
+            // Produits recommandés (essentiels)
+            suggestedProducts.forEach((prod) => {
+                equipmentHTML += createEquipmentCard(prod, true)
+            })
+
+            // Produits bonus (optionnels)
+            if (bonusProducts.length > 0) {
+                equipmentHTML += `<div class="equipment-divider"></div>`
+                equipmentHTML += `<div class="equipment-bonus-label">Bonus optionnel</div>`
+                bonusProducts.forEach((prod) => {
+                    equipmentHTML += createEquipmentCard(prod, false)
+                })
+            }
+
+            equipmentHTML += `</div>`
+            workoutContainer.insertAdjacentHTML("beforeend", equipmentHTML)
+        }
+    }
+
+    /**
+     * Crée une carte produit pour la section équipements
+     */
+    function createEquipmentCard(prod, isEssential) {
+        return `
+            <a href="${prod.url}" class="equipment-card ${
+            isEssential ? "essential" : "bonus"
+        }" target="_blank" rel="noopener">
+                <div class="equipment-card-img">
+                    ${
+                        prod.image_path
+                            ? `<img src="${prod.image_path}" alt="${prod.nom}">`
+                            : `<svg viewBox="0 0 24 24" width="60" height="60"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/></svg>`
+                    }
+                </div>
+                <div class="equipment-card-info">
+                    <p class="equipment-card-name">${prod.nom}</p>
+                    <p class="equipment-card-price">${
+                        prod.prix
+                            ? prod.prix.valeur + " " + prod.prix.devise
+                            : ""
+                    }</p>
+                    ${
+                        !isEssential
+                            ? '<span class="equipment-bonus-tag">Optionnel</span>'
+                            : ""
+                    }
+                </div>
+            </a>
+        `
+    }
+
+    /**
+     * Enveloppe pour findProductsByCategory si besoin
+     */
+    function findProductsByCategory(categoriesArray, categoryType) {
+        let results = []
+        if (!Array.isArray(categoriesArray)) return results
+
+        categoriesArray.forEach((group) => {
+            if (group.produits && Array.isArray(group.produits)) {
+                group.produits.forEach((prod) => {
+                    // Cherche si le produit correspond (par nom ou tags)
+                    const prodName = (prod.nom || "").toLowerCase()
+                    if (prodName.includes(categoryType.toLowerCase())) {
+                        results.push(prod)
                     }
                 })
             }
         })
         return results
-    }
-
-    /**
-     * Filtre et sélectionne les exercices en fonction du profil utilisateur.
-     * @param {object} profile - Les données du formulaire de l'utilisateur.
-     * @param {Array} allExos - La liste de tous les exercices disponibles.
-     * @returns {Array} Une sélection d'exercices structurée.
-     */
-    function generateWorkout(profile, allExos) {
-        const difficultyMap = {
-            Debutant: ["débutant"],
-            Intermediaire: ["débutant", "intermédiaire"],
-            Avancé: ["intermédiaire", "avancé"],
-        }
-        const allowedDifficulties = difficultyMap[profile.experience] || [
-            "débutant",
-        ]
-
-        const equipmentMap = {
-            Aucun: ["aucun", "tapis", "mur pour support", "cadre de porte"],
-            Basique: [
-                "aucun",
-                "tapis",
-                "mur pour support",
-                "cadre de porte",
-                "chaises",
-                "bancs",
-                "box",
-                "marche",
-                "haltère (ou barre)",
-                "bande de résistance (optionnel)",
-                "cônes (optionnel)",
-                "roues d'abdos",
-            ],
-            Complet: null,
-        }
-        const allowedEquipment = equipmentMap[profile.materiel]
-
-        const objectiveMap = {
-            "Perte de poids": ["cardio", "explosivité"],
-            Renforcement: ["renforcement"],
-            Souplesse: ["étirement", "mobilité", "souplesse", "relaxation"],
-        }
-        const allowedMainTypes = objectiveMap[profile.objectif] || [
-            "renforcement",
-        ]
-
-        const userSports = Array.isArray(profile.sports)
-            ? profile.sports
-            : profile.sports
-                ? [profile.sports]
-                : []
-
-        // 1. Filtrer les exercices éligibles par difficulté et matériel
-        const eligibleExos = allExos.filter((exo) => {
-            const difficultyMatch = allowedDifficulties.includes(exo.difficulty)
-            const equipmentMatch =
-                profile.materiel === "Complet" ||
-                (exo.equipment &&
-                    exo.equipment.every((eq) => allowedEquipment.includes(eq)))
-            return difficultyMatch && equipmentMatch
-        })
-
-        // 2. Créer des listes pour chaque phase de l'entraînement
-        const warmupPool = eligibleExos.filter((exo) =>
-            exo.type.includes("échauffement")
-        )
-
-        const mainPool = eligibleExos.filter((exo) => {
-            const isMainType = allowedMainTypes.some((type) =>
-                exo.type.includes(type)
-            )
-            if (!isMainType) return false
-
-            const isWarmup = exo.type.includes("échauffement")
-            if (isWarmup) return false
-
-            // Pour les objectifs autres que "Souplesse", les étirements sont pour le retour au calme
-            if (profile.objectif !== "Souplesse") {
-                const isCooldown =
-                    exo.type.includes("étirement") || exo.type.includes("repos")
-                if (isCooldown) return false
-            }
-
-            return true
-        })
-
-        const cooldownPool = eligibleExos.filter(
-            (exo) =>
-                (exo.type.includes("étirement") ||
-                    exo.type.includes("repos")) &&
-                !exo.type.includes("échauffement")
-        )
-
-        const sportValueMap = {
-            Crossfit: ["crossfit", "plyométrie", "explosivité", "calisthenics"],
-            Cyclisme: ["cyclisme"],
-            Musculation: ["musculation", "force", "calisthenics"],
-            SportsAquatiques: ["sports_aquatique"],
-            SportsRelaxation: [
-                "yoga",
-                "étirement",
-                "relaxation",
-                "récupération",
-                "souplesse",
-                "pilates",
-            ],
-            Randonnees: ["randonnee"],
-            Running: ["course à pied"],
-            SportsCollectifs: ["sport", "agilité"],
-            SportsRaquettes: ["sports de raquette"],
-        }
-
-        // 3. Fonction pour sélectionner les meilleurs exercices d'une liste
-        const selectExos = (pool, count) => {
-            if (!pool || pool.length === 0) return []
-
-            const scored = pool
-                .map((exo) => {
-                    let score = 0
-                    if (userSports.length > 0) {
-                        userSports.forEach((sport) => {
-                            const jsonSports = sportValueMap[sport] || []
-                            if (
-                                jsonSports.some((jsonSport) =>
-                                    exo.sport_category.includes(jsonSport)
-                                )
-                            ) {
-                                score++
-                            }
-                        })
-                    }
-                    return { ...exo, score }
-                })
-                .sort((a, b) => b.score - a.score)
-
-            // On mélange les meilleurs candidats pour la variété
-            let candidates = scored.slice(0, 15)
-            for (let i = candidates.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1))
-                    ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
-            }
-
-            return candidates.slice(0, count)
-        }
-
-        // 4. Composer la séance
-        let mainExosCount = 3 // Par défaut pour Intermédiaire
-        if (profile.experience === "Debutant") {
-            mainExosCount = 2
-        } else if (profile.experience === "Avancé") {
-            mainExosCount = 5
-        }
-
-        const warmupExos = selectExos(warmupPool, 1)
-        const mainExos = selectExos(mainPool, mainExosCount)
-        const cooldownExos = selectExos(cooldownPool, 1)
-
-        return [...warmupExos, ...mainExos, ...cooldownExos].filter(Boolean) // Supprime les éléments null/undefined si une pool est vide
-    }
-
-    /**
-     * Affiche la séance générée dans le DOM.
-     * @param {Array} workout - La liste des exercices à afficher.
-     * @param {object} profile - Le profil de l'utilisateur pour adapter les répétitions.
-     */
-    function displayWorkout(workout, profile) {
-        const finalStepContent = document.querySelector(".final-step-content")
-        const title = finalStepContent.querySelector("h2")
-        const subtitle = finalStepContent.querySelector(".subtitle")
-        const loader = document.getElementById("loader")
-        const workoutContainer = document.getElementById("workout-container")
-
-        finalStepContent.classList.remove("is-loading") // On retire la classe
-        loader.style.display = "none"
-
-        if (!workout || workout.length === 0) {
-            title.innerText = "Désolé !"
-            subtitle.innerText =
-                "Aucun exercice ne correspond parfaitement à vos critères. Essayez une autre sélection."
-            subtitle.style.display = "block"
-            return
-        }
-
-        const repsMap = {
-            Debutant: { sets: "3", reps: "10 Répétitions", time: "30 sec" },
-            Intermediaire: {
-                sets: "3",
-                reps: "15 Répétitions",
-                time: "45 sec",
-            },
-            Avancé: { sets: "4", reps: "20 Répétitions", time: "60 sec" },
-        }
-        const levelConfig = repsMap[profile.experience] || repsMap["Debutant"]
-
-        // Mappage des types d'exercices à leurs icônes respectives,
-        // en utilisant uniquement les noms de fichiers d'icônes existants du projet.
-        const typeIconMap = {
-            renforcement: "src/icon/muscle_V.png", // Icône générique pour le renforcement
-            cardio: "src/icon/coeurs_V.png", // Icône générique pour le cardio
-            explosivité: "src/icon/fonctionnement_V.png", // Pour les exercices explosifs (course/saut)
-            étirement: "src/icon/yoga_V.png", // Icône générique pour l'étirement/souplesse
-            mobilité: "src/icon/carriere_V.png", // Icône pour la mobilité (suggère le mouvement, la fluidité)
-            relaxation: "src/icon/lotus_V.png", // Icône générique pour la relaxation/bien-être
-            repos: "src/icon/lotus_V.png", // Utiliser l'icône lotus pour le repos
-
-            échauffement: "src/icon/debut_V.png", // Icône pour l'échauffement (début d'activité)
-
-            // Types composites (plus spécifiques, vérifiés en priorité)
-            cardio_renforcement: "src/icon/fonctionnement_V.png", // Combinaison cardio et renfo
-            renforcement_équilibre: "src/icon/personnes_V.png", // Force et contrôle corporel
-            mobilité_étirement: "src/icon/yoga_V.png", // Mobilité et flexibilité
-            renforcement_étirement: "src/icon/muscle_V.png", // Force et étirement (accent sur la force)
-            cardio_explosivité: "src/icon/fonctionnement_V.png", // Cardio et puissance
-            mobilité_renforcement: "src/icon/personnes_V.png", // Contrôle du corps, polyvalence
-            échauffement_mobilité: "src/icon/carriere_V.png", // Échauffement axé sur le mouvement
-            cardio_échauffement: "src/icon/coeurs_V.png", // Échauffement axé sur le cœur
-            échauffement_dynamique: "src/icon/debut_V.png", // Échauffement avec mouvements dynamiques
-            échauffement_étirement: "src/icon/yoga_V.png", // Échauffement avec focus sur l'étirement
-        }
-
-        let warmupHtml = ""
-        let mainHtml = ""
-        let cooldownHtml = ""
-
-        workout.forEach((exo) => {
-            const isTimeBased =
-                exo.type.includes("étirement") ||
-                exo.type.includes("repos") ||
-                exo.type.includes("cardio") ||
-                exo.title.toLowerCase().includes("planche") ||
-                exo.title.toLowerCase().includes("chaise")
-            const effort = isTimeBased ? levelConfig.time : levelConfig.reps
-
-            let iconSrc = ""
-            // Stratégie pour trouver la meilleure icône : du plus spécifique au plus générique.
-            // On prend le type tel quel, puis on le divise par '_' et on teste chaque partie.
-            // Ceci permet de trouver "cardio_renforcement" avant "cardio" ou "renforcement".
-            const exoTypesComponents = exo.type.split("_")
-            // Créer une liste de types à chercher, du plus spécifique au plus général
-            // Exemple: pour "renforcement_équilibre", on cherche "renforcement_équilibre", puis "renforcement", puis "équilibre".
-            const searchOrder = [
-                exo.type, // Le type complet d'abord
-                ...exoTypesComponents.filter((t) => t !== exo.type), // Puis chaque composant du type
-            ].filter((value, index, self) => self.indexOf(value) === index) // Supprimer les doublons
-
-            for (const t of searchOrder) {
-                if (typeIconMap[t]) {
-                    iconSrc = typeIconMap[t]
-                    break
-                }
-            }
-            // Fallback si aucune correspondance n'est trouvée (devrait être très rare avec le mappage étendu)
-            if (!iconSrc) {
-                iconSrc = "src/icon/kettlebell_V.png" // Icône par défaut, si tout le reste échoue
-            }
-
-            const cardHtml = `
-                <div class="exo-card" tabindex="0" role="button" aria-label="Voir détails de l'exercice" data-exo-id="${exo.id}">
-                    <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exo-gif" loading="lazy">
-                    <div class="exo-details">
-                        <h3>${exo.title}</h3>
-                        <div class="exo-meta">
-                             <img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">
-                             <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
-                        </div>
-                        <p class="exo-desc">${exo.description}</p>
-                    </div>
-                </div>
-            `
-
-            if (exo.type.includes("échauffement")) {
-                warmupHtml += cardHtml
-            } else if (
-                exo.type.includes("étirement") ||
-                exo.type.includes("repos")
-            ) {
-                cooldownHtml += cardHtml
-            } else {
-                mainHtml += cardHtml
-            }
-        })
-
-        let finalHtml = ""
-        if (warmupHtml) {
-            finalHtml += `<h3 class="workout-section-title">Échauffement</h3>${warmupHtml}`
-        }
-        if (mainHtml) {
-            finalHtml += `<h3 class="workout-section-title">Corps de séance</h3>${mainHtml}`
-        }
-        if (cooldownHtml) {
-            finalHtml += `<h3 class="workout-section-title">Retour au calme</h3>${cooldownHtml}`
-        }
-
-        title.innerText = "Votre séance sur mesure"
-        subtitle.innerText = `Voici ${workout.length} exercices conçus pour vous. Bon courage !`
-        subtitle.style.display = "block"
-        workoutContainer.innerHTML = finalHtml
-
-        // Ajout de l'écouteur sur chaque carte exercice pour ouvrir la modale
-        // On suppose que workout est dans le même ordre que les exos affichés
-        setTimeout(() => {
-            const allExos = workout // On a déjà la liste des exos utilisés
-            document.querySelectorAll(".exo-card").forEach((card, idx) => {
-                card.onclick = () => openExerciseModal(allExos[idx])
-                card.onkeydown = (e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault()
-                        openExerciseModal(allExos[idx])
-                    }
-                }
-            })
-        }, 0)
-    }
-
-    // Ajout de la modale exercice
-    function createExerciseModal() {
-        if (document.getElementById("exercise-modal")) return
-        const modal = document.createElement("div")
-        modal.id = "exercise-modal"
-        modal.className = "exercise-modal"
-        modal.innerHTML = `
-            <div class="exercise-modal-backdrop"></div>
-            <div class="exercise-modal-content">
-                <button class="exercise-modal-close" aria-label="Fermer">&times;</button>
-                <div class="exercise-modal-body"></div>
-            </div>
-        `
-        document.body.appendChild(modal)
-
-        // Fermer la modale sur clic croix ou backdrop
-        modal.querySelector(".exercise-modal-close").onclick =
-            closeExerciseModal
-        modal.querySelector(".exercise-modal-backdrop").onclick =
-            closeExerciseModal
-    }
-
-    // Utilitaire pour mettre la première lettre de chaque mot en majuscule
-    function capitalizeWords(str) {
-        if (!str) return ""
-        return str
-            .split(" ")
-            .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
-            .join(" ")
-    }
-    function capitalizeArray(arr) {
-        if (!arr) return ""
-        return arr.map(capitalizeWords).join(", ")
-    }
-
-    // Utilitaire pour trouver les produits pertinents pour un exercice
-    function getProductsForExercise(exo, catalog) {
-        let catalogArray = catalog
-        if (!Array.isArray(catalogArray)) {
-            if (Array.isArray(catalog.products)) {
-                catalogArray = catalog.products
-            } else if (Array.isArray(catalog.data)) {
-                catalogArray = catalog.data
-            } else if (Array.isArray(catalog.categories)) {
-                catalogArray = catalog.categories
-            } else {
-                return []
-            }
-        }
-        // Si structure "categories" (cas Decathlon), on va dans chaque catégorie puis "produits"
-        let allProducts = []
-        if (catalogArray.length && catalogArray[0].produits) {
-            catalogArray.forEach((cat) => {
-                if (Array.isArray(cat.produits)) {
-                    allProducts = allProducts.concat(cat.produits)
-                }
-            })
-        } else {
-            allProducts = catalogArray
-        }
-
-        // Recherche par mots-clés du matériel et type d'exercice
-        const keywords = []
-        if (Array.isArray(exo.equipment)) {
-            exo.equipment.forEach((eq) => {
-                keywords.push(eq.toLowerCase())
-            })
-        }
-        if (exo.type) {
-            keywords.push(exo.type.toLowerCase())
-        }
-        if (Array.isArray(exo.target_muscles)) {
-            exo.target_muscles.forEach((muscle) => {
-                keywords.push(muscle.toLowerCase())
-            })
-        }
-
-        // Recherche des produits pertinents
-        let found = []
-        for (const prod of allProducts) {
-            let match = false
-            // On regarde dans le nom, tags_objectif, et id_categorie
-            const prodName = (prod.nom || "").toLowerCase()
-            const tags = prod.tags_objectif
-                ? prod.tags_objectif.map((t) => t.toLowerCase())
-                : []
-            for (const kw of keywords) {
-                if (
-                    prodName.includes(kw) ||
-                    tags.some((tag) => kw.includes(tag) || tag.includes(kw))
-                ) {
-                    match = true
-                    break
-                }
-            }
-            // Si pas de match, on regarde si le produit est typiquement utile pour le matériel demandé
-            if (!match && Array.isArray(exo.equipment)) {
-                for (const eq of exo.equipment) {
-                    if (prodName.includes(eq.toLowerCase())) {
-                        match = true
-                        break
-                    }
-                }
-            }
-            if (match) found.push(prod)
-            if (found.length >= 2) break // max 2 produits
-        }
-        // Si rien trouvé, on prend le premier produit de la catégorie "Tapis de Sol" par défaut
-        if (found.length === 0) {
-            const tapis = allProducts.find((p) =>
-                (p.nom || "").toLowerCase().includes("tapis")
-            )
-            if (tapis) found.push(tapis)
-        }
-        return found.slice(0, 2)
-    }
-
-    function openExerciseModal(exo) {
-        createExerciseModal()
-        const modal = document.getElementById("exercise-modal")
-        const body = modal.querySelector(".exercise-modal-body")
-        // Produits recommandés pour cet exercice
-        const products =
-            exo.recommended_products ||
-            getProductsForExercise(exo, globalProductsCatalog)
-
-        // Section produits HTML
-        let productsHtml = ""
-        if (products && products.length > 0) {
-            productsHtml = `
-                <div class="exercise-modal-products">
-                    <div class="exercise-modal-products-title">Matériel utile :</div>
-                    <div class="exercise-modal-products-list">
-                        ${products
-                            .map(
-                                (prod) => `
-                            <a href="${
-                                prod.url
-                            }" class="exercise-modal-product-card" target="_blank">
-                                <div class="exercise-modal-product-img">
-                                    ${
-                                        prod.image_path
-                                            ? `<img src="${prod.image_path}" alt="${prod.nom}">`
-                                            : `<svg viewBox="0 0 24 24" width="64" height="64"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/><text x="12" y="16" text-anchor="middle" font-size="16" fill="#3643ba">${
-                                                  prod.nom ? prod.nom[0] : ""
-                                              }</text></svg>`
-                                    }
-                                </div>
-                                <div class="exercise-modal-product-info">
-                                    <div class="exercise-modal-product-name">${
-                                        prod.nom
-                                    }</div>
-                                    <div class="exercise-modal-product-price">${
-                                        prod.prix
-                                            ? prod.prix.valeur +
-                                              " " +
-                                              prod.prix.devise
-                                            : ""
-                                    }</div>
-                                </div>
-                            </a>
-                        `
-                            )
-                            .join("")}
-                    </div>
-                </div>
-            `
-        }
-
-        body.innerHTML = `
-            <h2>${exo.title}</h2>
-            <div class="exercise-modal-main-row">
-                <img src="src/gif/${exo.gif}" alt="${
-            exo.title
-        }" class="exercise-modal-gif" />
-                <div class="exercise-modal-meta-col">
-                    <span><b>Type :</b> ${capitalizeWords(
-                        exo.type.replace(/_/g, " ")
-                    )}</span>
-                    <span><b>Difficulté :</b> ${capitalizeWords(
-                        exo.difficulty
-                    )}</span>
-                    <span><b>Matériel :</b> ${
-                        capitalizeArray(exo.equipment) || "Aucun"
-                    }</span>
-                    <span><b>Groupes Musculaires :</b> ${capitalizeArray(
-                        exo.target_muscles
-                    )}</span>
-                </div>
-            </div>
-            <p class="exercise-modal-desc">${exo.description || ""}</p>
-            <div class="exercise-modal-instructions">
-                <b>Instructions :</b>
-                <ol>
-                    ${(exo.instructions || [])
-                .map((step) => `<li>${step}</li>`)
-                .join("")}
-                </ol>
-            </div>
-            ${productsHtml}
-        `
-        modal.classList.add("active")
-        document.body.style.overflow = "hidden"
-    }
-
-    function closeExerciseModal() {
-        const modal = document.getElementById("exercise-modal")
-        if (modal) {
-            modal.classList.remove("active")
-            setTimeout(() => {
-                modal.remove()
-            }, 200)
-        }
-        document.body.style.overflow = ""
-    }
-
-    function showStep(stepIndex) {
-        // ... ton code existant qui affiche l'étape ...
-
-        // GESTION DU BOUTON PRÉCÉDENT
-        const btnBack = document.getElementById("btnBack")
-
-        if (stepIndex === 1) {
-            // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
-            btnBack.style.visibility = "hidden"
-            // ou btnBack.style.display = 'none';
-        } else {
-            // Sinon, on l'affiche
-            btnBack.style.visibility = "visible"
-            // ou btnBack.style.display = 'flex';
-        }
-    }
-    // Fonction pour remettre l'étape 6 à zéro (réafficher le bouton, vider les résultats)
-    function resetFinalStepUI() {
-        const btn = document.getElementById("btnGenerate"); 
-        const title = document.getElementById("finalTitle");
-        const subtitle = document.getElementById("finalSubtitle");
-        const loader = document.getElementById("loader");
-        const workoutContainer = document.getElementById("workout-container");
-        const productsSection = document.getElementById("products-section");
-
-        // Si on n'a pas mis les IDs dans le HTML, on utilise les sélecteurs classiques
-        const finalContent = document.querySelector(".final-step-content");
-        const safeBtn = btn || finalContent.querySelector(".btn-decathlon");
-        const safeTitle = title || finalContent.querySelector("h2");
-        const safeSubtitle = subtitle || finalContent.querySelector(".subtitle");
-
-        // Réinitialisation
-        if (safeBtn) safeBtn.style.display = "block"; // On réaffiche le bouton
-        if (loader) loader.style.display = "none";
-
-        if (safeTitle) safeTitle.innerText = "Profil Terminé !";
-        if (safeSubtitle) {
-            safeSubtitle.innerText = "Nous avons toutes les infos pour créer votre séance sur mesure.";
-            safeSubtitle.style.display = "block";
-        }
-
-        // On vide les anciens résultats
-        if (workoutContainer) workoutContainer.innerHTML = "";
-        if (productsSection) productsSection.style.display = "none";
-
-        // On retire la classe de chargement
-        if (finalContent) finalContent.classList.remove("is-loading");
     }
 })
