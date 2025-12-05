@@ -337,8 +337,6 @@ document.addEventListener("DOMContentLoaded", () => {
             cardio: "src/icon/coeurs_V.png",
             cardio_renforcement: "src/icon/fonctionnement_V.png",
             etirement: "src/icon/yoga_V.png",
-            relaxation: "src/icon/lotus_V.png",
-            echauffement: "src/icon/debut_V.png",
         }
 
         let warmupHtml = ""
@@ -351,7 +349,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 exo.title.toLowerCase().includes("planche") ||
                 exo.title.toLowerCase().includes("chaise")
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
-            const iconSrc = typeIconMap[exo.type] || "src/icon/kettlebell_V.png" // Icône par défaut
+            const iconSrc = typeIconMap[exo.type] // On récupère l'icône, peut être undefined
+
+            let iconHtml = "" // Par défaut, pas d'icône
+            if (iconSrc) {
+                // Si une icône est trouvée, on crée la balise img
+                iconHtml = `<img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">`
+            }
 
             const cardHtml = `
                 <div class="exo-card">
@@ -359,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="exo-details">
                         <h3>${exo.title}</h3>
                         <div class="exo-meta">
-                             <img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">
+                             ${iconHtml}
                              <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
                         </div>
                         <p class="exo-desc">${exo.description}</p>
