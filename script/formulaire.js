@@ -820,7 +820,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             if (match) found.push(prod)
-            if (found.length >= 3) break
+            if (found.length >= 2) break // max 2 produits
         }
         // Si rien trouvé, on prend le premier produit de la catégorie "Tapis de Sol" par défaut
         if (found.length === 0) {
@@ -829,7 +829,7 @@ document.addEventListener("DOMContentLoaded", () => {
             )
             if (tapis) found.push(tapis)
         }
-        return found.slice(0, 3)
+        return found.slice(0, 2)
     }
 
     function openExerciseModal(exo) {
@@ -858,7 +858,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     ${
                                         prod.image_path
                                             ? `<img src="${prod.image_path}" alt="${prod.nom}">`
-                                            : `<svg viewBox="0 0 24 24" width="38" height="38"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/><text x="12" y="16" text-anchor="middle" font-size="10" fill="#3643ba">${
+                                            : `<svg viewBox="0 0 24 24" width="64" height="64"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/><text x="12" y="16" text-anchor="middle" font-size="16" fill="#3643ba">${
                                                   prod.nom ? prod.nom[0] : ""
                                               }</text></svg>`
                                     }
