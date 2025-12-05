@@ -430,7 +430,56 @@ h2 {
 }
 
 /* =========================================
-   11. SECTION PRODUITS (SHOP)
+   11. INDICATEUR DE DÉFILEMENT
+   ========================================= */
+.scroll-indicator {
+    position: fixed; /* Fixé par rapport au viewport */
+    bottom: 20px; /* 20px du bas de l'écran */
+    left: 50%;
+    transform: translateX(-50%); /* Centre horizontalement */
+    
+    display: flex; /* Ajouté pour utiliser Flexbox */
+    align-items: center; /* Centre verticalement les enfants */
+    justify-content: center; /* Centre horizontalement les enfants */
+    
+    background-color: rgba(255, 255, 255, 0.95); /* Fond blanc semi-transparent */
+    padding: 8px 20px;
+    border-radius: 50px; /* Forme de pilule */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Ombre douce */
+    z-index: 1000; /* Assure qu'il est au-dessus des autres éléments */
+    
+    pointer-events: none; /* Permet aux clics de passer à travers quand inactif */
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.scroll-indicator.active {
+    opacity: 1; /* Apparaît quand la classe 'active' est ajoutée par JS */
+    pointer-events: auto; /* Réactive les événements de souris quand visible */
+}
+
+.scroll-indicator svg {
+    width: 24px;
+    height: 24px;
+    fill: #3643BA; /* Bleu Decathlon */
+    animation: bounce 1.5s infinite; /* Animation de rebond douce */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px); /* Rebondit vers le haut */
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+
+/* =========================================
+   12. SECTION PRODUITS (SHOP)
    ========================================= */
    #products-section {
     margin-top: 50px;
