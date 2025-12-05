@@ -178,8 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
             Intermediaire: ["débutant", "intermédiaire"],
             Avancé: ["intermédiaire", "avancé"],
         }
-        const allowedDifficulties =
-            difficultyMap[profile.experience] || ["débutant"]
+        const allowedDifficulties = difficultyMap[profile.experience] || [
+            "débutant",
+        ]
 
         const equipmentMap = {
             Aucun: ["aucun", "tapis", "mur pour support", "cadre de porte"],
@@ -206,8 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
             Renforcement: ["renforcement"],
             Souplesse: ["étirement", "mobilité", "souplesse", "relaxation"],
         }
-        const allowedMainTypes =
-            objectiveMap[profile.objectif] || ["renforcement"]
+        const allowedMainTypes = objectiveMap[profile.objectif] || [
+            "renforcement",
+        ]
 
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
@@ -236,7 +238,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 !exo.type.includes("repos")
         )
         const cooldownPool = eligibleExos.filter(
-            (exo) => exo.type.includes("étirement") || exo.type.includes("repos")
+            (exo) =>
+                exo.type.includes("étirement") || exo.type.includes("repos")
         )
 
         const sportValueMap = {
@@ -285,10 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let candidates = scored.slice(0, 15)
             for (let i = candidates.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
-                ;[candidates[i], candidates[j]] = [
-                    candidates[j],
-                    candidates[i],
-                ]
+                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
             }
 
             return candidates.slice(0, count)
