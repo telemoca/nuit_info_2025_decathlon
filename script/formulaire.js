@@ -172,6 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
         progressBar.style.width = "0%"
     }
 
+    // On stocke le catalogue produits pour la modale
+    let globalProductsCatalog = null
+
     // Remplace ta fonction window.submitForm actuelle par celle-ci :
     window.submitForm = function () {
         const form = document.getElementById("quizForm")
@@ -217,14 +220,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const allExos = await exoResponse.json()
                 const allProducts = await prodResponse.json() // Données produits
+                globalProductsCatalog = allProducts // Stocke pour la modale
 
                 // 2. Générer la séance
                 const workout = generateWorkout(profilData, allExos)
 
-                // 3. Afficher la séance
+                // 3. Pour chaque exo, ajoute les produits utiles
+                workout.forEach((exo) => {
+                    exo.recommended_products = getProductsForExercise(
+                        exo,
+                        allProducts
+                    )
+                })
+
+                // 4. Afficher la séance
                 displayWorkout(workout, profilData)
 
-                // 4. Générer et afficher les produits recommandés
+                // 5. Générer et afficher les produits recommandés
                 displayRecommendedProducts(workout, allProducts)
             } catch (error) {
                 console.error("Erreur:", error)
@@ -745,26 +757,160 @@ document.addEventListener("DOMContentLoaded", () => {
         return arr.map(capitalizeWords).join(", ")
     }
 
+    // Utilitaire pour trouver les produits pertinents pour un exercice
+    function getProductsForExercise(exo, catalog) {
+        let catalogArray = catalog
+        if (!Array.isArray(catalogArray)) {
+            if (Array.isArray(catalog.products)) {
+                catalogArray = catalog.products
+            } else if (Array.isArray(catalog.data)) {
+                catalogArray = catalog.data
+            } else if (Array.isArray(catalog.categories)) {
+                catalogArray = catalog.categories
+            } else {
+                return []
+            }
+        }
+        // Si structure "categories" (cas Decathlon), on va dans chaque catégorie puis "produits"
+        let allProducts = []
+        if (catalogArray.length && catalogArray[0].produits) {
+            catalogArray.forEach((cat) => {
+                if (Array.isArray(cat.produits)) {
+                    allProducts = allProducts.concat(cat.produits)
+                }
+            })
+        } else {
+            allProducts = catalogArray
+        }
+
+        // Recherche par mots-clés du matériel et type d'exercice
+        const keywords = []
+        if (Array.isArray(exo.equipment)) {
+            exo.equipment.forEach((eq) => {
+                keywords.push(eq.toLowerCase())
+            })
+        }
+        if (exo.type) {
+            keywords.push(exo.type.toLowerCase())
+        }
+        if (Array.isArray(exo.target_muscles)) {
+            exo.target_muscles.forEach((muscle) => {
+                keywords.push(muscle.toLowerCase())
+            })
+        }
+
+        // Recherche des produits pertinents
+        let found = []
+        for (const prod of allProducts) {
+            let match = false
+            // On regarde dans le nom, tags_objectif, et id_categorie
+            const prodName = (prod.nom || "").toLowerCase()
+            const tags = prod.tags_objectif
+                ? prod.tags_objectif.map((t) => t.toLowerCase())
+                : []
+            for (const kw of keywords) {
+                if (
+                    prodName.includes(kw) ||
+                    tags.some((tag) => kw.includes(tag) || tag.includes(kw))
+                ) {
+                    match = true
+                    break
+                }
+            }
+            // Si pas de match, on regarde si le produit est typiquement utile pour le matériel demandé
+            if (!match && Array.isArray(exo.equipment)) {
+                for (const eq of exo.equipment) {
+                    if (prodName.includes(eq.toLowerCase())) {
+                        match = true
+                        break
+                    }
+                }
+            }
+            if (match) found.push(prod)
+            if (found.length >= 2) break // max 2 produits
+        }
+        // Si rien trouvé, on prend le premier produit de la catégorie "Tapis de Sol" par défaut
+        if (found.length === 0) {
+            const tapis = allProducts.find((p) =>
+                (p.nom || "").toLowerCase().includes("tapis")
+            )
+            if (tapis) found.push(tapis)
+        }
+        return found.slice(0, 2)
+    }
+
     function openExerciseModal(exo) {
         createExerciseModal()
         const modal = document.getElementById("exercise-modal")
         const body = modal.querySelector(".exercise-modal-body")
+        // Produits recommandés pour cet exercice
+        const products =
+            exo.recommended_products ||
+            getProductsForExercise(exo, globalProductsCatalog)
+
+        // Section produits HTML
+        let productsHtml = ""
+        if (products && products.length > 0) {
+            productsHtml = `
+                <div class="exercise-modal-products">
+                    <div class="exercise-modal-products-title">Matériel utile :</div>
+                    <div class="exercise-modal-products-list">
+                        ${products
+                            .map(
+                                (prod) => `
+                            <a href="${
+                                prod.url
+                            }" class="exercise-modal-product-card" target="_blank">
+                                <div class="exercise-modal-product-img">
+                                    ${
+                                        prod.image_path
+                                            ? `<img src="${prod.image_path}" alt="${prod.nom}">`
+                                            : `<svg viewBox="0 0 24 24" width="64" height="64"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/><text x="12" y="16" text-anchor="middle" font-size="16" fill="#3643ba">${
+                                                  prod.nom ? prod.nom[0] : ""
+                                              }</text></svg>`
+                                    }
+                                </div>
+                                <div class="exercise-modal-product-info">
+                                    <div class="exercise-modal-product-name">${
+                                        prod.nom
+                                    }</div>
+                                    <div class="exercise-modal-product-price">${
+                                        prod.prix
+                                            ? prod.prix.valeur +
+                                              " " +
+                                              prod.prix.devise
+                                            : ""
+                                    }</div>
+                                </div>
+                            </a>
+                        `
+                            )
+                            .join("")}
+                    </div>
+                </div>
+            `
+        }
+
         body.innerHTML = `
             <h2>${exo.title}</h2>
-            <img src="src/gif/${exo.gif}" alt="${exo.title
-            }" class="exercise-modal-gif" />
-            <div class="exercise-modal-meta">
-                <span><b>Type :</b> ${capitalizeWords(
-                exo.type.replace(/_/g, " ")
-            )}</span>
-                <span><b>Difficulté :</b> ${capitalizeWords(
-                exo.difficulty
-            )}</span>
-                <span><b>Matériel :</b> ${capitalizeArray(exo.equipment) || "Aucun"
-            }</span>
-                <span><b>Groupes Musculaires :</b> ${capitalizeArray(
-                exo.target_muscles
-            )}</span>
+            <div class="exercise-modal-main-row">
+                <img src="src/gif/${exo.gif}" alt="${
+            exo.title
+        }" class="exercise-modal-gif" />
+                <div class="exercise-modal-meta-col">
+                    <span><b>Type :</b> ${capitalizeWords(
+                        exo.type.replace(/_/g, " ")
+                    )}</span>
+                    <span><b>Difficulté :</b> ${capitalizeWords(
+                        exo.difficulty
+                    )}</span>
+                    <span><b>Matériel :</b> ${
+                        capitalizeArray(exo.equipment) || "Aucun"
+                    }</span>
+                    <span><b>Groupes Musculaires :</b> ${capitalizeArray(
+                        exo.target_muscles
+                    )}</span>
+                </div>
             </div>
             <p class="exercise-modal-desc">${exo.description || ""}</p>
             <div class="exercise-modal-instructions">
@@ -775,23 +921,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 .join("")}
                 </ol>
             </div>
+            ${productsHtml}
         `
         modal.classList.add("active")
         document.body.style.overflow = "hidden"
-
-        // Ajustement dynamique : si le contenu dépasse la fenêtre, réduit la taille du gif
-        setTimeout(() => {
-            const content = modal.querySelector(".exercise-modal-content")
-            const gif = modal.querySelector(".exercise-modal-gif")
-            if (content && gif) {
-                const winH = window.innerHeight
-                const contentH = content.offsetHeight
-                if (contentH > winH - 40) {
-                    gif.style.width = "120px"
-                    gif.style.height = "120px"
-                }
-            }
-        }, 0)
     }
 
     function closeExerciseModal() {

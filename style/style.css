@@ -572,8 +572,10 @@ h2 {
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    max-width: 99vw; width: 540px;
-    overflow: visible;
+    max-width: 99vw;
+    width: 540px;
+    /* max-height: 94vh;  <-- SUPPRIME */
+    overflow: visible; /* plus de scroll, tout est visible */
     padding: 44px 36px 36px 36px;
     animation: fadeIn 0.2s;
 }
@@ -592,56 +594,64 @@ h2 {
 .exercise-modal-close:hover { color: #222; }
 
 .exercise-modal-body h2 {
-    /* --- MODIFICATION TYPO TITRE MODALE --- */
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-style: italic;
-    /* ------------------------------------- */
-    margin-top: 0; margin-bottom: 18px;
+    margin-top: 0;
+    margin-bottom: 18px;
     font-size: 1.5rem;
     color: #3643ba;
     text-align: center;
 }
 
 .exercise-modal-gif {
-    display: block; margin: 0 auto 18px auto;
-    width: 200px; height: 200px;
+    display: block;
+    margin: 0 auto 18px auto;
+    width: 200px; /* plus petit pour éviter le débordement */
+    height: 200px;
     object-fit: contain;
     border-radius: 12px;
     background: #f7f9fc;
     box-shadow: 0 2px 8px rgba(54, 67, 186, 0.07);
 }
 
+/* Responsive : padding réduit et image plus petite sur mobile */
 @media (max-width: 700px) {
     .exercise-modal-content {
         width: 99vw;
         padding: 10px 2vw 14px 2vw;
     }
-    .exercise-modal-gif { width: 120px; height: 120px; }
+    .exercise-modal-gif {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 .exercise-modal-meta {
-    display: flex; flex-wrap: wrap; gap: 12px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
     justify-content: center;
-    margin-bottom: 16px;
+    gap: 10px;
+    min-width: 0;
+    flex: 1 1 0;
+}
+.exercise-modal-meta-col span {
     font-size: 1.05rem;
     color: #555;
+    margin-bottom: 2px;
+    word-break: break-word;
 }
-
 .exercise-modal-desc {
-    margin: 14px 0 20px 0;
+    margin: 10px 0 18px 0;
     color: #444;
     font-size: 1.08rem;
     text-align: center;
 }
 
 .exercise-modal-instructions {
-    margin-top: 14px;
+    margin: 10px 0 0 0;
     font-size: 1.04rem;
+    padding-bottom: 10px;
 }
-
 .exercise-modal-instructions ol {
-    margin: 10px 0 0 22px;
+    margin: 8px 0 0 22px;
     padding: 0;
 }
