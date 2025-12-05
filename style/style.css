@@ -430,9 +430,66 @@ h2 {
 }
 
 /* =========================================
-   11. SECTION PRODUITS (SHOP)
+   11. INDICATEUR DE DÉFILEMENT
    ========================================= */
-   #products-section {
+.scroll-indicator {
+    position: fixed; /* Fixé par rapport au viewport */
+    bottom: 20px; /* 20px du bas de l'écran */
+    left: 50%;
+    transform: translateX(-50%); /* Centre horizontalement */
+
+    display: flex; /* Ajouté pour utiliser Flexbox */
+    align-items: center; /* Centre verticalement les enfants */
+    justify-content: center; /* Centre horizontalement les enfants */
+
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.95
+    ); /* Fond blanc semi-transparent */
+    padding: 8px 20px;
+    border-radius: 50px; /* Forme de pilule */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre douce */
+    z-index: 1000; /* Assure qu'il est au-dessus des autres éléments */
+
+    pointer-events: none; /* Permet aux clics de passer à travers quand inactif */
+    opacity: 0; /* Caché par défaut */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.scroll-indicator.active {
+    opacity: 1; /* Apparaît quand la classe 'active' est ajoutée par JS */
+    pointer-events: auto; /* Réactive les événements de souris quand visible */
+}
+
+.scroll-indicator svg {
+    width: 24px;
+    height: 24px;
+    fill: #3643ba; /* Bleu Decathlon */
+    animation: bounce 1.5s infinite; /* Animation de rebond douce */
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px); /* Rebondit vers le haut */
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* =========================================
+   12. SECTION PRODUITS (SHOP)
+   ========================================= */
+#products-section {
     margin-top: 50px;
     border-top: 1px solid #e0e0e0;
     padding-top: 30px;
@@ -441,7 +498,10 @@ h2 {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Responsive auto */
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(140px, 1fr)
+    ); /* Responsive auto */
     gap: 15px;
     justify-items: center;
 }
@@ -464,7 +524,7 @@ h2 {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-color: #3643ba;
 }
 
@@ -524,7 +584,7 @@ h2 {
 /* Responsive tablette/desktop */
 @media screen and (min-width: 600px) {
     .products-grid {
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
 }

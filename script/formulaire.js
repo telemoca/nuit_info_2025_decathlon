@@ -5,22 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalSteps = 6
     const progressBar = document.getElementById("progressBar")
     let isAnimating = false // Sécurité pour empêcher le double clic rapide
-    // ... tes variables existantes ...
     const btnBack = document.getElementById("btnBack")
+    let scrollIndicator = null // Déclarer ici, initialiser plus bas
+    let validateBtnVisible = false // Nouvel état pour la visibilité du bouton
 
-    // --- NOUVEAU CODE : Gestion du bouton "Valider mes sports" ---
+    // --- Gestion du bouton "Valider mes sports" ---
     const sportsInputs = document.querySelectorAll('input[name="sports"]')
     const validateBtn = document.querySelector(".btn-validate")
 
     if (validateBtn) {
         // Fonction qui active/désactive le bouton
         function updateValidateButton() {
-            // Compte combien de cases sont cochées
             const count = document.querySelectorAll(
                 'input[name="sports"]:checked'
             ).length
 
-            // Si 0 cochée, disabled = true (bouton gris). Sinon false (bouton bleu).
             validateBtn.disabled = count === 0
         }
 
@@ -33,11 +32,58 @@ document.addEventListener("DOMContentLoaded", () => {
         updateValidateButton()
     }
     // -------------------------------------------------------------
+
+    // Initialisation du scroll indicator et du gestionnaire de scroll
+    scrollIndicator = document.getElementById("scrollIndicator")
+    const mainScrollContainer = document.documentElement // Utilise document.documentElement pour le scroll de la page entière
+
+    // Nouvelle approche : observer la visibilité du bouton avec IntersectionObserver
+    let observer = null
+    function setupValidateBtnObserver() {
+        if (!validateBtn) return
+        if (observer) observer.disconnect()
+
+        observer = new IntersectionObserver(
+            (entries) => {
+                validateBtnVisible = entries[0].isIntersecting
+                updateScrollIndicator()
+            },
+            {
+                root: null, // viewport
+                threshold: 0, // dès qu'une partie du bouton est visible
+            }
+        )
+        observer.observe(validateBtn)
+    }
+    setupValidateBtnObserver()
+
+    // Fonction pour afficher ou cacher la flèche selon la visibilité du bouton et le scroll
+    function updateScrollIndicator() {
+        if (currentStep === 3 && scrollIndicator) {
+            // La page est considérée en fin de défilement si le bas du contenu est très proche du bas du viewport
+            const hasReachedEndOfContent =
+                mainScrollContainer.scrollHeight -
+                    mainScrollContainer.scrollTop <=
+                mainScrollContainer.clientHeight + 5
+
+            // La flèche est active si le bouton n'est PAS visible ET qu'on n'est PAS en bas
+            if (!validateBtnVisible && !hasReachedEndOfContent) {
+                scrollIndicator.classList.add("active")
+            } else {
+                scrollIndicator.classList.remove("active")
+            }
+        } else if (scrollIndicator) {
+            scrollIndicator.classList.remove("active")
+        }
+    }
+
+    // Sur chaque scroll, on met à jour l'indicateur
+    mainScrollContainer.addEventListener("scroll", updateScrollIndicator)
+
     // Initialisation
     updateProgress()
     updateUI() // Important de l'appeler au début aussi
 
-    // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     window.nextStep = function () {
         // --- DÉBUT AJOUT : Validation pour l'étape 3 (Sports) ---
@@ -73,8 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     .querySelector(`.step[data-step="${currentStep}"]`)
                     .classList.add("active")
 
-                updateUI()
+                updateUI() // Important: Appelle updateUI après le changement d'étape
                 isAnimating = false // Déverrouille
+                // Reconnecte l'observer si on revient sur l'étape 3
+                if (currentStep === 3) setupValidateBtnObserver()
             }, 300) // 300ms de délai
         }
     }
@@ -89,11 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
             document
                 .querySelector(`.step[data-step="${currentStep}"]`)
                 .classList.add("active")
-            updateUI()
+            updateUI() // Important: Appelle updateUI après le changement d'étape
+            // Reconnecte l'observer si on revient sur l'étape 3
+            if (currentStep === 3) setupValidateBtnObserver()
         }
     }
 
-    // Mise à jour de l'interface (Barre de progression + Bouton retour)
+    // Mise à jour de l'interface (Barre de progression + Bouton retour + Indicateur de scroll)
     function updateUI() {
         // Barre de progression
         const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100
@@ -105,6 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             btnBack.style.visibility = "visible"
         }
+
+        // Gérer l'indicateur de défilement pour l'étape 3
+        updateScrollIndicator()
     }
 
     // Fonction de mise à jour initiale
@@ -137,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const productsSection = document.getElementById("products-section") // Récup section produits
 
         finalStepContent.classList.add("is-loading")
-        if (productsSection) productsSection.style.display = 'none'; // Cacher si on relance
+        if (productsSection) productsSection.style.display = "none" // Cacher si on relance
 
         btn.style.display = "none"
         title.innerText = "GÉNÉRATION EN COURS..."
@@ -149,8 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 // 1. Charger les deux fichiers JSON en parallèle
                 const [exoResponse, prodResponse] = await Promise.all([
                     fetch("exo.json"),
-                    fetch("produits.json")
-                ]);
+                    fetch("produits.json"),
+                ])
 
                 if (!exoResponse.ok || !prodResponse.ok)
                     throw new Error("Erreur chargement JSON")
@@ -165,8 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 displayWorkout(workout, profilData)
 
                 // 4. Générer et afficher les produits recommandés
-                displayRecommendedProducts(workout, allProducts);
-
+                displayRecommendedProducts(workout, allProducts)
             } catch (error) {
                 console.error("Erreur:", error)
                 finalStepContent.classList.remove("is-loading")
@@ -182,76 +234,91 @@ document.addEventListener("DOMContentLoaded", () => {
      * Analyse la séance, trouve le matériel manquant et affiche les produits.
      */
     function displayRecommendedProducts(workout, catalog) {
-        const productsSection = document.getElementById("products-section");
-        const grid = document.getElementById("products-grid");
-        grid.innerHTML = ""; // Vider
+        const productsSection = document.getElementById("products-section")
+        const grid = document.getElementById("products-grid")
+        grid.innerHTML = "" // Vider
 
         // 1. Extraire les équipements uniques nécessaires pour cette séance
-        const neededEquipment = new Set();
-        workout.forEach(exo => {
+        const neededEquipment = new Set()
+        workout.forEach((exo) => {
             if (exo.equipment) {
-                exo.equipment.forEach(eq => {
+                exo.equipment.forEach((eq) => {
                     // On normalise (minuscule) et on ignore "aucun", "mur", etc.
-                    const cleanEq = eq.toLowerCase();
-                    if (!['aucun', 'mur', 'mur pour support', 'chaises', 'cadre de porte'].includes(cleanEq)) {
-                        neededEquipment.add(cleanEq);
+                    const cleanEq = eq.toLowerCase()
+                    if (
+                        ![
+                            "aucun",
+                            "mur",
+                            "mur pour support",
+                            "chaises",
+                            "cadre de porte",
+                        ].includes(cleanEq)
+                    ) {
+                        neededEquipment.add(cleanEq)
                     }
-                });
+                })
             }
-        });
+        })
 
         // S'il n'y a besoin de rien (ex: full poids du corps sans tapis), on n'affiche rien
-        if (neededEquipment.size === 0) return;
+        if (neededEquipment.size === 0) return
 
         // 2. Trouver les produits correspondants dans le catalogue JSON
-        const suggestions = [];
+        const suggestions = []
 
         // Dictionnaire de mapping : Mot clé exercice => Type de produit dans le JSON
         // Cela permet de relier "tapis" (exo) à "Tapis de Sol" (produit)
         const mapping = {
-            "tapis": "Tapis de Sol",
-            "elastique": "Bandes Élastiques",
-            "bande": "Bandes Élastiques",
-            "haltère": "Haltères",
-            "barre": "Barre et Poids",
-            "bancs": "Banc de Musculation",
-            "kettlebell": "Kettlebell",
-            "corde": "Cardio & Abdos", // Corde à sauter
-            "roues": "Cardio & Abdos", // Roue abdos
-            "disques": "Accessoires Spécifiques" // Sliders
-        };
+            tapis: "Tapis de Sol",
+            elastique: "Bandes Élastiques",
+            bande: "Bandes Élastiques",
+            haltère: "Haltères",
+            barre: "Barre et Poids",
+            bancs: "Banc de Musculation",
+            kettlebell: "Kettlebell",
+            corde: "Cardio & Abdos", // Corde à sauter
+            roues: "Cardio & Abdos", // Roue abdos
+            disques: "Accessoires Spécifiques", // Sliders
+        }
 
-        neededEquipment.forEach(eq => {
+        neededEquipment.forEach((eq) => {
             // On cherche un mot clé correspondant
-            let targetCategory = null;
+            let targetCategory = null
             for (const [keyword, category] of Object.entries(mapping)) {
                 if (eq.includes(keyword)) {
-                    targetCategory = category;
-                    break;
+                    targetCategory = category
+                    break
                 }
             }
 
             if (targetCategory) {
                 // On cherche dans le JSON
-                const foundProducts = findProductsByCategory(catalog, targetCategory);
+                const foundProducts = findProductsByCategory(
+                    catalog,
+                    targetCategory
+                )
                 // On en prend 1 ou 2 max pour ne pas spammer
                 if (foundProducts.length > 0) {
                     // On évite les doublons globaux (si plusieurs exos demandent des haltères)
-                    foundProducts.slice(0, 1).forEach(p => suggestions.push(p));
+                    foundProducts
+                        .slice(0, 1)
+                        .forEach((p) => suggestions.push(p))
                 }
             }
-        });
+        })
 
         // 3. Afficher les cartes HTML
         if (suggestions.length > 0) {
             // Supprimer les doublons (au cas où)
-            const uniqueSuggestions = [...new Set(suggestions.map(JSON.stringify))].map(JSON.parse);
+            const uniqueSuggestions = [
+                ...new Set(suggestions.map(JSON.stringify)),
+            ].map(JSON.parse)
 
-            uniqueSuggestions.forEach(product => {
-                const card = document.createElement("a");
-                card.className = "product-card";
-                card.href = product.url;
-                card.target = "_blank"; // Ouvrir dans un nouvel onglet
+            uniqueSuggestions.forEach((product) => {
+                const card = document.createElement("a")
+                card.className = "product-card"
+                card.href = product.url
+                card.target = "_blank" // Ouvrir dans un nouvel onglet
 
                 card.innerHTML = `
                 <div class="product-top">
@@ -264,12 +331,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <svg viewBox="0 0 24 24"><path d="M11,9H13V6H16V4H13V1H11V4H8V6H11M7,18A2,2 0 0,0 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20A2,2 0 0,0 7,18M17,18A2,2 0 0,0 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20A2,2 0 0,0 17,18M7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.59 17.3,11.97L21.16,4.96L19.42,4H19.41L18.31,6L15.55,11H8.53L8.4,10.73L6.16,6L5.21,4L4.27,2H1V4H3L6.6,11.59L5.25,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75Z" /></svg>
                     Voir
                 </button>
-            `;
-                grid.appendChild(card);
-            });
+            `
+                grid.appendChild(card)
+            })
 
             // Afficher la section
-            productsSection.style.display = "block";
+            productsSection.style.display = "block"
         }
     }
 
@@ -277,29 +344,36 @@ document.addEventListener("DOMContentLoaded", () => {
      * Cherche récursivement dans la structure complexe de produits.json
      */
     function findProductsByCategory(catalog, categoryType) {
-        let results = [];
+        let results = []
 
         // Le JSON est structuré : Array -> category_group -> sub_categories -> type
-        catalog.forEach(group => {
+        catalog.forEach((group) => {
             if (group.sub_categories) {
-                group.sub_categories.forEach(sub => {
+                group.sub_categories.forEach((sub) => {
                     // On cherche si le "type" (ex: "Tapis de Sol") correspond ou contient le mot clé
-                    if (sub.type && (sub.type === categoryType || sub.type.includes(categoryType))) {
+                    if (
+                        sub.type &&
+                        (sub.type === categoryType ||
+                            sub.type.includes(categoryType))
+                    ) {
                         // On prend les produits de cette sous-catégorie
                         if (sub.products && sub.products.length > 0) {
                             // On prend le premier produit spécifique, pas la catégorie générale si possible
                             // Ici on prend tout pour laisser le choix, ou on filtre
-                            results = results.concat(sub.products);
+                            results = results.concat(sub.products)
                         }
                     }
                     // Cas spécial pour "Cardio & Abdos" qui est un type mais contient des produits variés
-                    else if (categoryType === "Cardio & Abdos" && sub.type === "Cardio & Abdos") {
-                        results = results.concat(sub.products);
+                    else if (
+                        categoryType === "Cardio & Abdos" &&
+                        sub.type === "Cardio & Abdos"
+                    ) {
+                        results = results.concat(sub.products)
                     }
-                });
+                })
             }
-        });
-        return results;
+        })
+        return results
     }
 
     /**
@@ -350,15 +424,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
             : profile.sports
-                ? [profile.sports]
-                : []
+            ? [profile.sports]
+            : []
 
         // 1. Filtrer les exercices éligibles par difficulté et matériel
         const eligibleExos = allExos.filter((exo) => {
             const difficultyMatch = allowedDifficulties.includes(exo.difficulty)
             const equipmentMatch =
                 profile.materiel === "Complet" ||
-                exo.equipment.every((eq) => allowedEquipment.includes(eq))
+                (exo.equipment &&
+                    exo.equipment.every((eq) => allowedEquipment.includes(eq)))
             return difficultyMatch && equipmentMatch
         })
 
@@ -366,16 +441,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const warmupPool = eligibleExos.filter((exo) =>
             exo.type.includes("échauffement")
         )
-        const mainPool = eligibleExos.filter(
-            (exo) =>
-                allowedMainTypes.some((type) => exo.type.includes(type)) &&
-                !exo.type.includes("échauffement") &&
-                !exo.type.includes("étirement") &&
-                !exo.type.includes("repos")
-        )
+
+        const mainPool = eligibleExos.filter((exo) => {
+            const isMainType = allowedMainTypes.some((type) =>
+                exo.type.includes(type)
+            )
+            if (!isMainType) return false
+
+            const isWarmup = exo.type.includes("échauffement")
+            if (isWarmup) return false
+
+            // Pour les objectifs autres que "Souplesse", les étirements sont pour le retour au calme
+            if (profile.objectif !== "Souplesse") {
+                const isCooldown =
+                    exo.type.includes("étirement") || exo.type.includes("repos")
+                if (isCooldown) return false
+            }
+
+            return true
+        })
+
         const cooldownPool = eligibleExos.filter(
             (exo) =>
-                exo.type.includes("étirement") || exo.type.includes("repos")
+                (exo.type.includes("étirement") ||
+                    exo.type.includes("repos")) &&
+                !exo.type.includes("échauffement")
         )
 
         const sportValueMap = {
@@ -424,18 +514,25 @@ document.addEventListener("DOMContentLoaded", () => {
             let candidates = scored.slice(0, 15)
             for (let i = candidates.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
-                    ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
             }
 
             return candidates.slice(0, count)
         }
 
         // 4. Composer la séance
+        let mainExosCount = 3 // Par défaut pour Intermédiaire
+        if (profile.experience === "Debutant") {
+            mainExosCount = 2
+        } else if (profile.experience === "Avancé") {
+            mainExosCount = 5
+        }
+
         const warmupExos = selectExos(warmupPool, 1)
-        const mainExos = selectExos(mainPool, 3)
+        const mainExos = selectExos(mainPool, mainExosCount)
         const cooldownExos = selectExos(cooldownPool, 1)
 
-        return [...warmupExos, ...mainExos, ...cooldownExos]
+        return [...warmupExos, ...mainExos, ...cooldownExos].filter(Boolean) // Supprime les éléments null/undefined si une pool est vide
     }
 
     /**
@@ -472,12 +569,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const levelConfig = repsMap[profile.experience] || repsMap["Debutant"]
 
+        // Mappage des types d'exercices à leurs icônes respectives,
+        // en utilisant uniquement les noms de fichiers d'icônes existants du projet.
         const typeIconMap = {
-            renforcement: "src/icon/muscle_V.png",
-            cardio: "src/icon/coeurs_V.png",
-            explosivité: "src/icon/fonctionnement_V.png", // Associé à la course/explosivité
-            étirement: "src/icon/yoga_V.png",
-            mobilité: "src/icon/yoga_V.png", // Même icône pour la mobilité
+            renforcement: "src/icon/muscle_V.png", // Icône générique pour le renforcement
+            cardio: "src/icon/coeurs_V.png", // Icône générique pour le cardio
+            explosivité: "src/icon/fonctionnement_V.png", // Pour les exercices explosifs (course/saut)
+            étirement: "src/icon/yoga_V.png", // Icône générique pour l'étirement/souplesse
+            mobilité: "src/icon/carriere_V.png", // Icône pour la mobilité (suggère le mouvement, la fluidité)
+            relaxation: "src/icon/lotus_V.png", // Icône générique pour la relaxation/bien-être
+            repos: "src/icon/lotus_V.png", // Utiliser l'icône lotus pour le repos
+
+            échauffement: "src/icon/debut_V.png", // Icône pour l'échauffement (début d'activité)
+
+            // Types composites (plus spécifiques, vérifiés en priorité)
+            cardio_renforcement: "src/icon/fonctionnement_V.png", // Combinaison cardio et renfo
+            renforcement_équilibre: "src/icon/personnes_V.png", // Force et contrôle corporel
+            mobilité_étirement: "src/icon/yoga_V.png", // Mobilité et flexibilité
+            renforcement_étirement: "src/icon/muscle_V.png", // Force et étirement (accent sur la force)
+            cardio_explosivité: "src/icon/fonctionnement_V.png", // Cardio et puissance
+            mobilité_renforcement: "src/icon/personnes_V.png", // Contrôle du corps, polyvalence
+            échauffement_mobilité: "src/icon/carriere_V.png", // Échauffement axé sur le mouvement
+            cardio_échauffement: "src/icon/coeurs_V.png", // Échauffement axé sur le cœur
+            échauffement_dynamique: "src/icon/debut_V.png", // Échauffement avec mouvements dynamiques
+            échauffement_étirement: "src/icon/yoga_V.png", // Échauffement avec focus sur l'étirement
         }
 
         let warmupHtml = ""
@@ -494,18 +609,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
 
             let iconSrc = ""
-            // On cherche le premier type correspondant dans notre map pour trouver une icône
-            for (const type in typeIconMap) {
-                if (exo.type.includes(type)) {
-                    iconSrc = typeIconMap[type]
+            // Stratégie pour trouver la meilleure icône : du plus spécifique au plus générique.
+            // On prend le type tel quel, puis on le divise par '_' et on teste chaque partie.
+            // Ceci permet de trouver "cardio_renforcement" avant "cardio" ou "renforcement".
+            const exoTypesComponents = exo.type.split("_")
+            // Créer une liste de types à chercher, du plus spécifique au plus général
+            // Exemple: pour "renforcement_équilibre", on cherche "renforcement_équilibre", puis "renforcement", puis "équilibre".
+            const searchOrder = [
+                exo.type, // Le type complet d'abord
+                ...exoTypesComponents.filter((t) => t !== exo.type), // Puis chaque composant du type
+            ].filter((value, index, self) => self.indexOf(value) === index) // Supprimer les doublons
+
+            for (const t of searchOrder) {
+                if (typeIconMap[t]) {
+                    iconSrc = typeIconMap[t]
                     break
                 }
             }
-
-            let iconHtml = "" // Par défaut, pas d'icône
-            if (iconSrc) {
-                // Si une icône est trouvée, on crée la balise img
-                iconHtml = `<img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">`
+            // Fallback si aucune correspondance n'est trouvée (devrait être très rare avec le mappage étendu)
+            if (!iconSrc) {
+                iconSrc = "src/icon/kettlebell_V.png" // Icône par défaut, si tout le reste échoue
             }
 
             const cardHtml = `
@@ -514,7 +637,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="exo-details">
                         <h3>${exo.title}</h3>
                         <div class="exo-meta">
-                             ${iconHtml}
+                             <img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">
                              <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
                         </div>
                         <p class="exo-desc">${exo.description}</p>
