@@ -297,6 +297,16 @@ h2 {
 .final-step-content {
     text-align: center;
     padding: 40px 20px;
+    transition: all 0.4s ease;
+}
+
+/* Pendant le chargement, on centre tout verticalement */
+.final-step-content.is-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centrage vertical */
+    min-height: 40vh; /* On lui donne de la hauteur pour que le centrage soit visible */
 }
 
 .loader-icon {
@@ -359,10 +369,24 @@ h2 {
     font-size: 1.3rem;
 }
 
+.exo-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.exo-type-icon {
+    width: 22px;
+    height: 22px;
+    /* Ce filtre colore l'icône en bleu Decathlon */
+    filter: invert(24%) sepia(84%) saturate(2222%) hue-rotate(228deg) brightness(88%) contrast(92%);
+}
+
 .exo-reps {
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
+    margin-bottom: 0;
     font-size: 1rem;
 }
 

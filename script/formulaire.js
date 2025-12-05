@@ -132,6 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = finalStepContent.querySelector("h2")
         const subtitle = finalStepContent.querySelector(".subtitle")
 
+        finalStepContent.classList.add('is-loading');
+
         btn.style.display = "none"
         title.innerText = "GÉNÉRATION EN COURS..."
         subtitle.style.display = "none"
@@ -151,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Erreur lors de la génération de la séance:",
                     error
                 )
+                finalStepContent.classList.remove('is-loading'); // On retire la classe en cas d'erreur
                 title.innerText = "Oops !"
                 subtitle.innerText =
                     "Nous n'avons pas pu générer votre séance. Veuillez réessayer."
@@ -274,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const loader = document.getElementById("loader")
         const workoutContainer = document.getElementById("workout-container")
 
+        finalStepContent.classList.remove('is-loading'); // On retire la classe
         loader.style.display = "none"
 
         if (!workout || workout.length === 0) {
@@ -295,6 +299,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const levelConfig = repsMap[profile.experience] || repsMap["Debutant"]
 
+        const typeIconMap = {
+            renforcement: "src/icon/muscle_V.png",
+            cardio: "src/icon/coeurs_V.png",
+            cardio_renforcement: "src/icon/fonctionnement_V.png",
+            etirement: "src/icon/yoga_V.png",
+            relaxation: "src/icon/lotus_V.png",
+            echauffement: "src/icon/debut_V.png",
+        };
+
         let workoutHtml = ""
         workout.forEach((exo) => {
             const isTimeBased =
@@ -302,13 +315,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 exo.title.toLowerCase().includes("planche") ||
                 exo.title.toLowerCase().includes("chaise")
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
+            const iconSrc = typeIconMap[exo.type] || "src/icon/kettlebell_V.png"; // Icône par défaut
 
             workoutHtml += `
                 <div class="exo-card">
-                    <img src="src/gif/${exo.media.gif}" alt="${exo.title}" class="exo-gif" loading="lazy">
+                    <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exo-gif" loading="lazy">
                     <div class="exo-details">
                         <h3>${exo.title}</h3>
-                        <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
+                        <div class="exo-meta">
+                             <img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">
+                             <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
+                        </div>
                         <p class="exo-desc">${exo.description}</p>
                     </div>
                 </div>
