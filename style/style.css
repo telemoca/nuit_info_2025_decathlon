@@ -363,6 +363,7 @@ h2 {
     gap: 20px;
     align-items: center;
     animation: fadeIn 0.5s ease forwards;
+    cursor: pointer; /* Ajout pour indiquer que c'est cliquable */
 }
 
 .exo-gif {
@@ -581,10 +582,119 @@ h2 {
     fill: #333;
 }
 
-/* Responsive tablette/desktop */
-@media screen and (min-width: 600px) {
-    .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+/* =========================================
+   MODALE EXERCICE (POPUP)
+   ========================================= */
+.exercise-modal {
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+.exercise-modal.active {
+    display: block;
+}
+
+.exercise-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+    animation: fadeIn 0.2s;
+}
+
+.exercise-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    max-width: 99vw;
+    width: 540px;
+    /* max-height: 94vh;  <-- SUPPRIME */
+    overflow: visible; /* plus de scroll, tout est visible */
+    padding: 44px 36px 36px 36px;
+    animation: fadeIn 0.2s;
+}
+
+.exercise-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #3643ba;
+    cursor: pointer;
+    z-index: 2;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.exercise-modal-close:hover {
+    color: #222;
+}
+
+.exercise-modal-body h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+    color: #3643ba;
+    text-align: center;
+}
+
+.exercise-modal-gif {
+    display: block;
+    margin: 0 auto 18px auto;
+    width: 200px; /* plus petit pour éviter le débordement */
+    height: 200px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #f7f9fc;
+    box-shadow: 0 2px 8px rgba(54, 67, 186, 0.07);
+}
+
+/* Responsive : padding réduit et image plus petite sur mobile */
+@media (max-width: 700px) {
+    .exercise-modal-content {
+        width: 99vw;
+        padding: 10px 2vw 14px 2vw;
     }
+    .exercise-modal-gif {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.exercise-modal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    color: #555;
+}
+
+.exercise-modal-desc {
+    margin: 14px 0 20px 0;
+    color: #444;
+    font-size: 1.08rem;
+    text-align: center;
+}
+
+.exercise-modal-instructions {
+    margin-top: 14px;
+    font-size: 1.04rem;
+}
+
+.exercise-modal-instructions ol {
+    margin: 10px 0 0 22px;
+    padding: 0;
 }
