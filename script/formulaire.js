@@ -5,30 +5,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalSteps = 6
     const progressBar = document.getElementById("progressBar")
     let isAnimating = false // Sécurité pour empêcher le double clic rapide
-// ... tes variables existantes ...
+    // ... tes variables existantes ...
     const btnBack = document.getElementById("btnBack")
-    
+
     // --- NOUVEAU CODE : Gestion du bouton "Valider mes sports" ---
-    const sportsInputs = document.querySelectorAll('input[name="sports"]');
-    const validateBtn = document.querySelector('.btn-validate');
+    const sportsInputs = document.querySelectorAll('input[name="sports"]')
+    const validateBtn = document.querySelector(".btn-validate")
 
     if (validateBtn) {
         // Fonction qui active/désactive le bouton
         function updateValidateButton() {
             // Compte combien de cases sont cochées
-            const count = document.querySelectorAll('input[name="sports"]:checked').length;
-            
+            const count = document.querySelectorAll(
+                'input[name="sports"]:checked'
+            ).length
+
             // Si 0 cochée, disabled = true (bouton gris). Sinon false (bouton bleu).
-            validateBtn.disabled = count === 0;
+            validateBtn.disabled = count === 0
         }
 
         // On ajoute l'écouteur sur chaque checkbox
-        sportsInputs.forEach(input => {
-            input.addEventListener('change', updateValidateButton);
-        });
+        sportsInputs.forEach((input) => {
+            input.addEventListener("change", updateValidateButton)
+        })
 
         // On lance la fonction une première fois pour désactiver le bouton au démarrage
-        updateValidateButton();
+        updateValidateButton()
     }
     // -------------------------------------------------------------
     // Initialisation
@@ -38,16 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     window.nextStep = function () {
-        
         // --- DÉBUT AJOUT : Validation pour l'étape 3 (Sports) ---
         if (currentStep === 3) {
             // On sélectionne toutes les cases "sports" qui sont cochées
-            const sportsCoques = document.querySelectorAll('input[name="sports"]:checked');
-            
+            const sportsCoques = document.querySelectorAll(
+                'input[name="sports"]:checked'
+            )
+
             // Si aucune n'est cochée, on alerte l'utilisateur et on bloque
             if (sportsCoques.length === 0) {
-                alert("Veuillez sélectionner au moins un sport pour continuer.");
-                return; // On arrête la fonction ici, l'étape ne changera pas
+                alert("Veuillez sélectionner au moins un sport pour continuer.")
+                return // On arrête la fonction ici, l'étape ne changera pas
             }
         }
         // --- FIN AJOUT ---
@@ -132,6 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = finalStepContent.querySelector("h2")
         const subtitle = finalStepContent.querySelector(".subtitle")
 
+        finalStepContent.classList.add("is-loading")
+
         btn.style.display = "none"
         title.innerText = "GÉNÉRATION EN COURS..."
         subtitle.style.display = "none"
@@ -151,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Erreur lors de la génération de la séance:",
                     error
                 )
+                finalStepContent.classList.remove("is-loading") // On retire la classe en cas d'erreur
                 title.innerText = "Oops !"
                 subtitle.innerText =
                     "Nous n'avons pas pu générer votre séance. Veuillez réessayer."
@@ -164,51 +170,46 @@ document.addEventListener("DOMContentLoaded", () => {
      * Filtre et sélectionne les exercices en fonction du profil utilisateur.
      * @param {object} profile - Les données du formulaire de l'utilisateur.
      * @param {Array} allExos - La liste de tous les exercices disponibles.
-     * @returns {Array} Une sélection de 5 exercices.
+     * @returns {Array} Une sélection d'exercices structurée.
      */
     function generateWorkout(profile, allExos) {
         const difficultyMap = {
-            Debutant: ["debutant"],
-            Intermediaire: ["debutant", "intermediaire"],
-            Avancé: ["intermediaire", "avance", "expert"],
+            Debutant: ["débutant"],
+            Intermediaire: ["débutant", "intermédiaire"],
+            Avancé: ["intermédiaire", "avancé"],
         }
         const allowedDifficulties = difficultyMap[profile.experience] || [
-            "debutant",
+            "débutant",
         ]
 
         const equipmentMap = {
-            Aucun: [
-                "poids_du_corps",
-                "tapis",
-                "aucun",
-                "mur",
-                "chaise",
-                "marche_escalier",
-            ],
+            Aucun: ["aucun", "tapis", "mur pour support", "cadre de porte"],
             Basique: [
-                "poids_du_corps",
-                "tapis",
                 "aucun",
-                "mur",
-                "chaise",
-                "marche_escalier",
-                "elastique",
-                "kettlebell",
-                "halteres",
-                "banc",
-                "banc_solide",
+                "tapis",
+                "mur pour support",
+                "cadre de porte",
+                "chaises",
+                "bancs",
                 "box",
+                "marche",
+                "haltère (ou barre)",
+                "bande de résistance (optionnel)",
+                "cônes (optionnel)",
+                "roues d'abdos",
             ],
             Complet: null,
         }
         const allowedEquipment = equipmentMap[profile.materiel]
 
         const objectiveMap = {
-            "Perte de poids": ["cardio", "cardio_renforcement"],
+            "Perte de poids": ["cardio", "explosivité"],
             Renforcement: ["renforcement"],
-            Souplesse: ["etirement", "relaxation"],
+            Souplesse: ["étirement", "mobilité", "souplesse", "relaxation"],
         }
-        const allowedTypes = objectiveMap[profile.objectif] || ["renforcement"]
+        const allowedMainTypes = objectiveMap[profile.objectif] || [
+            "renforcement",
+        ]
 
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
@@ -216,50 +217,89 @@ document.addEventListener("DOMContentLoaded", () => {
             ? [profile.sports]
             : []
 
-        const filteredExos = allExos.filter((exo) => {
+        // 1. Filtrer les exercices éligibles par difficulté et matériel
+        const eligibleExos = allExos.filter((exo) => {
             const difficultyMatch = allowedDifficulties.includes(exo.difficulty)
             const equipmentMatch =
                 profile.materiel === "Complet" ||
                 exo.equipment.every((eq) => allowedEquipment.includes(eq))
-            const typeMatch = allowedTypes.includes(exo.type)
-            return difficultyMatch && equipmentMatch && typeMatch
+            return difficultyMatch && equipmentMatch
         })
 
+        // 2. Créer des listes pour chaque phase de l'entraînement
+        const warmupPool = eligibleExos.filter((exo) =>
+            exo.type.includes("échauffement")
+        )
+        const mainPool = eligibleExos.filter(
+            (exo) =>
+                allowedMainTypes.some((type) => exo.type.includes(type)) &&
+                !exo.type.includes("échauffement") &&
+                !exo.type.includes("étirement") &&
+                !exo.type.includes("repos")
+        )
+        const cooldownPool = eligibleExos.filter(
+            (exo) =>
+                exo.type.includes("étirement") || exo.type.includes("repos")
+        )
+
         const sportValueMap = {
-            Crossfit: "crossfit",
-            Cyclisme: "cyclisme",
-            Musculation: "musculation",
-            SportsAquatiques: "sports_aquatique",
-            SportsRelaxation: "sport_relaxation",
-            Randonnees: "randonnee",
-            Running: "running",
-            SportsCollectifs: "sport_collectif",
-            SportsRaquettes: "sports_raquete",
+            Crossfit: ["crossfit", "plyométrie", "explosivité", "calisthenics"],
+            Cyclisme: ["cyclisme"],
+            Musculation: ["musculation", "force", "calisthenics"],
+            SportsAquatiques: ["sports_aquatique"],
+            SportsRelaxation: [
+                "yoga",
+                "étirement",
+                "relaxation",
+                "récupération",
+                "souplesse",
+                "pilates",
+            ],
+            Randonnees: ["randonnee"],
+            Running: ["course à pied"],
+            SportsCollectifs: ["sport", "agilité"],
+            SportsRaquettes: ["sports de raquette"],
         }
 
-        const scoredExos = filteredExos
-            .map((exo) => {
-                let score = 0
-                if (userSports.length > 0) {
-                    userSports.forEach((sport) => {
-                        const jsonSport = sportValueMap[sport]
-                        if (jsonSport && exo.sport_category.includes(jsonSport))
-                            score++
-                    })
-                }
-                if (exo.sport_category.includes("tous")) score += 0.5
-                return { ...exo, score }
-            })
-            .sort((a, b) => b.score - a.score)
+        // 3. Fonction pour sélectionner les meilleurs exercices d'une liste
+        const selectExos = (pool, count) => {
+            if (!pool || pool.length === 0) return []
 
-        const EXERCISE_COUNT = 5
-        let candidates = scoredExos.slice(0, 15)
-        for (let i = candidates.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1))
-            ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+            const scored = pool
+                .map((exo) => {
+                    let score = 0
+                    if (userSports.length > 0) {
+                        userSports.forEach((sport) => {
+                            const jsonSports = sportValueMap[sport] || []
+                            if (
+                                jsonSports.some((jsonSport) =>
+                                    exo.sport_category.includes(jsonSport)
+                                )
+                            ) {
+                                score++
+                            }
+                        })
+                    }
+                    return { ...exo, score }
+                })
+                .sort((a, b) => b.score - a.score)
+
+            // On mélange les meilleurs candidats pour la variété
+            let candidates = scored.slice(0, 15)
+            for (let i = candidates.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1))
+                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+            }
+
+            return candidates.slice(0, count)
         }
 
-        return candidates.slice(0, EXERCISE_COUNT)
+        // 4. Composer la séance
+        const warmupExos = selectExos(warmupPool, 1)
+        const mainExos = selectExos(mainPool, 3)
+        const cooldownExos = selectExos(cooldownPool, 1)
+
+        return [...warmupExos, ...mainExos, ...cooldownExos]
     }
 
     /**
@@ -274,6 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const loader = document.getElementById("loader")
         const workoutContainer = document.getElementById("workout-container")
 
+        finalStepContent.classList.remove("is-loading") // On retire la classe
         loader.style.display = "none"
 
         if (!workout || workout.length === 0) {
@@ -295,46 +336,98 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const levelConfig = repsMap[profile.experience] || repsMap["Debutant"]
 
-        let workoutHtml = ""
+        const typeIconMap = {
+            renforcement: "src/icon/muscle_V.png",
+            cardio: "src/icon/coeurs_V.png",
+            explosivité: "src/icon/fonctionnement_V.png", // Associé à la course/explosivité
+            étirement: "src/icon/yoga_V.png",
+            mobilité: "src/icon/yoga_V.png", // Même icône pour la mobilité
+        }
+
+        let warmupHtml = ""
+        let mainHtml = ""
+        let cooldownHtml = ""
+
         workout.forEach((exo) => {
             const isTimeBased =
-                ["etirement", "relaxation", "cardio"].includes(exo.type) ||
+                exo.type.includes("étirement") ||
+                exo.type.includes("repos") ||
+                exo.type.includes("cardio") ||
                 exo.title.toLowerCase().includes("planche") ||
                 exo.title.toLowerCase().includes("chaise")
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
 
-            workoutHtml += `
+            let iconSrc = ""
+            // On cherche le premier type correspondant dans notre map pour trouver une icône
+            for (const type in typeIconMap) {
+                if (exo.type.includes(type)) {
+                    iconSrc = typeIconMap[type]
+                    break
+                }
+            }
+
+            let iconHtml = "" // Par défaut, pas d'icône
+            if (iconSrc) {
+                // Si une icône est trouvée, on crée la balise img
+                iconHtml = `<img src="${iconSrc}" class="exo-type-icon" alt="Type d'exercice">`
+            }
+
+            const cardHtml = `
                 <div class="exo-card">
-                    <img src="src/gif/${exo.media.gif}" alt="${exo.title}" class="exo-gif" loading="lazy">
+                    <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exo-gif" loading="lazy">
                     <div class="exo-details">
                         <h3>${exo.title}</h3>
-                        <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
+                        <div class="exo-meta">
+                             ${iconHtml}
+                             <p class="exo-reps">${levelConfig.sets} Séries de ${effort}</p>
+                        </div>
                         <p class="exo-desc">${exo.description}</p>
                     </div>
                 </div>
             `
+
+            if (exo.type.includes("échauffement")) {
+                warmupHtml += cardHtml
+            } else if (
+                exo.type.includes("étirement") ||
+                exo.type.includes("repos")
+            ) {
+                cooldownHtml += cardHtml
+            } else {
+                mainHtml += cardHtml
+            }
         })
+
+        let finalHtml = ""
+        if (warmupHtml) {
+            finalHtml += `<h3 class="workout-section-title">Échauffement</h3>${warmupHtml}`
+        }
+        if (mainHtml) {
+            finalHtml += `<h3 class="workout-section-title">Corps de séance</h3>${mainHtml}`
+        }
+        if (cooldownHtml) {
+            finalHtml += `<h3 class="workout-section-title">Retour au calme</h3>${cooldownHtml}`
+        }
 
         title.innerText = "Votre séance sur mesure"
         subtitle.innerText = `Voici ${workout.length} exercices conçus pour vous. Bon courage !`
         subtitle.style.display = "block"
-        workoutContainer.innerHTML = workoutHtml
+        workoutContainer.innerHTML = finalHtml
     }
     function showStep(stepIndex) {
-    // ... ton code existant qui affiche l'étape ...
+        // ... ton code existant qui affiche l'étape ...
 
-    // GESTION DU BOUTON PRÉCÉDENT
-    const btnBack = document.getElementById('btnBack');
-    
-    if (stepIndex === 1) {
-        // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
-        btnBack.style.visibility = 'hidden'; 
-        // ou btnBack.style.display = 'none';
-    } else {
-        // Sinon, on l'affiche
-        btnBack.style.visibility = 'visible';
-        // ou btnBack.style.display = 'flex';
+        // GESTION DU BOUTON PRÉCÉDENT
+        const btnBack = document.getElementById("btnBack")
+
+        if (stepIndex === 1) {
+            // Si on est à l'étape 1, on cache le bouton (ou on le rend invisible)
+            btnBack.style.visibility = "hidden"
+            // ou btnBack.style.display = 'none';
+        } else {
+            // Sinon, on l'affiche
+            btnBack.style.visibility = "visible"
+            // ou btnBack.style.display = 'flex';
+        }
     }
-}
-
 })

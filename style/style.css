@@ -78,21 +78,21 @@ h2 {
 /* --- Bouton Précédent (Style Amélioré) --- */
 .btn-back {
     display: inline-flex; /* Garde le bouton compact */
-    align-items: center;  /* Aligne verticalement le texte et l'icône */
+    align-items: center; /* Aligne verticalement le texte et l'icône */
     justify-content: flex-start;
-    
+
     background: transparent; /* Fond transparent */
     border: none; /* Pas de bordure */
-    
-    font-family: 'Roboto', sans-serif;
+
+    font-family: "Roboto", sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     color: #707070; /* Gris neutre pour ne pas voler la vedette */
-    
+
     cursor: pointer;
     margin-bottom: 20px; /* Espace avant le titre */
     padding: 10px 0; /* Zone de clic confortable */
-    
+
     transition: all 0.3s ease;
 }
 
@@ -107,7 +107,7 @@ h2 {
 
 /* --- Effet au survol --- */
 .btn-back:hover {
-    color: #3643BA; /* Devient Bleu Decathlon */
+    color: #3643ba; /* Devient Bleu Decathlon */
 }
 
 .btn-back:hover svg {
@@ -285,7 +285,7 @@ h2 {
     transform: none; /* On annule l'effet de grossissement */
     box-shadow: none;
 }
-.btn-validate:hover,
+.btn-validate:not(:disabled):hover,
 .btn-decathlon:hover {
     background-color: #2a3494; /* Bleu plus foncé */
     transform: scale(1.02);
@@ -297,6 +297,16 @@ h2 {
 .final-step-content {
     text-align: center;
     padding: 40px 20px;
+    transition: all 0.4s ease;
+}
+
+/* Pendant le chargement, on centre tout verticalement */
+.final-step-content.is-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centrage vertical */
+    min-height: 40vh; /* On lui donne de la hauteur pour que le centrage soit visible */
 }
 
 .loader-icon {
@@ -327,6 +337,20 @@ h2 {
    ========================================= */
 #workout-container {
     margin-top: 30px;
+    text-align: left; /* Aligne les titres de section à gauche */
+}
+
+.workout-section-title {
+    font-size: 1.6rem;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+#workout-container .workout-section-title:first-child {
+    margin-top: 0;
 }
 
 .exo-card {
@@ -359,10 +383,25 @@ h2 {
     font-size: 1.3rem;
 }
 
+.exo-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.exo-type-icon {
+    width: 22px;
+    height: 22px;
+    /* Ce filtre colore l'icône en bleu Decathlon */
+    filter: invert(24%) sepia(84%) saturate(2222%) hue-rotate(228deg)
+        brightness(88%) contrast(92%);
+}
+
 .exo-reps {
     font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
+    margin-bottom: 0;
     font-size: 1rem;
 }
 
