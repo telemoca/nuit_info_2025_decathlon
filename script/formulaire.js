@@ -179,6 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Remplace ta fonction window.submitForm actuelle par celle-ci :
+    // On stocke le catalogue produits pour la modale
+    let globalProductsCatalog = null
+
     window.submitForm = function () {
         const form = document.getElementById("quizForm")
         const formData = new FormData(form)
@@ -200,10 +203,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const loader = document.getElementById("loader")
         const title = finalStepContent.querySelector("h2")
         const subtitle = finalStepContent.querySelector(".subtitle")
-        const productsSection = document.getElementById("products-section") // Récup section produits
+        const productsSection = document.getElementById("products-section")
 
         finalStepContent.classList.add("is-loading")
-        if (productsSection) productsSection.style.display = "none" // Cacher si on relance
+        if (productsSection) productsSection.style.display = "none"
 
         btn.style.display = "none"
         title.innerText = "GÉNÉRATION EN COURS..."
@@ -222,7 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     throw new Error("Erreur chargement JSON")
 
                 const allExos = await exoResponse.json()
-                const allProducts = await prodResponse.json() // Données produits
+                const allProducts = await prodResponse.json()
+                globalProductsCatalog = allProducts // ✅ STOCKER GLOBALEMENT
 
                 // 2. Générer la séance
                 const workout = generateWorkout(profilData, allExos)
@@ -897,32 +901,84 @@ document.addEventListener("DOMContentLoaded", () => {
         createExerciseModal()
         const modal = document.getElementById("exercise-modal")
         const body = modal.querySelector(".exercise-modal-body")
+        
+        // Utiliser la variable globale
+        const products = exo.recommended_products || getProductsForExercise(exo, globalProductsCatalog || {})
+
+        // Section produits HTML
+        let productsHtml = ""
+        if (products && products.length > 0) {
+            productsHtml = `
+                <div class="exercise-modal-products">
+                    <div class="exercise-modal-products-title">Matériel utile pour cet exercice</div>
+                    <div class="exercise-modal-products-list">
+                        ${products
+                            .map(
+                                (prod) => `
+                            <a href="${prod.url}" class="exercise-modal-product-card" target="_blank" rel="noopener noreferrer">
+                                <div class="exercise-modal-product-img">
+                                    ${
+                                        prod.image_path
+                                            ? `<img src="${prod.image_path}" alt="${prod.nom}" onerror="this.src='src/icon/icon_site.png'">`
+                                            : `<svg viewBox="0 0 24 24" width="48" height="48"><path d="M22,12V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V12A1,1 0 0,1 1,11V8A2,2 0 0,1 3,6H21A2,2 0 0,1 23,8V11A1,1 0 0,1 22,12M4,8V11H20V8H4M4,13V20H20V13H4Z" fill="#3643ba"/></svg>`
+                                    }
+                                </div>
+                                <div class="exercise-modal-product-info">
+                                    <div class="exercise-modal-product-name">${prod.nom}</div>
+                                    <div class="exercise-modal-product-price">${
+                                        prod.prix ? prod.prix.valeur.toFixed(2) + " " + prod.prix.devise : "Consulter"
+                                    }</div>
+                                </div>
+                            </a>
+                        `
+                            )
+                            .join("")}
+                    </div>
+                </div>
+            `
+        }
+
+        // ✅ NOUVELLE SECTION : BULLES D'INFORMATION
+        let infoBubblesHtml = `
+            <div class="exercise-modal-info-section">
+                <div class="exercise-modal-info-bubbles">
+                    <div class="exercise-modal-info-bubble">
+                        <div class="exercise-modal-bubble-label">Type</div>
+                        <div class="exercise-modal-bubble-value">${capitalizeWords(exo.type.replace(/_/g, " "))}</div>
+                    </div>
+                    
+                    <div class="exercise-modal-info-bubble">
+                        <div class="exercise-modal-bubble-label">Difficulté</div>
+                        <div class="exercise-modal-bubble-value">${capitalizeWords(exo.difficulty)}</div>
+                    </div>
+                    
+                    <div class="exercise-modal-info-bubble">
+                        <div class="exercise-modal-bubble-label">Matériel</div>
+                        <div class="exercise-modal-bubble-value">${capitalizeArray(exo.equipment) || "Aucun"}</div>
+                    </div>
+                </div>
+            </div>
+        `
+
         body.innerHTML = `
             <h2>${exo.title}</h2>
-            <img src="src/gif/${exo.gif}" alt="${exo.title
-            }" class="exercise-modal-gif" />
-            <div class="exercise-modal-meta">
-                <span><b>Type :</b> ${capitalizeWords(
-                exo.type.replace(/_/g, " ")
-            )}</span>
-                <span><b>Difficulté :</b> ${capitalizeWords(
-                exo.difficulty
-            )}</span>
-                <span><b>Matériel :</b> ${capitalizeArray(exo.equipment) || "Aucun"
-            }</span>
-                <span><b>Groupes Musculaires :</b> ${capitalizeArray(
-                exo.target_muscles
-            )}</span>
+            <div class="exercise-modal-main-row">
+                <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exercise-modal-gif" />
+                <div class="exercise-modal-meta-col">
+                    ${infoBubblesHtml}
+                </div>
             </div>
+            
             <p class="exercise-modal-desc">${exo.description || ""}</p>
+            
             <div class="exercise-modal-instructions">
                 <b>Instructions :</b>
                 <ol>
-                    ${(exo.instructions || [])
-                .map((step) => `<li>${step}</li>`)
-                .join("")}
+                    ${(exo.instructions || []).map((step) => `<li>${step}</li>`).join("")}
                 </ol>
             </div>
+            
+            ${productsHtml}
         `
         modal.classList.add("active")
         document.body.style.overflow = "hidden"
@@ -1008,5 +1064,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // On retire la classe de chargement
         if (finalContent) finalContent.classList.remove("is-loading")
+    }
+
+    /**
+     * Utilitaire pour trouver les produits pertinents pour un exercice
+     */
+    function getProductsForExercise(exo, catalog) {
+        // ✅ VÉRIFIER SI CATALOG EST VIDE
+        if (!catalog || !catalog.categories || catalog.categories.length === 0) {
+            console.warn("Catalogue produits non disponible")
+            return []
+        }
+
+        const keywords = []
+        
+        // Extraire les mots-clés du matériel
+        if (Array.isArray(exo.equipment)) {
+            exo.equipment.forEach((eq) => {
+                keywords.push(eq.toLowerCase().trim())
+            })
+        }
+        
+        // Extraire les mots-clés du type d'exercice
+        if (exo.type) {
+            const typeKeywords = exo.type.toLowerCase().split("_")
+            keywords.push(...typeKeywords)
+        }
+        
+        // Extraire les mots-clés des muscles ciblés
+        if (Array.isArray(exo.target_muscles)) {
+            exo.target_muscles.forEach((muscle) => {
+                keywords.push(muscle.toLowerCase().trim())
+            })
+        }
+
+        if (keywords.length === 0) {
+            return []
+        }
+
+        // Dictionnaire de mapping pour améliorer la recherche
+        const mappingKeywords = {
+            "tapis": ["tapis", "sol", "yoga", "pilates"],
+            "aucun": ["bodyweight", "poids du corps", "calisthenics"],
+            "élastique": ["elastique", "bande", "resistance", "training"],
+            "haltère": ["haltere", "dumbbell", "poids"],
+            "barre": ["barre", "barbell", "disque"],
+            "kettlebell": ["kettlebell"],
+            "banc": ["banc", "bench", "musculation"],
+            "box": ["box", "plyo", "saut"],
+            "abdominaux": ["abdominaux", "roulette", "ab wheel", "ceinture"],
+            "cardio": ["corde", "jump rope", "cardiaque"],
+            "yoga": ["yoga", "bien-etre", "relaxation", "etirement"],
+            "mobilité": ["sangle", "support", "yoga"],
+            "gainage": ["gainage", "planche", "swiss", "core"]
+        }
+
+        const foundProductIds = new Set()
+        const products = []
+
+        // Parcourir les catégories et chercher les produits correspondants
+        catalog.categories.forEach((categorie) => {
+            if (!categorie.produits || categorie.produits.length === 0) return
+
+            categorie.produits.forEach((product) => {
+                if (foundProductIds.has(product.id)) return
+
+                const productName = (product.nom || "").toLowerCase()
+                const productTags = product.tags_objectif ? product.tags_objectif.map(t => t.toLowerCase()) : []
+
+                let isMatch = false
+                
+                // Recherche directe
+                keywords.forEach((keyword) => {
+                    if (productName.includes(keyword) || 
+                        productTags.some(tag => tag.includes(keyword) || keyword.includes(tag))) {
+                        isMatch = true
+                    }
+                })
+
+                // Recherche par mapping
+                if (!isMatch) {
+                    keywords.forEach((keyword) => {
+                        if (mappingKeywords[keyword]) {
+                            mappingKeywords[keyword].forEach((mappedKeyword) => {
+                                if (productName.includes(mappedKeyword) || 
+                                    productTags.some(tag => mappedKeyword.includes(tag) || tag.includes(mappedKeyword))) {
+                                    isMatch = true
+                                }
+                            })
+                        }
+                    })
+                }
+
+                if (isMatch) {
+                    foundProductIds.add(product.id)
+                    products.push(product)
+                }
+            })
+        })
+
+        return products.slice(0, 3)
     }
 })
