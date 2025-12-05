@@ -95,7 +95,7 @@ cd nuit_info_2025_decathlon
 ```
 
 2. **Ouvrir l'application**
-   - Double-cliquez sur `index.html`
+   - Double-cliquez sur `welcome.html`
    - Ou servez via un serveur local :
 ```bash
 # Python 3
@@ -106,7 +106,7 @@ npx http-server
 ```
 
 3. **Accéder l'application**
-   - Ouvrez `http://localhost:8000` dans votre navigateur
+   - Ouvrez `http://localhost:8000/welcome.html` dans votre navigateur
 
 ---
 
@@ -135,26 +135,31 @@ npx http-server
 
 ```
 nuit_info_2025_decathlon/
+├── welcome.html
 ├── index.html
-├── css/
+├── style/
 │   ├── style.css
 │   └── ...
-├── js/
+├── script/
 │   ├── app.js
 │   └── ...
-├── images/
+├── src/
 │   ├── logo.png
-│   ├── exercices/
+│   ├── gif/
 │   │   ├── squat.gif
 │   │   ├── pompes.gif
 │   │   └── ...
-│   └── produits/
-│       ├── produit1.jpg
-│       ├── produit2.jpg
+│   ├── icon/
+│   │   ├── icon_site.png
+│   │   └── ...
+│   └── img/
+│       ├── produit1.avig
+│       ├── produit2.avig
 │       └── ...
 └── README.md
 ```
 
+- **`welcome.html`** : La page d'accueil de l'application
 - **`index.html`** : La page principale de l'application
 - **`css/`** : Dossier contenant les fichiers CSS
 - **`js/`** : Dossier contenant les fichiers JavaScript
@@ -203,8 +208,4 @@ Les contributions sont les bienvenues ! Voici comment vous pouvez aider :
 
 ## 📜 Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus d'informations.
-
----
-
-Merci d'avoir choisi **DECATHLON COACH** ! Nous espérons que vous apprécierez votre expérience d'entraînement personnalisée.
+Ce projet est sous licence MIT.
