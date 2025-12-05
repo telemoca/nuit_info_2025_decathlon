@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // La page est considérée en fin de défilement si le bas du contenu est très proche du bas du viewport
             const hasReachedEndOfContent =
                 mainScrollContainer.scrollHeight -
-                    mainScrollContainer.scrollTop <=
+                mainScrollContainer.scrollTop <=
                 mainScrollContainer.clientHeight + 5
 
             // La flèche est active si le bouton n'est PAS visible ET qu'on n'est PAS en bas
@@ -86,49 +86,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fonction pour passer à l'étape suivante (rendue globale pour le HTML)
     window.nextStep = function () {
-        // --- DÉBUT AJOUT : Validation pour l'étape 3 (Sports) ---
+        // Validation étape 3 (Sports) - On garde ton code existant
         if (currentStep === 3) {
-            // On sélectionne toutes les cases "sports" qui sont cochées
-            const sportsCoques = document.querySelectorAll(
-                'input[name="sports"]:checked'
-            )
-
-            // Si aucune n'est cochée, on alerte l'utilisateur et on bloque
+            const sportsCoques = document.querySelectorAll('input[name="sports"]:checked')
             if (sportsCoques.length === 0) {
                 alert("Veuillez sélectionner au moins un sport pour continuer.")
-                return // On arrête la fonction ici, l'étape ne changera pas
+                return
             }
         }
-        // --- FIN AJOUT ---
 
         if (currentStep < totalSteps && !isAnimating) {
-            isAnimating = true // Verrouille le clic
+            isAnimating = true
 
-            // Petit délai pour laisser l'animation du "clic" se faire (UX)
             setTimeout(() => {
-                // Masquer l'étape actuelle
-                document
-                    .querySelector(`.step[data-step="${currentStep}"]`)
-                    .classList.remove("active")
-
-                // Incrémenter
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove("active")
                 currentStep++
+                document.querySelector(`.step[data-step="${currentStep}"]`).classList.add("active")
 
-                // Afficher la suivante
-                document
-                    .querySelector(`.step[data-step="${currentStep}"]`)
-                    .classList.add("active")
+                // --- AJOUT ICI : Réinitialiser l'étape finale si on y arrive ---
+                if (currentStep === totalSteps) {
+                    resetFinalStepUI();
+                }
+                // -------------------------------------------------------------
 
-                updateUI() // Important: Appelle updateUI après le changement d'étape
-                isAnimating = false // Déverrouille
-                // Reconnecte l'observer si on revient sur l'étape 3
+                updateUI()
+                isAnimating = false
                 if (currentStep === 3) setupValidateBtnObserver()
-            }, 300) // 300ms de délai
+            }, 300)
         }
     }
 
     // Fonction pour revenir en arrière (rendue globale)
+    // --- 1. MODIFIER LA FONCTION DE RETOUR (window.prevStep) ---
     window.prevStep = function () {
+        // Cas spécial : Si on est à l'étape 1, on retourne à l'accueil
+        if (currentStep === 1) {
+            window.location.href = "welcome.html";
+            return;
+        }
+
+        // Sinon, comportement normal (étape précédente du formulaire)
         if (currentStep > 1 && !isAnimating) {
             document
                 .querySelector(`.step[data-step="${currentStep}"]`)
@@ -137,23 +134,33 @@ document.addEventListener("DOMContentLoaded", () => {
             document
                 .querySelector(`.step[data-step="${currentStep}"]`)
                 .classList.add("active")
-            updateUI() // Important: Appelle updateUI après le changement d'étape
-            // Reconnecte l'observer si on revient sur l'étape 3
+            updateUI()
+
             if (currentStep === 3) setupValidateBtnObserver()
         }
     }
 
-    // Mise à jour de l'interface (Barre de progression + Bouton retour + Indicateur de scroll)
+    // --- 2. MODIFIER LA MISE À JOUR DE L'INTERFACE (updateUI) ---
     function updateUI() {
         // Barre de progression
         const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100
         progressBar.style.width = percentage + "%"
 
-        // Bouton retour (Caché si étape 1, sinon visible)
-        if (currentStep === 1) {
-            btnBack.style.visibility = "hidden"
-        } else {
-            btnBack.style.visibility = "visible"
+        // Bouton retour : 
+        // AVANT : Il était caché à l'étape 1.
+        // MAINTENANT : Il est toujours visible.
+        if (btnBack) {
+            btnBack.style.visibility = "visible";
+
+            // Optionnel : Changer le texte pour être plus précis sur l'étape 1
+            // Tu peux supprimer ce bloc si tu veux garder juste "Précédent"
+            const btnText = btnBack.lastChild; // Le noeud texte après le SVG
+            if (currentStep === 1) {
+                // Sur l'étape 1, on peut suggérer "Accueil" ou garder "Précédent"
+                if (btnText.nodeType === 3) btnText.textContent = " Accueil";
+            } else {
+                if (btnText.nodeType === 3) btnText.textContent = " Précédent";
+            }
         }
 
         // Gérer l'indicateur de défilement pour l'étape 3
@@ -438,8 +445,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
             : profile.sports
-            ? [profile.sports]
-            : []
+                ? [profile.sports]
+                : []
 
         // 1. Filtrer les exercices éligibles par difficulté et matériel
         const eligibleExos = allExos.filter((exo) => {
@@ -528,7 +535,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let candidates = scored.slice(0, 15)
             for (let i = candidates.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
-                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+                    ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
             }
 
             return candidates.slice(0, count)
@@ -744,30 +751,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const body = modal.querySelector(".exercise-modal-body")
         body.innerHTML = `
             <h2>${exo.title}</h2>
-            <img src="src/gif/${exo.gif}" alt="${
-            exo.title
-        }" class="exercise-modal-gif" />
+            <img src="src/gif/${exo.gif}" alt="${exo.title
+            }" class="exercise-modal-gif" />
             <div class="exercise-modal-meta">
                 <span><b>Type :</b> ${capitalizeWords(
-                    exo.type.replace(/_/g, " ")
-                )}</span>
+                exo.type.replace(/_/g, " ")
+            )}</span>
                 <span><b>Difficulté :</b> ${capitalizeWords(
-                    exo.difficulty
-                )}</span>
-                <span><b>Matériel :</b> ${
-                    capitalizeArray(exo.equipment) || "Aucun"
-                }</span>
+                exo.difficulty
+            )}</span>
+                <span><b>Matériel :</b> ${capitalizeArray(exo.equipment) || "Aucun"
+            }</span>
                 <span><b>Groupes Musculaires :</b> ${capitalizeArray(
-                    exo.target_muscles
-                )}</span>
+                exo.target_muscles
+            )}</span>
             </div>
             <p class="exercise-modal-desc">${exo.description || ""}</p>
             <div class="exercise-modal-instructions">
                 <b>Instructions :</b>
                 <ol>
                     ${(exo.instructions || [])
-                        .map((step) => `<li>${step}</li>`)
-                        .join("")}
+                .map((step) => `<li>${step}</li>`)
+                .join("")}
                 </ol>
             </div>
         `
@@ -815,5 +820,37 @@ document.addEventListener("DOMContentLoaded", () => {
             btnBack.style.visibility = "visible"
             // ou btnBack.style.display = 'flex';
         }
+    }
+    // Fonction pour remettre l'étape 6 à zéro (réafficher le bouton, vider les résultats)
+    function resetFinalStepUI() {
+        const btn = document.getElementById("btnGenerate"); 
+        const title = document.getElementById("finalTitle");
+        const subtitle = document.getElementById("finalSubtitle");
+        const loader = document.getElementById("loader");
+        const workoutContainer = document.getElementById("workout-container");
+        const productsSection = document.getElementById("products-section");
+
+        // Si on n'a pas mis les IDs dans le HTML, on utilise les sélecteurs classiques
+        const finalContent = document.querySelector(".final-step-content");
+        const safeBtn = btn || finalContent.querySelector(".btn-decathlon");
+        const safeTitle = title || finalContent.querySelector("h2");
+        const safeSubtitle = subtitle || finalContent.querySelector(".subtitle");
+
+        // Réinitialisation
+        if (safeBtn) safeBtn.style.display = "block"; // On réaffiche le bouton
+        if (loader) loader.style.display = "none";
+
+        if (safeTitle) safeTitle.innerText = "Profil Terminé !";
+        if (safeSubtitle) {
+            safeSubtitle.innerText = "Nous avons toutes les infos pour créer votre séance sur mesure.";
+            safeSubtitle.style.display = "block";
+        }
+
+        // On vide les anciens résultats
+        if (workoutContainer) workoutContainer.innerHTML = "";
+        if (productsSection) productsSection.style.display = "none";
+
+        // On retire la classe de chargement
+        if (finalContent) finalContent.classList.remove("is-loading");
     }
 })

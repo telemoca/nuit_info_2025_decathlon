@@ -8,7 +8,7 @@
 }
 
 body {
-    font-family: "Roboto", sans-serif; /* Police par défaut recommandée */
+    font-family: "Roboto", sans-serif; /* Police texte courant */
     background-color: #ffffff;
     color: #333;
     line-height: 1.6;
@@ -20,15 +20,15 @@ body {
 header {
     width: 100%;
     background-color: #ffffff;
-    padding: 20px 5%; /* Marge sur les côtés */
+    padding: 20px 5%;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Aligné à gauche */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Légère ombre sous le menu */
+    justify-content: flex-start;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .logo-img {
-    height: 40px; /* Taille ajustable selon ton image */
+    height: 40px;
     width: auto;
     display: block;
 }
@@ -44,7 +44,7 @@ header {
 
 .progress-bar {
     height: 100%;
-    background-color: #3643ba; /* BLEU DECATHLON */
+    background-color: #3643ba;
     width: 0%;
     transition: width 0.4s ease;
 }
@@ -54,81 +54,80 @@ header {
    ========================================= */
 .container {
     width: 90%;
-    max-width: 500px; /* Largeur Mobile par défaut */
+    max-width: 500px;
     margin: 40px auto;
     padding: 0;
 }
 
+/* --- MODIFICATION TYPO TITRES --- */
 h2 {
+    font-family: 'Roboto Condensed', sans-serif; /* Police Decathlon */
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
     text-align: center;
     color: #333;
     margin-bottom: 10px;
-    font-size: 2.2rem; /* Augmenté de 1.8rem à 2.2rem */
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
 }
+/* -------------------------------- */
 
 .subtitle {
     text-align: center;
     color: #666;
     margin-bottom: 30px;
-    font-size: 1.2rem; /* Augmenté de 1rem à 1.2rem */
+    font-size: 1.2rem;
 }
 
 /* Bouton Retour */
-/* --- Bouton Précédent (Style Amélioré) --- */
-/* --- Bouton Précédent (Style Amélioré) --- */
 .btn-back {
-    display: inline-flex; /* Garde le bouton compact */
-    align-items: center; /* Aligne verticalement le texte et l'icône */
+    display: inline-flex;
+    align-items: center;
     justify-content: flex-start;
-
-    background: transparent; /* Fond transparent */
-    border: none; /* Pas de bordure */
-
+    background: transparent;
+    border: none;
     font-family: "Roboto", sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
-    color: #707070; /* Gris neutre pour ne pas voler la vedette */
-
+    color: #707070;
     cursor: pointer;
-    margin-bottom: 20px; /* Espace avant le titre */
-    padding: 10px 0; /* Zone de clic confortable */
-
+    margin-bottom: 20px;
+    padding: 10px 0;
     transition: all 0.3s ease;
 }
 
-/* Taille et couleur de l'icône SVG */
 .btn-back svg {
     width: 22px;
     height: 22px;
-    margin-right: 8px; /* Espace entre flèche et texte */
-    fill: currentColor; /* L'icône prend la couleur du texte */
+    margin-right: 8px;
+    fill: currentColor;
     transition: transform 0.3s ease;
 }
 
-/* --- Effet au survol --- */
 .btn-back:hover {
-    color: #3643ba; /* Devient Bleu Decathlon */
+    color: #3643ba;
 }
 
 .btn-back:hover svg {
-    transform: translateX(-4px); /* La flèche bouge un peu vers la gauche */
+    transform: translateX(-4px);
 }
 
-/* Optionnel : Cacher le bouton si on est désactivé (via JS) */
 .btn-back.hidden {
     display: none;
     visibility: hidden;
 }
+
 /* =========================================
    5. ÉTAPES (STEPS)
    ========================================= */
 .step {
-    display: none; /* Caché par défaut */
+    display: none;
     animation: fadeIn 0.5s ease;
 }
 
 .step.active {
-    display: block; /* Affiché si actif */
+    display: block;
 }
 
 @keyframes fadeIn {
@@ -143,13 +142,11 @@ h2 {
 }
 
 /* =========================================
-   6. GRILLE QCM (RESPONSIVE)
+   6. GRILLE QCM
    ========================================= */
-
-/* --- MOBILE FIRST (Vertical) --- */
 .options-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Une seule colonne */
+    grid-template-columns: 1fr;
     gap: 15px;
     width: 100%;
 }
@@ -160,15 +157,13 @@ h2 {
     cursor: pointer;
 }
 
-/* --- VERSION PC / TABLETTE (Horizontal) --- */
 @media screen and (min-width: 768px) {
     .container {
         max-width: 1000px;
     }
-
     .options-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 30px; /* Retour à 30px */
+        gap: 30px;
     }
 }
 
@@ -176,55 +171,48 @@ h2 {
    7. DESIGN DES CARTES (TUILES)
    ========================================= */
 .option-input {
-    display: none; /* Cache le bouton radio rond */
+    display: none;
 }
 
 .option-tile {
-    /* Mise en page interne */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-
-    /* --- AJUSTEMENTS ICI --- */
-    padding: 25px 20px; /* Plus compact */
-    min-height: 200px; /* Hauteur équilibrée */
-    /* ----------------------- */
-
+    padding: 25px 20px;
+    min-height: 200px;
     background-color: #f7f9fc;
     border: 2px solid #e3e8ef;
     border-radius: 12px;
     color: #333;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* L'icône prend la couleur du texte ou une couleur définie */
 .tile-icon {
-    /* --- AJUSTEMENTS ICI --- */
-    width: 75px; /* Taille moyenne (Ni trop petit, ni trop gros) */
+    width: 75px;
     height: 75px;
-    margin-bottom: 15px; /* On rapproche un peu le texte */
-    /* ----------------------- */
-
+    margin-bottom: 15px;
     fill: #3643ba;
     transition: fill 0.3s ease;
 }
 
-/* Quand c'est coché, l'icône devient blanche AUTOMATIQUEMENT */
 .option-input:checked + .option-tile .tile-icon {
-    fill: #ffffff; /* Pas besoin de changer d'image ! */
+    fill: #ffffff;
+    filter: brightness(0) invert(1);
 }
 
 .tile-label {
-    font-weight: 600;
+    /* --- AJUSTEMENT TYPO ETIQUETTE --- */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    /* --------------------------------- */
     font-size: 1.1rem;
 }
 
-/* --- EFFET HOVER (Survol Souris) --- */
-/* Règle générale pour le survol */
 .options-grid label:hover .option-tile {
     background-color: #ffffff;
     border-color: #3643ba;
@@ -232,30 +220,19 @@ h2 {
     box-shadow: 0 15px 30px rgba(54, 67, 186, 0.15);
 }
 
-/* --- EFFET SÉLECTIONNÉ (Checked) --- */
-/* Règle pour une case sélectionnée */
 .option-input:checked + .option-tile {
-    background-color: #3643ba; /* FOND BLEU OFFICIEL */
+    background-color: #3643ba;
     border-color: #3643ba;
-    color: #ffffff; /* Texte blanc */
+    color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 8px 15px rgba(54, 67, 186, 0.3);
 }
 
-.option-input:checked + .option-tile .tile-icon {
-    fill: #ffffff; /* Icône blanche */
-}
-
 .options-grid label:hover .option-input:checked + .option-tile {
-    background-color: #2a3494; /* Un bleu un peu plus foncé pour le contraste */
+    background-color: #2a3494;
     border-color: #2a3494;
-    transform: translateY(-4px); /* Un léger mouvement pour confirmer */
-    box-shadow: 0 10px 20px rgba(42, 52, 148, 0.4); /* Ombre un peu plus intense */
-}
-
-/* L'icône reste blanche */
-.options-grid label:hover .option-input:checked + .option-tile .tile-icon {
-    fill: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(42, 52, 148, 0.4);
 }
 
 /* =========================================
@@ -263,31 +240,40 @@ h2 {
    ========================================= */
 .btn-validate,
 .btn-decathlon {
+    /* --- MODIFICATION TYPO BOUTONS --- */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    /* -------------------------------- */
+    
     display: block;
     width: 100%;
-    max-width: 300px; /* Pas trop large sur PC */
-    margin: 30px auto 0; /* Centré */
+    max-width: 300px;
+    margin: 30px auto 0;
     padding: 15px;
-    background-color: #3643ba; /* BLEU DECATHLON */
+    background-color: #3643ba;
     color: white;
     border: none;
-    border-radius: 50px; /* Bouton arrondi */
-    font-size: 1.1rem;
-    font-weight: bold;
+    border-radius: 50px;
+    font-size: 1.2rem; /* Légèrement plus gros */
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
     text-align: center;
 }
+
 .btn-validate:disabled {
-    background-color: #e0e0e0; /* Gris clair */
-    color: #a0a0a0; /* Texte gris foncé */
-    cursor: not-allowed; /* Curseur "interdit" */
-    transform: none; /* On annule l'effet de grossissement */
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    transform: none;
     box-shadow: none;
 }
+
 .btn-validate:not(:disabled):hover,
 .btn-decathlon:hover {
-    background-color: #2a3494; /* Bleu plus foncé */
+    background-color: #2a3494;
     transform: scale(1.02);
 }
 
@@ -300,36 +286,25 @@ h2 {
     transition: all 0.4s ease;
 }
 
-/* Pendant le chargement, on centre tout verticalement */
 .final-step-content.is-loading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centrage vertical */
-    min-height: 40vh; /* On lui donne de la hauteur pour que le centrage soit visible */
+    justify-content: center;
+    min-height: 40vh;
 }
 
 .loader-icon {
     width: 60px;
     height: 60px;
-    fill: #3643ba; /* Loader BLEU */
+    fill: #3643ba;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* Quand l'input est coché, on applique un filtre sur l'image dans la tuile */
-.option-input:checked + .option-tile .tile-icon {
-    /* Rend l'image complètement blanche */
-    filter: brightness(0) invert(1);
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* =========================================
@@ -337,10 +312,16 @@ h2 {
    ========================================= */
 #workout-container {
     margin-top: 30px;
-    text-align: left; /* Aligne les titres de section à gauche */
+    text-align: left;
 }
 
 .workout-section-title {
+    /* --- MODIFICATION TYPO SOUS-TITRES SÉANCE --- */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    /* ------------------------------------------- */
     font-size: 1.6rem;
     color: #333;
     margin-top: 40px;
@@ -363,7 +344,7 @@ h2 {
     gap: 20px;
     align-items: center;
     animation: fadeIn 0.5s ease forwards;
-    cursor: pointer; /* Ajout pour indiquer que c'est cliquable */
+    cursor: pointer;
 }
 
 .exo-gif {
@@ -379,6 +360,12 @@ h2 {
 }
 
 .exo-details h3 {
+    /* --- MODIFICATION TYPO TITRE EXO --- */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    /* ---------------------------------- */
     margin: 0 0 8px 0;
     color: #3643ba;
     font-size: 1.3rem;
@@ -394,9 +381,7 @@ h2 {
 .exo-type-icon {
     width: 22px;
     height: 22px;
-    /* Ce filtre colore l'icône en bleu Decathlon */
-    filter: invert(24%) sepia(84%) saturate(2222%) hue-rotate(228deg)
-        brightness(88%) contrast(92%);
+    filter: invert(24%) sepia(84%) saturate(2222%) hue-rotate(228deg) brightness(88%) contrast(92%);
 }
 
 .exo-reps {
@@ -419,12 +404,10 @@ h2 {
         align-items: stretch;
         gap: 0;
     }
-
     .exo-gif {
         width: 100%;
         height: 180px;
     }
-
     .exo-details {
         padding: 20px;
     }
@@ -434,57 +417,39 @@ h2 {
    11. INDICATEUR DE DÉFILEMENT
    ========================================= */
 .scroll-indicator {
-    position: fixed; /* Fixé par rapport au viewport */
-    bottom: 20px; /* 20px du bas de l'écran */
+    position: fixed;
+    bottom: 20px;
     left: 50%;
-    transform: translateX(-50%); /* Centre horizontalement */
-
-    display: flex; /* Ajouté pour utiliser Flexbox */
-    align-items: center; /* Centre verticalement les enfants */
-    justify-content: center; /* Centre horizontalement les enfants */
-
-    background-color: rgba(
-        255,
-        255,
-        255,
-        0.95
-    ); /* Fond blanc semi-transparent */
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 8px 20px;
-    border-radius: 50px; /* Forme de pilule */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre douce */
-    z-index: 1000; /* Assure qu'il est au-dessus des autres éléments */
-
-    pointer-events: none; /* Permet aux clics de passer à travers quand inactif */
-    opacity: 0; /* Caché par défaut */
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
 .scroll-indicator.active {
-    opacity: 1; /* Apparaît quand la classe 'active' est ajoutée par JS */
-    pointer-events: auto; /* Réactive les événements de souris quand visible */
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .scroll-indicator svg {
     width: 24px;
     height: 24px;
-    fill: #3643ba; /* Bleu Decathlon */
-    animation: bounce 1.5s infinite; /* Animation de rebond douce */
+    fill: #3643ba;
+    animation: bounce 1.5s infinite;
 }
 
 @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-8px); /* Rebondit vers le haut */
-    }
-    60% {
-        transform: translateY(-4px);
-    }
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
 }
 
 /* =========================================
@@ -499,10 +464,7 @@ h2 {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fill,
-        minmax(140px, 1fr)
-    ); /* Responsive auto */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 15px;
     justify-items: center;
 }
@@ -517,7 +479,7 @@ h2 {
     justify-content: space-between;
     padding: 15px;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none; /* Pour le lien */
+    text-decoration: none;
     color: #333;
     position: relative;
     height: 100%;
@@ -529,7 +491,6 @@ h2 {
     border-color: #3643ba;
 }
 
-/* Image simulée par une icône ou un placeholder (car pas d'image dans le JSON) */
 .product-image-placeholder {
     width: 100%;
     height: 100px;
@@ -552,11 +513,11 @@ h2 {
     font-weight: 600;
     margin-bottom: 15px;
     line-height: 1.3;
-    flex-grow: 1; /* Pousse le bouton vers le bas */
+    flex-grow: 1;
 }
 
 .btn-shop {
-    background-color: #ffea28; /* Jaune Decathlon (ou bleu #3643ba selon préférence) */
+    background-color: #ffea28;
     color: #333;
     font-weight: bold;
     border: none;
@@ -570,6 +531,10 @@ h2 {
     font-size: 0.85rem;
     transition: background 0.2s;
     width: 100%;
+    
+    /* Bouton d'achat peut rester en Roboto simple pour la lisibilité,
+       ou passer en Condensed si on veut vraiment tout uniformiser.
+       Je le laisse en standard pour l'instant pour la lisibilité petite taille. */
 }
 
 .btn-shop:hover {
@@ -588,20 +553,13 @@ h2 {
 .exercise-modal {
     position: fixed;
     z-index: 2000;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     display: none;
 }
-
-.exercise-modal.active {
-    display: block;
-}
+.exercise-modal.active { display: block; }
 
 .exercise-modal-backdrop {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: rgba(0, 0, 0, 0.55);
     cursor: pointer;
     animation: fadeIn 0.2s;
@@ -609,26 +567,21 @@ h2 {
 
 .exercise-modal-content {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    max-width: 99vw;
-    width: 540px;
-    /* max-height: 94vh;  <-- SUPPRIME */
-    overflow: visible; /* plus de scroll, tout est visible */
+    max-width: 99vw; width: 540px;
+    overflow: visible;
     padding: 44px 36px 36px 36px;
     animation: fadeIn 0.2s;
 }
 
 .exercise-modal-close {
     position: absolute;
-    top: 12px;
-    right: 18px;
-    background: none;
-    border: none;
+    top: 12px; right: 18px;
+    background: none; border: none;
     font-size: 2.2rem;
     color: #3643ba;
     cursor: pointer;
@@ -636,46 +589,40 @@ h2 {
     line-height: 1;
     transition: color 0.2s;
 }
-
-.exercise-modal-close:hover {
-    color: #222;
-}
+.exercise-modal-close:hover { color: #222; }
 
 .exercise-modal-body h2 {
-    margin-top: 0;
-    margin-bottom: 18px;
+    /* --- MODIFICATION TYPO TITRE MODALE --- */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: italic;
+    /* ------------------------------------- */
+    margin-top: 0; margin-bottom: 18px;
     font-size: 1.5rem;
     color: #3643ba;
     text-align: center;
 }
 
 .exercise-modal-gif {
-    display: block;
-    margin: 0 auto 18px auto;
-    width: 200px; /* plus petit pour éviter le débordement */
-    height: 200px;
+    display: block; margin: 0 auto 18px auto;
+    width: 200px; height: 200px;
     object-fit: contain;
     border-radius: 12px;
     background: #f7f9fc;
     box-shadow: 0 2px 8px rgba(54, 67, 186, 0.07);
 }
 
-/* Responsive : padding réduit et image plus petite sur mobile */
 @media (max-width: 700px) {
     .exercise-modal-content {
         width: 99vw;
         padding: 10px 2vw 14px 2vw;
     }
-    .exercise-modal-gif {
-        width: 120px;
-        height: 120px;
-    }
+    .exercise-modal-gif { width: 120px; height: 120px; }
 }
 
 .exercise-modal-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 24px;
+    display: flex; flex-wrap: wrap; gap: 12px 24px;
     justify-content: center;
     margin-bottom: 16px;
     font-size: 1.05rem;
