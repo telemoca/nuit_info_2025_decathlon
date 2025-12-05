@@ -220,7 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // 3. Pour chaque exo, ajoute les produits utiles
                 workout.forEach((exo) => {
-                    exo.recommended_products = getProductsForExercise(exo, allProducts)
+                    exo.recommended_products = getProductsForExercise(
+                        exo,
+                        allProducts
+                    )
                 })
 
                 // 4. Afficher la séance
@@ -848,19 +851,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         ${products
                             .map(
                                 (prod) => `
-                            <a href="${prod.url}" class="exercise-modal-product-card" target="_blank">
+                            <a href="${
+                                prod.url
+                            }" class="exercise-modal-product-card" target="_blank">
                                 <div class="exercise-modal-product-img">
                                     ${
                                         prod.image_path
                                             ? `<img src="${prod.image_path}" alt="${prod.nom}">`
-                                            : `<svg viewBox="0 0 24 24" width="38" height="38"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/><text x="12" y="16" text-anchor="middle" font-size="10" fill="#3643ba">${prod.nom ? prod.nom[0] : ""}</text></svg>`
+                                            : `<svg viewBox="0 0 24 24" width="38" height="38"><circle cx="12" cy="12" r="10" fill="#e3e8ef"/><text x="12" y="16" text-anchor="middle" font-size="10" fill="#3643ba">${
+                                                  prod.nom ? prod.nom[0] : ""
+                                              }</text></svg>`
                                     }
                                 </div>
                                 <div class="exercise-modal-product-info">
-                                    <div class="exercise-modal-product-name">${prod.nom}</div>
+                                    <div class="exercise-modal-product-name">${
+                                        prod.nom
+                                    }</div>
                                     <div class="exercise-modal-product-price">${
                                         prod.prix
-                                            ? prod.prix.valeur + " " + prod.prix.devise
+                                            ? prod.prix.valeur +
+                                              " " +
+                                              prod.prix.devise
                                             : ""
                                     }</div>
                                 </div>
@@ -876,12 +887,16 @@ document.addEventListener("DOMContentLoaded", () => {
         body.innerHTML = `
             <h2>${exo.title}</h2>
             <div class="exercise-modal-main-row">
-                <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exercise-modal-gif" />
+                <img src="src/gif/${exo.gif}" alt="${
+            exo.title
+        }" class="exercise-modal-gif" />
                 <div class="exercise-modal-meta-col">
                     <span><b>Type :</b> ${capitalizeWords(
                         exo.type.replace(/_/g, " ")
                     )}</span>
-                    <span><b>Difficulté :</b> ${capitalizeWords(exo.difficulty)}</span>
+                    <span><b>Difficulté :</b> ${capitalizeWords(
+                        exo.difficulty
+                    )}</span>
                     <span><b>Matériel :</b> ${
                         capitalizeArray(exo.equipment) || "Aucun"
                     }</span>
