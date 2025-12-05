@@ -285,7 +285,7 @@ h2 {
     transform: none; /* On annule l'effet de grossissement */
     box-shadow: none;
 }
-.btn-validate:hover,
+.btn-validate:not(:disabled):hover,
 .btn-decathlon:hover {
     background-color: #2a3494; /* Bleu plus foncé */
     transform: scale(1.02);
@@ -337,6 +337,20 @@ h2 {
    ========================================= */
 #workout-container {
     margin-top: 30px;
+    text-align: left; /* Aligne les titres de section à gauche */
+}
+
+.workout-section-title {
+    font-size: 1.6rem;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+#workout-container .workout-section-title:first-child {
+    margin-top: 0;
 }
 
 .exo-card {

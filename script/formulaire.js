@@ -190,6 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "mur",
                 "chaise",
                 "marche_escalier",
+                "table_solide",
             ],
             Basique: [
                 "poids_du_corps",
@@ -198,6 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "mur",
                 "chaise",
                 "marche_escalier",
+                "table_solide",
                 "elastique",
                 "kettlebell",
                 "halteres",
@@ -214,7 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
             Renforcement: ["renforcement"],
             Souplesse: ["etirement", "relaxation"],
         }
-        const allowedTypes = objectiveMap[profile.objectif] || ["renforcement"]
+        const allowedMainTypes = objectiveMap[profile.objectif] || [
+            "renforcement",
+        ]
 
         const userSports = Array.isArray(profile.sports)
             ? profile.sports
@@ -222,14 +226,25 @@ document.addEventListener("DOMContentLoaded", () => {
             ? [profile.sports]
             : []
 
-        const filteredExos = allExos.filter((exo) => {
+        // 1. Filtrer les exercices éligibles par difficulté et matériel
+        const eligibleExos = allExos.filter((exo) => {
             const difficultyMatch = allowedDifficulties.includes(exo.difficulty)
             const equipmentMatch =
                 profile.materiel === "Complet" ||
                 exo.equipment.every((eq) => allowedEquipment.includes(eq))
-            const typeMatch = allowedTypes.includes(exo.type)
-            return difficultyMatch && equipmentMatch && typeMatch
+            return difficultyMatch && equipmentMatch
         })
+
+        // 2. Créer des listes pour chaque phase de l'entraînement
+        const warmupPool = eligibleExos.filter(
+            (exo) => exo.type === "echauffement"
+        )
+        const mainPool = eligibleExos.filter((exo) =>
+            allowedMainTypes.includes(exo.type)
+        )
+        const cooldownPool = eligibleExos.filter((exo) =>
+            ["etirement", "relaxation"].includes(exo.type)
+        )
 
         const sportValueMap = {
             Crossfit: "crossfit",
@@ -243,29 +258,44 @@ document.addEventListener("DOMContentLoaded", () => {
             SportsRaquettes: "sports_raquete",
         }
 
-        const scoredExos = filteredExos
-            .map((exo) => {
-                let score = 0
-                if (userSports.length > 0) {
-                    userSports.forEach((sport) => {
-                        const jsonSport = sportValueMap[sport]
-                        if (jsonSport && exo.sport_category.includes(jsonSport))
-                            score++
-                    })
-                }
-                if (exo.sport_category.includes("tous")) score += 0.5
-                return { ...exo, score }
-            })
-            .sort((a, b) => b.score - a.score)
+        // 3. Fonction pour sélectionner les meilleurs exercices d'une liste
+        const selectExos = (pool, count) => {
+            if (!pool || pool.length === 0) return []
 
-        const EXERCISE_COUNT = 5
-        let candidates = scoredExos.slice(0, 15)
-        for (let i = candidates.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1))
-            ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+            const scored = pool
+                .map((exo) => {
+                    let score = 0
+                    if (userSports.length > 0) {
+                        userSports.forEach((sport) => {
+                            const jsonSport = sportValueMap[sport]
+                            if (
+                                jsonSport &&
+                                exo.sport_category.includes(jsonSport)
+                            )
+                                score++
+                        })
+                    }
+                    if (exo.sport_category.includes("tous")) score += 0.5
+                    return { ...exo, score }
+                })
+                .sort((a, b) => b.score - a.score)
+
+            // On mélange les meilleurs candidats pour la variété
+            let candidates = scored.slice(0, 10)
+            for (let i = candidates.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1))
+                ;[candidates[i], candidates[j]] = [candidates[j], candidates[i]]
+            }
+
+            return candidates.slice(0, count)
         }
 
-        return candidates.slice(0, EXERCISE_COUNT)
+        // 4. Composer la séance
+        const warmupExos = selectExos(warmupPool, 1)
+        const mainExos = selectExos(mainPool, 3)
+        const cooldownExos = selectExos(cooldownPool, 1)
+
+        return [...warmupExos, ...mainExos, ...cooldownExos]
     }
 
     /**
@@ -311,7 +341,10 @@ document.addEventListener("DOMContentLoaded", () => {
             echauffement: "src/icon/debut_V.png",
         }
 
-        let workoutHtml = ""
+        let warmupHtml = ""
+        let mainHtml = ""
+        let cooldownHtml = ""
+
         workout.forEach((exo) => {
             const isTimeBased =
                 ["etirement", "relaxation", "cardio"].includes(exo.type) ||
@@ -320,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const effort = isTimeBased ? levelConfig.time : levelConfig.reps
             const iconSrc = typeIconMap[exo.type] || "src/icon/kettlebell_V.png" // Icône par défaut
 
-            workoutHtml += `
+            const cardHtml = `
                 <div class="exo-card">
                     <img src="src/gif/${exo.gif}" alt="${exo.title}" class="exo-gif" loading="lazy">
                     <div class="exo-details">
@@ -333,12 +366,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             `
+
+            if (exo.type === "echauffement") {
+                warmupHtml += cardHtml
+            } else if (["etirement", "relaxation"].includes(exo.type)) {
+                cooldownHtml += cardHtml
+            } else {
+                mainHtml += cardHtml
+            }
         })
+
+        let finalHtml = ""
+        if (warmupHtml) {
+            finalHtml += `<h3 class="workout-section-title">Échauffement</h3>${warmupHtml}`
+        }
+        if (mainHtml) {
+            finalHtml += `<h3 class="workout-section-title">Corps de séance</h3>${mainHtml}`
+        }
+        if (cooldownHtml) {
+            finalHtml += `<h3 class="workout-section-title">Retour au calme</h3>${cooldownHtml}`
+        }
 
         title.innerText = "Votre séance sur mesure"
         subtitle.innerText = `Voici ${workout.length} exercices conçus pour vous. Bon courage !`
         subtitle.style.display = "block"
-        workoutContainer.innerHTML = workoutHtml
+        workoutContainer.innerHTML = finalHtml
     }
     function showStep(stepIndex) {
         // ... ton code existant qui affiche l'étape ...
